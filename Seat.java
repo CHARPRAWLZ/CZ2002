@@ -11,15 +11,15 @@ public class Seat {
     }
     
     public int getSeatNumber() {
-        return this.seatNumber;
+        return seatNumber;
     }
     
     public boolean seatIsBooked() {
-        return this.isBooked;
+        return isBooked;
     }
     
     public void setBookStatus(boolean booking) {
-        this.isBooked = booking;
+        isBooked = booking;
     }
     
 }

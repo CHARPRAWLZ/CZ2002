@@ -1,3 +1,5 @@
+package CZ2002;
+
 import java.util.Scanner;
 public class AppUI {
    public Cineplex getCineplexID;

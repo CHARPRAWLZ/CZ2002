@@ -1,3 +1,5 @@
+package CZ2002;
+
 public class Cineplex {
     private String cineplexID,cineplexName,locationName;
 

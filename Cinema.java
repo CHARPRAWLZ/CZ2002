@@ -1,3 +1,5 @@
+package CZ2002;
+
 public class Cinema {
     private String name;
     

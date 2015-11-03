@@ -1,3 +1,5 @@
+package CZ2002;
+
 public class CinemaStaff {
     private String staffID, staffName, password;
     

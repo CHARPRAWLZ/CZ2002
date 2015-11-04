@@ -53,8 +53,11 @@ public class Seat {
     /* end of Accessors */
 
     /* Mutators */
-    public void setBookStatus(boolean booking) {
-        isBooked = booking;
+    public void bookSeat(){
+        isBooked = true;
+    }
+    public void unbookSeat(){
+        isBooked = false;
     }
     /* end of Mutators */
 

@@ -8,23 +8,50 @@ public class AppUI {
 
     public static void main(String args[]) {
         int choice;
-        System.out.println("1.Login as admin");
-        System.out.println("2.Continue as user");
-        System.out.println("3: Quit");
+        String username, password;
         Scanner sc = new Scanner(System.in);
+
+        System.out.println("Welcome to MOBLIMA");
+        System.out.println("1. Login");
+        System.out.println("2. Sign Up");
+        System.out.println("3. Quit");
+
+        System.out.print("Enter choice: ");
         choice = sc.nextInt();
-        switch (choice) {
-            case 1:
-                //go to CinemaStaff UI
-                break;
-            case 2:
-                //go to MovieBooking UI
-                break;
-            case 3:
-                return;
-        }
-        while (choice < 3) {
-            choice = sc.nextInt();
-        }
+
+        do {
+
+            switch (choice) {
+                case 1:
+                    loginUI();
+                    choice = 3;
+                    break;
+                case 2:
+                    signUpUI();
+                    choice = 3;
+                    break;
+                case 3:
+                    break;
+                default:
+                    System.out.println("Error input!");
+                    System.out.println("\n1. Login");
+                    System.out.println("2. Sign Up");
+                    System.out.println("3. Quit");
+                    System.out.print("Enter choice: ");
+                    choice = sc.nextInt();
+            }
+
+        } while (choice != 3);
+        
+        System.out.println("\n----------------------------------------");
+        System.out.println("Thank you for using MOBLIMA");
+    }
+
+    private static void loginUI() {
+
+    }
+
+    private static void signUpUI() {
+
     }
 }

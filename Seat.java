@@ -11,21 +11,21 @@ public class Seat {
     private final boolean exist;
 
     /* Constructors */
-    Seat(char seatRow, int seatNumber, boolean exist) {
+    public Seat(char seatRow, int seatNumber, boolean exist) {
         this.seatRow = Character.toUpperCase(seatRow);
         this.seatNumber = seatNumber;
         this.exist = exist;
     }
 
-    Seat(String seatID, boolean exist) {
+    public Seat(String seatID, boolean exist) {
         this(seatID.charAt(0), Integer.valueOf(seatID.substring(1)), exist);
     }
 
-    Seat(char seatRow, int seatNumber) {
+    public Seat(char seatRow, int seatNumber) {
         this(seatRow, seatNumber, true);
     }
 
-    Seat(String seatID) {
+    public Seat(String seatID) {
         this(seatID, true);
     }
     /* end of Constructors */

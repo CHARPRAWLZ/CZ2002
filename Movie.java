@@ -10,14 +10,14 @@ public class Movie extends movieInfo {
     private final String movieID;
 
     /* Constructors */
-    Movie(String title, String movieID) {
+    public Movie(String title, String movieID) {
         super(title);
         this.movieID = movieID;
         this.movieStatus = "Coming Soon";
         this.overallRating = 0;
     }
 
-    Movie(String title, String movieID, String synopsis, String director, String cast,
+    public Movie(String title, String movieID, String synopsis, String director, String cast,
             String type, String movieStatus, double overallRating) {
         super(title, synopsis, director, cast, type);
         this.movieID = movieID;
@@ -62,11 +62,11 @@ class movieInfo {
     public String synopsis, director, cast, movieType;
 
     /* Constructor */
-    movieInfo(String title) {
+    public movieInfo(String title) {
         this(title, "-", "-", "-", "-");
     }
 
-    movieInfo(String title, String synopsis, String director, String cast,
+    public movieInfo(String title, String synopsis, String director, String cast,
             String movieType) {
         this.title = title;
         this.synopsis = synopsis;

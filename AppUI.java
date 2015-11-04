@@ -11,7 +11,7 @@ public class AppUI {
         String username, password;
         Scanner sc = new Scanner(System.in);
 
-        // Welcome page
+        // Welcome page to MOBLIMA
         System.out.println("Welcome to MOBLIMA");
         System.out.println("1. Login");
         System.out.println("2. Sign Up");

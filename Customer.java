@@ -1,5 +1,7 @@
 package CZ2002;
 
-public class Customer {
-    
+public class Customer extends User{
+    public Customer(){
+        super(name,emailAddress,mobileNo);
+    }
 }

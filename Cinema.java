@@ -2,7 +2,7 @@ package CZ2002;
 
 public class Cinema {
 
-    private String name;
+    private String cinemaCode;
     private Seat[] seat;
 
     public void getLayout() {
@@ -10,10 +10,10 @@ public class Cinema {
     }
 
     public String getName() {
-        return name;
+        return cinemaCode;
     }
 
     public void setName(String Name) {
-        name = Name;
+        cinemaCode = Name;
     }
 }

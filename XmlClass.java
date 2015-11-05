@@ -1,5 +1,12 @@
 package CZ2002;
 
+/* Document and Element are subinterface of Node, thus both shares the method
+ appendChild()
+
+ Node appendChild(Node newChild):
+ Adds the node newChild to the end of the list of children of this node. If
+ the newChild is already in the tree, it is first removed.
+ */
 import org.w3c.dom.*;
 import javax.xml.parsers.*;
 import javax.xml.transform.*;
@@ -20,7 +27,6 @@ public class XmlClass {
             this.file = new File("xml/allmovies.xml");
             this.doc = dBuilder.newDocument();
             this.root = doc.createElement("allmovies");
-
             if (file.exists()) {
                 //load existing file, get root
                 doc = dBuilder.parse(file);
@@ -36,7 +42,6 @@ public class XmlClass {
             //  movie element
             this.movie = doc.createElement("movie");
             this.root.appendChild(movie);
-
             // setting attribute to element
             //set movie id to auto-increment based on root's counter
             //ensures id will always be unique even if movie is deleted
@@ -48,7 +53,6 @@ public class XmlClass {
             Attr attr = doc.createAttribute("id");
             attr.setValue(s);
             movie.setAttributeNode(attr);
-            
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -60,11 +64,15 @@ public class XmlClass {
             Document doc = xml.getDoc();
             Element movie = xml.getMovie();
             File file = xml.getFile();
+            /*
+             * NOTE: the section above can be part of a constructor
+             * The following section below is input from user, can put as methods
+             */
             // setTitle()
             Element title = doc.createElement("title");
             title.appendChild(doc.createTextNode("Lord Of The Rings"));
             movie.appendChild(title);
-            
+
             //setStatus()
             Element status = doc.createElement("status");
             status.appendChild(doc.createTextNode("Coming Soon"));

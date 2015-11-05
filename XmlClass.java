@@ -35,9 +35,9 @@ public class XmlClass {
                 this.root = doc.getDocumentElement();
             } else {
                 // create a counter, append root to doc
-                Attr counter = doc.createAttribute("counter");
-                counter.setValue("0");
-                this.root.setAttributeNode(counter);
+                //Attr counter = doc.createAttribute("counter");
+                //counter.setValue("0");
+                this.root.setAttribute("counter","0");
                 doc.appendChild(this.root);
             }
 
@@ -52,9 +52,9 @@ public class XmlClass {
             String s = Integer.toString(x);
             this.incCounter = s;
             this.root.setAttribute("counter", s);
-            Attr attr = doc.createAttribute("id");
-            attr.setValue(s);
-            movie.setAttributeNode(attr);
+            //Attr attr = doc.createAttribute("id");
+            //attr.setValue(s);
+            movie.setAttribute("id",s);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -136,8 +136,8 @@ public class XmlClass {
 
     public void appendStatus(String statusIn) {
         Element status = doc.createElement("status");
-        status.appendChild(doc.createTextNode(statusIn));
         this.movie.appendChild(status);
+        status.appendChild(doc.createTextNode(statusIn));
     }
 
     public void writeContent() {

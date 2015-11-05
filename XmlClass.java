@@ -23,10 +23,6 @@ public class XmlClass {
     private String incCounter;
 
     public XmlClass() {
-
-    }
-
-    public XmlClass(String titleIn, String statusIn) {
         try {
             //create document
             DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -59,14 +55,6 @@ public class XmlClass {
             Attr attr = doc.createAttribute("id");
             attr.setValue(s);
             movie.setAttributeNode(attr);
-
-            Element title = doc.createElement("title");
-            title.appendChild(doc.createTextNode(titleIn));
-            movie.appendChild(title);
-
-            Element status = doc.createElement("status");
-            status.appendChild(doc.createTextNode(statusIn));
-            movie.appendChild(status);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -74,17 +62,35 @@ public class XmlClass {
     }
 
     public static void main(String argv[]) {
+        XmlClass xml = new XmlClass();
+        String choice = "0";
         Scanner sc = new Scanner(System.in);
         try {
             // setTitle()
+            do {
+            System.out.println("1: Input Movie");
+            System.out.println("2: Exit");
+            System.out.print("Enter choice: ");
+            choice = sc.nextLine();
+            switch(choice) {
+                case "1":
             System.out.print("Enter title: ");
             String titleInput = sc.nextLine();
 
             //setStatus()
+            System.out.flush();
             System.out.print("Enter status: ");
             String statusInput = sc.nextLine();
 
-            XmlClass xml = new XmlClass(titleInput, statusInput);
+            xml.appendTitle(titleInput);
+            xml.appendStatus(statusInput);
+            choice = "2";
+                    break;
+                case "2": break;
+            }
+            
+        } while(!choice.equals("2"));
+            
             xml.writeContent();
 
         } catch (Exception e) {
@@ -123,6 +129,18 @@ public class XmlClass {
 
     public Element getMovie() {
         return this.movie;
+    }
+
+    public void appendTitle(String titleIn) {
+        Element title = doc.createElement("title");
+        title.appendChild(doc.createTextNode(titleIn));
+        this.movie.appendChild(title);
+    }
+
+    public void appendStatus(String statusIn) {
+        Element status = doc.createElement("status");
+        status.appendChild(doc.createTextNode(statusIn));
+        this.movie.appendChild(status);
     }
 
     public void writeContent() {

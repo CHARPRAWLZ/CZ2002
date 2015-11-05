@@ -1,14 +1,20 @@
 package CZ2002;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Cineplex {
     private String cineplexID,cineplexName,locationName;
+    private ArrayList<Cinema> cinemaList = new <Cinema>ArrayList();
     
     private enum locations {
         Punggol, Sengkang, Buangkok, Hougang
     }
     
     public Cineplex(String cineplexID, String cineplexName, locations loc){
+        for(int i = 0; i < 3; i++) {
+            Cinema cinema = new Cinema(cineplexID.concat("-" + Integer.toString(i+1)));
+            this.cinemaList.add(cinema);
+        }
         this.cineplexID = cineplexID;
         this.cineplexName = cineplexName;
         this.locationName = loc.toString();

@@ -68,29 +68,26 @@ public class XmlClass {
         try {
             // setTitle()
             do {
-            System.out.println("1: Input Movie");
-            System.out.println("2: Exit");
-            System.out.print("Enter choice: ");
-            choice = sc.nextLine();
-            switch(choice) {
-                case "1":
-            System.out.print("Enter title: ");
-            String titleInput = sc.nextLine();
+                System.out.println("1: Input Movie");
+                System.out.println("2: Exit");
+                System.out.print("Enter choice: ");
+                choice = sc.nextLine();
+                switch (choice) {
+                    case "1":
+                        System.out.print("Enter title: ");
+                        String titleInput = sc.nextLine();
+                        System.out.print("Enter status: ");
+                        String statusInput = sc.nextLine();
 
-            //setStatus()
-            System.out.flush();
-            System.out.print("Enter status: ");
-            String statusInput = sc.nextLine();
+                        xml.appendTitle(titleInput);
+                        xml.appendStatus(statusInput);
+                        break;
+                    case "2":
+                        break;
+                }
 
-            xml.appendTitle(titleInput);
-            xml.appendStatus(statusInput);
-            choice = "2";
-                    break;
-                case "2": break;
-            }
-            
-        } while(!choice.equals("2"));
-            
+            } while (!choice.equals("2"));
+
             xml.writeContent();
 
         } catch (Exception e) {
@@ -158,7 +155,6 @@ public class XmlClass {
             // Output to console for testing
             StreamResult consoleResult = new StreamResult(System.out);
             t.transform(source, consoleResult);
-
         } catch (Exception e) {
             e.printStackTrace();
         }

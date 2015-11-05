@@ -8,46 +8,58 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.*;
 
 public class XmlClass {
-
-    public static void main(String argv[]) {
-
-        try {
+    private File file;
+    private Document doc;
+    private Element root,movie;
+    private String incCounter;
+    
+    public XmlClass() {
+        try{
             //create document
             DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            File f = new File("xml/allmovies.xml");
-            Document doc = dBuilder.newDocument();
-            Element rootElement = doc.createElement("allmovies");
+            this.file = new File("xml/allmovies.xml");
+            this.doc = dBuilder.newDocument();
+            this.root = doc.createElement("allmovies");
 
-            if (f.exists()) {
-                System.out.println("File existed");
+            if (file.exists()) {
                 //load existing file, get root
-                doc = dBuilder.parse(f);
-                rootElement = doc.getDocumentElement();
+                doc = dBuilder.parse(file);
+                this.root = doc.getDocumentElement();
             } else {
                 // create a counter, append root to doc
                 Attr counter = doc.createAttribute("counter");
                 counter.setValue("0");
-                rootElement.setAttributeNode(counter);
-                doc.appendChild(rootElement);
+                this.root.setAttributeNode(counter);
+                doc.appendChild(this.root);
             }
 
             //  movie element
-            Element movie = doc.createElement("movie");
-            rootElement.appendChild(movie);
+            this.movie = doc.createElement("movie");
+            this.root.appendChild(movie);
 
             // setting attribute to element
             //set movie id to auto-increment based on root's counter
             //ensures id will always be unique even if movie is deleted
-            String s = incCounter(rootElement);
-            rootElement.setAttribute("counter", s);
+            String c = this.root.getAttribute("counter");
+            int x = Integer.parseInt(c) + 1;
+            String s = Integer.toString(x);
+            this.incCounter = s;
+            this.root.setAttribute("counter", s);
             Attr attr = doc.createAttribute("id");
             attr.setValue(s);
             movie.setAttributeNode(attr);
             
-            /*
-             * NOTE: the section above can be part of a constructor
-             * The following section below is input from user, can put as methods
-             */
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+    }
+    public static void main(String argv[]) {
+        XmlClass xml = new XmlClass();
+        try {
+            Document doc = xml.getDoc();
+            Element movie = xml.getMovie();
+            File file = xml.getFile();
             // setTitle()
             Element title = doc.createElement("title");
             title.appendChild(doc.createTextNode("Lord Of The Rings"));
@@ -58,21 +70,38 @@ public class XmlClass {
             status.appendChild(doc.createTextNode("Coming Soon"));
             movie.appendChild(status);
 
-            writeContent(doc, f);
-
+            xml.writeContent(doc, file);
+        
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
 
-    public static String incCounter(Element rootElement) {
-        String c = rootElement.getAttribute("counter");
-        int x = Integer.parseInt(c) + 1;
-        String s = Integer.toString(x);
-        return s;
     }
-
-    public static void writeContent(Document doc, File file) {
+    public void setFile(File f) {
+        this.file = f;
+    }
+    public File getFile() {
+        return this.file;
+    }
+    public void setDoc(Document d) {
+        this.doc = d;
+    }
+    public Document getDoc() {
+        return this.doc;
+    }
+    public void setRoot(Element r) {
+        this.root = r;
+    }
+    public Element getRoot() {
+        return this.root;
+    }
+    public void setMovie(Element m) {
+        this.movie = m;
+    }
+    public Element getMovie() {
+        return this.movie;
+    }
+    public void writeContent(Document doc, File file) {
         try {
             //write the content into xml file
             Transformer t = TransformerFactory.newInstance().newTransformer();

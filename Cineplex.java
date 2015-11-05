@@ -1,7 +1,18 @@
 package CZ2002;
+import java.util.Scanner;
 
 public class Cineplex {
     private String cineplexID,cineplexName,locationName;
+    
+    private enum locations {
+        Punggol, Sengkang, Buangkok, Hougang
+    }
+    
+    public Cineplex(String cineplexID, String cineplexName, locations loc){
+        this.cineplexID = cineplexID;
+        this.cineplexName = cineplexName;
+        this.locationName = loc.toString();
+    }
 
     public void getName(){
         System.out.println(cineplexID + cineplexName + locationName);
@@ -10,5 +21,15 @@ public class Cineplex {
         cineplexName = cineplex;
         cineplexID = id;
         locationName = location;
+    }
+    
+    public static void main(String[] args) {
+        /*int i = 1;
+        Scanner sc = new Scanner(System.in);
+        for (CineplexList e : CineplexList.values()){
+            System.out.println(i + " : " + e.CineplexID() + " : " + e.CineplexName());
+        }*/
+        locations e;
+        System.out.println(CineplexList.values()[1].CineplexID() + " : " + CineplexList.values()[1].CineplexName());
     }
 }

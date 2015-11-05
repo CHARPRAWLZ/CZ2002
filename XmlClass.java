@@ -78,7 +78,7 @@ public class XmlClass {
             status.appendChild(doc.createTextNode("Coming Soon"));
             movie.appendChild(status);
 
-            xml.writeContent(doc, file);
+            xml.writeContent();
         
         } catch (Exception e) {
             e.printStackTrace();
@@ -109,7 +109,7 @@ public class XmlClass {
     public Element getMovie() {
         return this.movie;
     }
-    public void writeContent(Document doc, File file) {
+    public void writeContent() {
         try {
             //write the content into xml file
             Transformer t = TransformerFactory.newInstance().newTransformer();
@@ -117,8 +117,8 @@ public class XmlClass {
             //t.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
             t.setOutputProperty(OutputKeys.INDENT, "yes");
             //transform doc into xml
-            DOMSource source = new DOMSource(doc);
-            StreamResult result = new StreamResult(file);
+            DOMSource source = new DOMSource(this.doc);
+            StreamResult result = new StreamResult(this.file);
             t.transform(source, result);
 
             // Output to console for testing

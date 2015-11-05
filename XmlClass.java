@@ -25,7 +25,7 @@ public class XmlClass {
         try{
             //create document
             DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            this.file = new File("allmovies.xml");
+            this.file = new File("src/CZ2002/allmovies.xml");
             this.doc = dBuilder.newDocument();
             this.root = doc.createElement("allmovies");
             if (file.exists()) {

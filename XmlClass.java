@@ -13,6 +13,7 @@ import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.*;
+import java.util.Scanner;
 
 public class XmlClass {
     private File file;
@@ -24,7 +25,7 @@ public class XmlClass {
         try{
             //create document
             DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            this.file = new File("xml/allmovies.xml");
+            this.file = new File("allmovies.xml");
             this.doc = dBuilder.newDocument();
             this.root = doc.createElement("allmovies");
             if (file.exists()) {
@@ -60,6 +61,7 @@ public class XmlClass {
     }
     public static void main(String argv[]) {
         XmlClass xml = new XmlClass();
+        Scanner sc = new Scanner(System.in);
         try {
             Document doc = xml.getDoc();
             Element movie = xml.getMovie();
@@ -70,12 +72,16 @@ public class XmlClass {
              */
             // setTitle()
             Element title = doc.createElement("title");
-            title.appendChild(doc.createTextNode("Lord Of The Rings"));
+            System.out.print("Enter title: ");
+            String titleInput = sc.nextLine();
+            title.appendChild(doc.createTextNode(titleInput));
             movie.appendChild(title);
 
             //setStatus()
             Element status = doc.createElement("status");
-            status.appendChild(doc.createTextNode("Coming Soon"));
+            System.out.print("Enter status: ");
+            String statusInput = sc.nextLine();
+            status.appendChild(doc.createTextNode(statusInput));
             movie.appendChild(status);
 
             xml.writeContent();

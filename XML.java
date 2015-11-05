@@ -20,7 +20,6 @@ public class XML {
     private File file;
     private Document doc;
     private Element root;
-    private String incCounter;
 
     public XML() {
     }
@@ -37,7 +36,6 @@ public class XML {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     public static void main(String argv[]) {
@@ -64,7 +62,7 @@ public class XML {
                         System.out.print("Enter status: ");
                         String statusIn = sc.nextLine();
                         xml.addElement(movie, "status", statusIn);
-                        
+
                         xml.writeContent();
 
                         break;
@@ -96,6 +94,7 @@ public class XML {
         parent.appendChild(c);
         return c;
     }
+
     public void addContent(Element e, String nodeName) {
         e.appendChild(doc.createTextNode(nodeName));
     }
@@ -104,10 +103,10 @@ public class XML {
         String c = this.root.getAttribute("counter");
         int x = Integer.parseInt(c) + 1;
         String s = Integer.toString(x);
-        this.incCounter = s;
         this.root.setAttribute("counter", s);
         e.setAttribute("id", s);
     }
+
     public void addElement(Element parentNode, String elementName, String elementContent) {
         Element e = this.doc.createElement(elementName);
         parentNode.appendChild(e);

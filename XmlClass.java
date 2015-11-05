@@ -36,6 +36,8 @@ public class XmlClass {
             rootElement.appendChild(movie);
 
             // setting attribute to element
+            //set movie id to auto-increment based on root's counter
+            //ensures id will always be unique even if movie is deleted
             String s = incCounter(rootElement);
             rootElement.setAttribute("counter", s);
             Attr attr = doc.createAttribute("id");
@@ -44,14 +46,14 @@ public class XmlClass {
             
             /*
              * NOTE: the section above can be part of a constructor
-             * The following section below is input from user
+             * The following section below is input from user, can put as methods
              */
-            // title element
+            // setTitle()
             Element title = doc.createElement("title");
             title.appendChild(doc.createTextNode("Lord Of The Rings"));
             movie.appendChild(title);
             
-            //status element
+            //setStatus()
             Element status = doc.createElement("status");
             status.appendChild(doc.createTextNode("Coming Soon"));
             movie.appendChild(status);

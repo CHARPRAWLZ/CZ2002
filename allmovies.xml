@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<allmovies counter="8">
+<allmovies counter="9">
     <movie id="1">
         <title>test</title>
         <status>test</status>
@@ -33,5 +33,9 @@
 <movie id="8">
 <title>Titles</title>
 <status>Statuses</status>
+</movie>
+<movie id="9">
+<title>sdf</title>
+<status>sfsd</status>
 </movie>
 </allmovies>

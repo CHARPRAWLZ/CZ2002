@@ -43,38 +43,37 @@ public class XML {
     public static void main(String argv[]) {
         XML xml = new XML("src/CZ2002/allmovies.xml");
         Element root = xml.setRoot("allmovies");
-        String choice = "0";
+        String choice = "-1";
         Scanner sc = new Scanner(System.in);
         try {
             // setTitle()
             do {
                 System.out.println("1: Input Movie");
-                System.out.println("2: Exit");
+                System.out.println("0: Exit");
                 System.out.print("Enter choice: ");
                 choice = sc.nextLine();
                 switch (choice) {
                     case "1":
-                        Element movie = xml.appendNewChild(root, "movie");
+                        Element movie = xml.addNewChild(root, "movie");
                         xml.setIncId(movie);
 
                         System.out.print("Enter title: ");
                         String titleIn = sc.nextLine();
-                        Element title = xml.appendNewChild(movie, "title");
-                        xml.createNode(title, titleIn);
+                        xml.addElement(movie, "title", titleIn);
 
                         System.out.print("Enter status: ");
                         String statusIn = sc.nextLine();
-                        Element status = xml.appendNewChild(movie, "status");
-                        xml.createNode(status, statusIn);
+                        xml.addElement(movie, "status", statusIn);
+                        
+                        xml.writeContent();
 
                         break;
-                    case "2":
+                    case "0":
                         break;
                 }
 
-            } while (!choice.equals("2"));
+            } while (!choice.equals("0"));
 
-                        xml.writeContent();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -92,10 +91,13 @@ public class XML {
         return this.root;
     }
 
-    public Element appendNewChild(Element parent, String child) {
+    public Element addNewChild(Element parent, String child) {
         Element c = this.doc.createElement(child);
         parent.appendChild(c);
         return c;
+    }
+    public void addContent(Element e, String nodeName) {
+        e.appendChild(doc.createTextNode(nodeName));
     }
 
     public void setIncId(Element e) {
@@ -106,9 +108,10 @@ public class XML {
         this.root.setAttribute("counter", s);
         e.setAttribute("id", s);
     }
-
-    public void createNode(Element e, String nodeName) {
-        e.appendChild(doc.createTextNode(nodeName));
+    public void addElement(Element parentNode, String elementName, String elementContent) {
+        Element e = this.doc.createElement(elementName);
+        parentNode.appendChild(e);
+        e.appendChild(doc.createTextNode(elementContent));
     }
 
     public void writeContent() {

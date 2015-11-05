@@ -16,13 +16,18 @@ import java.io.*;
 import java.util.Scanner;
 
 public class XmlClass {
+
     private File file;
     private Document doc;
-    private Element root,movie;
+    private Element root, movie;
     private String incCounter;
-    
+
     public XmlClass() {
-        try{
+
+    }
+
+    public XmlClass(String titleIn, String statusIn) {
+        try {
             //create document
             DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             this.file = new File("src/CZ2002/allmovies.xml");
@@ -54,67 +59,72 @@ public class XmlClass {
             Attr attr = doc.createAttribute("id");
             attr.setValue(s);
             movie.setAttributeNode(attr);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        
-    }
-    public static void main(String argv[]) {
-        XmlClass xml = new XmlClass();
-        Scanner sc = new Scanner(System.in);
-        try {
-            Document doc = xml.getDoc();
-            Element movie = xml.getMovie();
-            File file = xml.getFile();
-            /*
-             * NOTE: the section above can be part of a constructor
-             * The following section below is input from user, can put as methods
-             */
-            // setTitle()
+
             Element title = doc.createElement("title");
-            System.out.print("Enter title: ");
-            String titleInput = sc.nextLine();
-            title.appendChild(doc.createTextNode(titleInput));
+            title.appendChild(doc.createTextNode(titleIn));
             movie.appendChild(title);
 
-            //setStatus()
             Element status = doc.createElement("status");
-            System.out.print("Enter status: ");
-            String statusInput = sc.nextLine();
-            status.appendChild(doc.createTextNode(statusInput));
+            status.appendChild(doc.createTextNode(statusIn));
             movie.appendChild(status);
-
-            xml.writeContent();
-        
         } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
+
+    public static void main(String argv[]) {
+        Scanner sc = new Scanner(System.in);
+        try {
+            // setTitle()
+            System.out.print("Enter title: ");
+            String titleInput = sc.nextLine();
+
+            //setStatus()
+            System.out.print("Enter status: ");
+            String statusInput = sc.nextLine();
+
+            XmlClass xml = new XmlClass(titleInput, statusInput);
+            xml.writeContent();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
     public void setFile(File f) {
         this.file = f;
     }
+
     public File getFile() {
         return this.file;
     }
+
     public void setDoc(Document d) {
         this.doc = d;
     }
+
     public Document getDoc() {
         return this.doc;
     }
+
     public void setRoot(Element r) {
         this.root = r;
     }
+
     public Element getRoot() {
         return this.root;
     }
+
     public void setMovie(Element m) {
         this.movie = m;
     }
+
     public Element getMovie() {
         return this.movie;
     }
+
     public void writeContent() {
         try {
             //write the content into xml file

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<allmovies counter="3">
+    <movie id="1">
+        <title>test</title>
+        <status>test</status>
+    </movie>
+    <movie id="2">
+        <title>test2</title>
+        <status>test2</status>
+    </movie>
+<movie id="3">
+<title>abc</title>
+<status>abc</status>
+</movie>
+</allmovies>

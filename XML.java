@@ -21,40 +21,19 @@ public class XML {
     private Document doc;
     private Element root;
     private String incCounter;
-    public XML() {}
+
+    public XML() {
+    }
+
     public XML(String f) {
         try {
             //create document
             DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             this.file = new File(f);
             this.doc = dBuilder.newDocument();
-            this.root = doc.createElement("allmovies");
-            if (file.exists()) {
-                //load existing file, get root
-                doc = dBuilder.parse(file);
-                this.root = doc.getDocumentElement();
-            } else {
-                // create a counter, append root to doc
-                //Attr counter = doc.createAttribute("counter");
-                //counter.setValue("0");
-                this.root.setAttribute("counter","0");
-                doc.appendChild(this.root);
+            if (this.file.exists()) {
+                this.doc = dBuilder.parse(file);
             }
-
-            //  movie element
-            this.movie = doc.createElement("movie");
-            this.root.appendChild(movie);
-            // setting attribute to element
-            //set movie id to auto-increment based on root's counter
-            //ensures id will always be unique even if movie is deleted
-            String c = this.root.getAttribute("counter");
-            int x = Integer.parseInt(c) + 1;
-            String s = Integer.toString(x);
-            this.incCounter = s;
-            this.root.setAttribute("counter", s);
-            //Attr attr = doc.createAttribute("id");
-            //attr.setValue(s);
-            movie.setAttribute("id",s);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -62,7 +41,8 @@ public class XML {
     }
 
     public static void main(String argv[]) {
-        XML xml = new XML();
+        XML xml = new XML("src/CZ2002/allmovies.xml");
+        Element root = xml.setRoot("allmovies");
         String choice = "0";
         Scanner sc = new Scanner(System.in);
         try {
@@ -74,13 +54,19 @@ public class XML {
                 choice = sc.nextLine();
                 switch (choice) {
                     case "1":
-                        System.out.print("Enter title: ");
-                        String titleInput = sc.nextLine();
-                        System.out.print("Enter status: ");
-                        String statusInput = sc.nextLine();
+                        Element movie = xml.appendNewChild(root, "movie");
+                        xml.setIncId(movie);
 
-                        xml.appendTitle(titleInput);
-                        xml.appendStatus(statusInput);
+                        System.out.print("Enter title: ");
+                        String titleIn = sc.nextLine();
+                        Element title = xml.appendNewChild(movie, "title");
+                        xml.createNode(title, titleIn);
+
+                        System.out.print("Enter status: ");
+                        String statusIn = sc.nextLine();
+                        Element status = xml.appendNewChild(movie, "status");
+                        xml.createNode(status, statusIn);
+
                         break;
                     case "2":
                         break;
@@ -88,13 +74,43 @@ public class XML {
 
             } while (!choice.equals("2"));
 
-            xml.writeContent();
-
+                        xml.writeContent();
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
+
+    public Element setRoot(String r) {
+        Element eRoot = this.doc.createElement(r);
+        if (this.file.exists()) {
+            eRoot = this.doc.getDocumentElement();
+        } else {
+            eRoot.setAttribute("counter", "0");
+            this.doc.appendChild(eRoot);
+        }
+        this.root = eRoot;
+        return this.root;
+    }
+
+    public Element appendNewChild(Element parent, String child) {
+        Element c = this.doc.createElement(child);
+        parent.appendChild(c);
+        return c;
+    }
+
+    public void setIncId(Element e) {
+        String c = this.root.getAttribute("counter");
+        int x = Integer.parseInt(c) + 1;
+        String s = Integer.toString(x);
+        this.incCounter = s;
+        this.root.setAttribute("counter", s);
+        e.setAttribute("id", s);
+    }
+
+    public void createNode(Element e, String nodeName) {
+        e.appendChild(doc.createTextNode(nodeName));
+    }
+
     public void writeContent() {
         try {
             //write the content into xml file

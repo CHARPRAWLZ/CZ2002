@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<allmovies counter="17">
+<allmovies counter="22">
 <movie id="1">
 <title>LOTR</title>
 <status>LOTR</status>
@@ -67,5 +67,25 @@
 <movie id="17">
 <title>title</title>
 <status>statuses</status>
+</movie>
+<movie id="18">
+<title>hehe</title>
+<status>status</status>
+</movie>
+<movie id="19">
+<title>New title</title>
+<status>New Status</status>
+</movie>
+<movie id="20">
+<title>abc</title>
+<status>def</status>
+</movie>
+<movie id="21">
+<title>coffee</title>
+<status>drinker</status>
+</movie>
+<movie id="22">
+<title>Harry Potter</title>
+<status>Now Showing</status>
 </movie>
 </allmovies>

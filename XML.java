@@ -44,11 +44,12 @@ public class XML {
         String choice = "-1";
         Scanner sc = new Scanner(System.in);
         do {
-            System.out.println("||=======================||");
-            System.out.println("|| 1: Input Movie        ||");
-            System.out.println("|| 2: Display all movies ||");
-            System.out.println("|| 0: Exit               ||");
-            System.out.println("||=======================||");
+            System.out.println("||==========================||");
+            System.out.println("|| 1: Input Movie           ||");
+            System.out.println("|| 2: Display all movies    ||");
+            System.out.println("|| 3: Get movie by movie id ||");
+            System.out.println("|| 0: Exit                  ||");
+            System.out.println("||==========================||");
             System.out.print("Enter choice: ");
             choice = sc.nextLine();
             switch (choice) {
@@ -75,18 +76,43 @@ public class XML {
                         Document doc = xml.getDoc();
                         NodeList movieList = doc.getElementsByTagName("movie");
                         for (int i = 0; i < movieList.getLength(); i++) {
-                            Node movieNode = movieList.item(i);
+                            Element e = xml.getNodeElement(movieList, i);
                             System.out.println("---------------");
-                            System.out.print(movieNode.getNodeName());
-                            if (movieNode.getNodeType() == Node.ELEMENT_NODE) {
-                                Element e = (Element) movieNode;
-                                System.out.println(" id: " + e.getAttribute("id"));
-                                System.out.println("Title   : " + xml.getNodeContent(e, "title"));
-                                System.out.println("Status  : " + xml.getNodeContent(e, "status"));
-                            }
+                            System.out.println(e.getNodeName() + " id: " + e.getAttribute("id"));
+                            System.out.println("Title   : " + xml.getNodeContent(e, "title"));
+                            System.out.println("Status  : " + xml.getNodeContent(e, "status"));
+
                         }
 
                     }
+                    break;
+                case "3":
+                    System.out.print("Enter movie id: ");
+                    String id = sc.nextLine();
+                    boolean idExists = false;
+                    if (!xml.getFile().exists()) {
+                        System.out.println("no file found");
+                    } else {
+                        Document doc = xml.getDoc();
+                        NodeList movieList = doc.getElementsByTagName("movie");
+                        for (int i = 0; i < movieList.getLength(); i++) {
+                            Element e = xml.getNodeElement(movieList, i);
+                            if (e.getAttribute("id").equals(id)) {
+                                idExists = true;
+                                System.out.println("---------------");
+                                System.out.println(e.getNodeName() + " id: " + e.getAttribute("id"));
+                                System.out.println("Title   : " + xml.getNodeContent(e, "title"));
+                                System.out.println("Status  : " + xml.getNodeContent(e, "status"));
+                            }
+
+                        }
+                        if (idExists == false) {
+                            System.out.println("Id not found");
+                        }
+
+                    }
+                    break;
+
                 case "0":
                     break;
             }
@@ -96,13 +122,13 @@ public class XML {
     }
 
     /**
-     * set root, and add counter
+     * set root of document, add increment counter
      *
-     * @param r
-     * @return
+     * @param root root name
+     * @return element of root
      */
-    public Element setRoot(String r) {
-        Element eRoot = this.doc.createElement(r);
+    public Element setRoot(String root) {
+        Element eRoot = this.doc.createElement(root);
         if (this.file.exists()) {
             eRoot = this.doc.getDocumentElement();
         } else {
@@ -114,23 +140,23 @@ public class XML {
     }
 
     /**
-     * give auto-increment to an element id
+     * give auto-increment to an element attribute id
      *
-     * @param e
+     * @param element Element that has element attribute id increment
      */
-    public void setIncId(Element e) {
+    public void setIncId(Element element) {
         String c = this.root.getAttribute("counter");
         int x = Integer.parseInt(c) + 1;
         String s = Integer.toString(x);
         this.root.setAttribute("counter", s);
-        e.setAttribute("id", s);
+        element.setAttribute("id", s);
     }
 
     /**
-     * add child with no textnode to an element
+     * add child NODE to an element
      *
-     * @param parent
-     * @param child
+     * @param parent parent element of the child
+     * @param child name of child NODE to be appended to parent
      * @return
      */
     public Element addNewChild(Element parent, String child) {
@@ -140,20 +166,17 @@ public class XML {
     }
 
     /**
-     * add textnode to an element
+     * add text content to an element
      *
-     * @param e
-     * @param nodeName
+     * @param element
+     * @param content
      */
-    public void addContent(Element e, String nodeName) {
-        e.appendChild(doc.createTextNode(nodeName));
-    }
-    public String getNodeContent(Element e, String nodeName) {
-        return e.getElementsByTagName("title").item(0).getTextContent();
+    public void addContent(Element element, String content) {
+        element.appendChild(doc.createTextNode(content));
     }
 
     /**
-     * combination of addNewChild() and addContent()
+     * add child NODE with content to a parent element
      *
      * @param parentNode
      * @param elementName
@@ -163,6 +186,33 @@ public class XML {
         Element e = this.doc.createElement(elementName);
         parentNode.appendChild(e);
         e.appendChild(doc.createTextNode(elementContent));
+    }
+
+    /**
+     * get a node element in a node list
+     *
+     * @param list list of items in xml
+     * @param index index of the element in the list
+     * @return element of NodeList
+     */
+    public Element getNodeElement(NodeList list, int index) {
+        Node listnode = list.item(index);
+        Element e = null;
+        if (listnode.getNodeType() == Node.ELEMENT_NODE) {
+            e = (Element) listnode;
+        }
+        return e;
+    }
+
+    /**
+     * get the content of a node element
+     *
+     * @param element parent element
+     * @param nodeName name of node in the parent element
+     * @return content of node
+     */
+    public String getNodeContent(Element element, String nodeName) {
+        return element.getElementsByTagName(nodeName).item(0).getTextContent();
     }
 
     /**
@@ -189,10 +239,20 @@ public class XML {
         }
     }
 
+    /**
+     * Get xml file
+     *
+     * @return xml file
+     */
     public File getFile() {
         return this.file;
     }
 
+    /**
+     * Get xml doc
+     *
+     * @return xml doc
+     */
     public Document getDoc() {
         return this.doc;
     }

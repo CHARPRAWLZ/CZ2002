@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<allmovies counter="22">
+<allmovies counter="23">
 <movie id="1">
 <title>LOTR</title>
 <status>LOTR</status>
@@ -87,5 +87,9 @@
 <movie id="22">
 <title>Harry Potter</title>
 <status>Now Showing</status>
+</movie>
+<movie id="23">
+<title>a</title>
+<status>b</status>
 </movie>
 </allmovies>

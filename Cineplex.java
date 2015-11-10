@@ -7,7 +7,7 @@ import java.util.Scanner;
  * @author calvinlee
  */
 public class Cineplex {
-    private String cineplexID,cineplexName,locationName;
+    private final String cineplexID,cineplexName,locationName;
     private ArrayList<Cinema> cinemaList = new <Cinema>ArrayList();
     /*
     private enum locations {
@@ -52,27 +52,11 @@ public class Cineplex {
     }
     
     /**
-     * Updates the ID of the Cineplex
-     * @param id 
-     */
-    public void setID(String id) {
-        this.cineplexID = id;
-    }
-    
-    /**
      * Returns the name of the Cineplex
      * @return 
      */
     public String getName(){
         return this.cineplexName;
-    }
-    
-    /**
-     * Updates the name of the Cineplex
-     * @param name 
-     */
-    public void setName(String name) {
-        this.cineplexName = name;
     }
     
     /**

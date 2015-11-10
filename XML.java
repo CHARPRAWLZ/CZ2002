@@ -54,79 +54,6 @@ public class XML {
             e.printStackTrace();
         }
     }
-
-    public static void main(String argv[]) {
-        XML xml = new XML("src/CZ2002/allmovies.xml", "movie");
-        String choice = "-1", id = "";
-        Scanner sc = new Scanner(System.in);
-        do {
-            System.out.println("||===========================||");
-            System.out.println("|| 1: Input Movie            ||");
-            System.out.println("|| 2: Display all movies     ||");
-            System.out.println("|| 3: Get movie by movie id  ||");
-            System.out.println("|| 4: Edit movie by movie id ||");
-            System.out.println("|| 0: Exit                   ||");
-            System.out.println("||===========================||");
-            System.out.print("Enter choice: ");
-            choice = sc.nextLine();
-            switch (choice) {
-                case "1":
-                    Element e = xml.addElement();
-
-                    System.out.println("\n[ Enter / to go back ]");
-                    System.out.print("Enter title: ");
-                    String titleIn = sc.nextLine();
-                    if (titleIn.equals("/")) {
-                        break;
-                    }
-                    xml.addItem(e, "Title", titleIn);
-
-                    System.out.print("Enter status: ");
-                    String statusIn = sc.nextLine();
-                    xml.addItem(e, "Status", statusIn);
-
-                    xml.writeContent();
-                    System.out.println("- Movie added into database -");
-
-                    break;
-                case "2":
-                    xml.displayElement();
-                    break;
-                case "3":
-                    System.out.print("Enter movie id: ");
-                    id = sc.nextLine();
-                    xml.displayElement(id);
-                    break;
-                case "4":
-                    System.out.print("Enter movie id: ");
-                    id = sc.nextLine();
-                    if (xml.displayElement(id) == true) {
-                        System.out.println("\n[ Enter / to go back ]");
-                        System.out.print("Enter item name: ");
-                        String name = sc.nextLine();
-                        if (name.equals("/")) {
-                            break;
-                        }
-                        if (xml.checkItemExists(id, name) == true) {
-                            System.out.println("\n[ Enter / to go back ]");
-                            System.out.print("Enter new value: ");
-                            String val = sc.nextLine();
-                            if (val.equals("/")) {
-                                break;
-                            }
-                            xml.editItem(id, name, val);
-                            xml.displayElement(id);
-                            xml.writeContent();
-                        }
-                    }
-                    break;
-                default:
-                    break;
-            }
-            System.out.println();
-        } while (!choice.equals("0"));
-
-    }
     /**
      * Add element
      * @return element
@@ -396,4 +323,78 @@ public class XML {
     public Document getDoc() {
         return this.doc;
     }
+    /*
+    public static void main(String argv[]) {
+        XML xml = new XML("src/CZ2002/allmovies.xml", "movie");
+        String choice = "-1", id = "";
+        Scanner sc = new Scanner(System.in);
+        do {
+            System.out.println("||===========================||");
+            System.out.println("|| 1: Input Movie            ||");
+            System.out.println("|| 2: Display all movies     ||");
+            System.out.println("|| 3: Get movie by movie id  ||");
+            System.out.println("|| 4: Edit movie by movie id ||");
+            System.out.println("|| 0: Exit                   ||");
+            System.out.println("||===========================||");
+            System.out.print("Enter choice: ");
+            choice = sc.nextLine();
+            switch (choice) {
+                case "1":
+                    Element e = xml.addElement();
+
+                    System.out.println("\n[ Enter / to go back ]");
+                    System.out.print("Enter title: ");
+                    String titleIn = sc.nextLine();
+                    if (titleIn.equals("/")) {
+                        break;
+                    }
+                    xml.addItem(e, "Title", titleIn);
+
+                    System.out.print("Enter status: ");
+                    String statusIn = sc.nextLine();
+                    xml.addItem(e, "Status", statusIn);
+
+                    xml.writeContent();
+                    System.out.println("- Movie added into database -");
+
+                    break;
+                case "2":
+                    xml.displayElement();
+                    break;
+                case "3":
+                    System.out.print("Enter movie id: ");
+                    id = sc.nextLine();
+                    xml.displayElement(id);
+                    break;
+                case "4":
+                    System.out.print("Enter movie id: ");
+                    id = sc.nextLine();
+                    if (xml.displayElement(id) == true) {
+                        System.out.println("\n[ Enter / to go back ]");
+                        System.out.print("Enter item name: ");
+                        String name = sc.nextLine();
+                        if (name.equals("/")) {
+                            break;
+                        }
+                        if (xml.checkItemExists(id, name) == true) {
+                            System.out.println("\n[ Enter / to go back ]");
+                            System.out.print("Enter new value: ");
+                            String val = sc.nextLine();
+                            if (val.equals("/")) {
+                                break;
+                            }
+                            xml.editItem(id, name, val);
+                            xml.displayElement(id);
+                            xml.writeContent();
+                        }
+                    }
+                    break;
+                default:
+                    break;
+            }
+            System.out.println();
+        } while (!choice.equals("0"));
+
+    }
+    */
 }

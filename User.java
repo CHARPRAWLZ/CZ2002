@@ -4,6 +4,13 @@ public class User {
     //variables
    private String userId, name, emailAddress, mobileNo;
    //constructors
+   /**
+    * Constructs an instance of class User.
+    * @param id
+    * @param name
+    * @param email
+    * @param number 
+    */
    public User(String id,String name,String email,String number){
        this.userId = id;
        this.name = name;
@@ -11,6 +18,10 @@ public class User {
        this.mobileNo = number;
    }
    //accessors
+   /**
+    * Returns the UserID of the User instance.
+    * @return userId
+    */
    public String getUserID(){
         return userId;
 }

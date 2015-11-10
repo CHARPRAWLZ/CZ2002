@@ -2,10 +2,11 @@ package CZ2002;
 
 import java.util.Date;
 
-/**Showtime : Class
- * Contains information on the movie that's screening, the cinema and its
- * cineplex where it is screened in, and the timing of the screening.
- * 
+/**
+ * Showtime : Class Contains information on the movie that's screening, the
+ * cinema and its cineplex where it is screened in, and the timing of the
+ * screening.
+ *
  * @author Hocks
  */
 public class Showtime {
@@ -16,12 +17,14 @@ public class Showtime {
     private Date timing;
 
     /* Constructors */
-    /**Constructor of Showtime class.
-     * 'has a' relationship with Cineplex, Cinema and Movie.
+    /**
+     * Constructor of Showtime class. 'has a' relationship with Cineplex, Cinema
+     * and Movie.
+     *
      * @param cineplex
      * @param cinemaRoom
      * @param movie
-     * @param timing 
+     * @param timing
      */
     public Showtime(Cineplex cineplex, int cinemaRoom, Movie movie, Date timing) {
         this.cineplex = cineplex;
@@ -32,48 +35,54 @@ public class Showtime {
     /* end of Constructors */
 
     /* Accessors */
-    /**Returns cinema name.
-     * 
+    /**
+     * Returns cinema name.
+     *
      * @return Cinema Name
      */
     public String getCinemaName() {
         return cinema.getName();
     }
 
-    /**Returns cinema type.
-     * 
+    /**
+     * Returns cinema type.
+     *
      * @return Cinema Type
      */
     public String getCinemaType() {
         return cinema.getCinemaType();
     }
-    
-    /**Returns cineplex name.
-     * 
+
+    /**
+     * Returns cineplex name.
+     *
      * @return Cineplex Name
      */
     public String getCineplexName() {
         return cineplex.getName();
     }
 
-    /**Returns movie name.
-     * 
+    /**
+     * Returns movie name.
+     *
      * @return Movie Name
      */
     public String getMovieName() {
         return movie.getTitle();
     }
 
-    /**Returns Movie ID.
-     * 
+    /**
+     * Returns Movie ID.
+     *
      * @return Movie ID
      */
     public String getMovieID() {
         return movie.getMovieID();
     }
 
-    /**Returns the time of the show in the format "hh:mm AM/PM".
-     * 
+    /**
+     * Returns the time of the show in the format "hh:mm AM/PM".
+     *
      * @return Show Time
      */
     public String getTiming() {
@@ -88,8 +97,10 @@ public class Showtime {
         return hour + mins + (morning ? " AM" : " PM");
     }
 
-    /**Returns the date of the show in the format "dd mth yyyy, day".
-     * Example: 01 Feb 2015, Mon
+    /**
+     * Returns the date of the show in the format "dd mth yyyy, day". Example:
+     * 01 Feb 2015, Mon
+     *
      * @return Show Date
      */
     public String getDate() {
@@ -120,42 +131,46 @@ public class Showtime {
         timing.setMinutes(time % 100);
         return true;
     }
-    
-    /**Checks the content of str to determine if it is date or time.
-     * 
+
+    /**
+     * Checks the content of str to determine if it is date or time.
+     *
      * @param str
      * @return True if setDate is successful; False if unsuccessful.
      */
     public boolean setDate(String str) {
-        if (str.isEmpty())
+        if (str.isEmpty()) {
             return false;
+        }
         String strArr[] = str.split("/");
-        if (strArr.length == 3)
-            return setDate(str, timing.getHours()*100+timing.getMinutes());
-        else if (this.isInt(str)){
+        if (strArr.length == 3) {
+            return setDate(str, timing.getHours() * 100 + timing.getMinutes());
+        } else if (this.isInt(str)) {
             String date = "";
             date += timing.getDate() + "/";
             date += (timing.getMonth() + 1) + "/";
             date += timing.getYear();
             return setDate(date, Integer.valueOf(str));
-        }
-        else
+        } else {
             return false;
+        }
     }
     /* end of Mutators */
-    
-    /**Checks if string is int.
-     * 
+
+    /**
+     * Checks if string is int.
+     *
      * @param str
      * @return True if string is int; false if otherwise.
      */
     private boolean isInt(String str) {
         char charArr[] = str.toCharArray();
         for (char c : charArr) {
-            if (c < '0' || c > '9')
+            if (c < '0' || c > '9') {
                 return false;
+            }
         }
         return true;
     }
-    
+
 }

@@ -6,7 +6,21 @@ import java.io.*;
 public class AppUI {
 
     static Scanner sc = new Scanner(System.in);
-    public Cineplex getCineplexID;
+    ArrayList<Cinema> cinemaList;
+    // Start of Cineplex and Cinema initialisation
+    Cineplex cineplex1 = new Cineplex("CP1", "Cathay Cineplexes", "Woodlands", 3);
+    cinemaList = cineplex1.getCinemaList();
+    initCinemaType(cinemaList);
+    cineplex1.setCinemaList();
+    Cineplex cineplex2 = new Cineplex("CP2", "Cathay Cineplex", "Orchard" , 3);
+    cinemaList = cineplex2.getCinemaList();
+    initCinemaType(cinemaList);
+    cineplex2.setCinemaList();
+    Cineplex cineplex3 = new Cineplex("CP3", "The Cathay Cineplex", "CBD", 3);
+    cinemaList = cineplex3.getCinemaList();
+    initCinemaType(cinemaList);
+    cineplex3.setCinemaList();
+    // End of Cineplex and Cinema initialisation
 
     public static void main(String args[]) {
         String choice;
@@ -51,5 +65,15 @@ public class AppUI {
 
     private static void movieGoerUI() {
         System.out.println("movieGoerUI");
+    }
+    
+    /**
+     * Initialise the cinemaType for each of the Cinema in the cinemaList
+     * @param cinemaList List of Cinema within a Cineplex
+     */
+    public static void initCinemaType(ArrayList<Cinema> cinemaList) {
+        cinemaList.get(0).setCinemaType("Normal");
+        cinemaList.get(1).setCinemaType("Normal");
+        cinemaList.get(2).setCinemaType("Gold");
     }
 }

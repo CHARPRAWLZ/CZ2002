@@ -10,21 +10,36 @@ public class Showtime {
     private Date timing;
 
     /* Constructors */
-    public Showtime(Cineplex cineplex, int CinemaRoom, Movie movie, Date timing) {
+    /**Constructor of Showtime class.
+     * 'has a' relationship with Cineplex, Cinema and Movie.
+     * @param cineplex
+     * @param cinemaRoom
+     * @param movie
+     * @param timing 
+     */
+    public Showtime(Cineplex cineplex, int cinemaRoom, Movie movie, Date timing) {
         this.cineplex = cineplex;
-        this.cinema = this.cineplex.getCinemaList().get(CinemaRoom - 1);
+        this.cinema = this.cineplex.getCinemaList().get(cinemaRoom - 1);
         this.movie = movie;
         this.timing = timing;
     }
     /* end of Constructors */
 
     /* Accessors */
+    /**
+     * 
+     * @return 
+     */
     public String getCinemaName() {
         return cinema.getName();
     }
 
     public String getCinemaType() {
         return cinema.getCinemaType();
+    }
+    
+    public String getCineplexName() {
+        return cineplex.getName();
     }
 
     public String getMovieName() {

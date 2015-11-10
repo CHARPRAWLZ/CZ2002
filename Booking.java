@@ -14,12 +14,27 @@ public class Booking {
     private String custMobileNumber;
     private String custEmailAddr;
     private int custAge;
+    private String cineplexId;
+    private String cineplexName;
+    private String cinemaName;
+    private String cinemaType;
+    private String seat;
+    private String movieId;
+    private String movieName;
+    private String movieDate;
+    private String movieTime;
     
     public Booking(String custName, String custMobileNumber, 
-            String custEmailAddr, int custAge) {
+            String custEmailAddr, int custAge, String cineplexId, 
+            String cineplexName, String cinemaName, String cinemaType, 
+            String seat, String movieId, String movieName, String movieDate, 
+            String movieTime) {
         this.custName = custName;
         this.custMobileNumber = custMobileNumber;
         this.custEmailAddr = custEmailAddr;
         this.custAge = custAge;
+        Payment payment = new Payment(String cinemaName, String movieDate, 
+                String movieTime);
+        
     }
 }

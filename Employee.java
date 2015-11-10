@@ -18,16 +18,32 @@ public class Employee extends User{
         this.password = pw;
     }
     //accessors
+    /**
+     * Returns the username of the employee account
+     * @return userName
+     */
     public String getUserName(){
         return userName;
     }
+    /**
+     * Returns the password of the employee account
+     * @return password
+     */
     public String getPassword(){
         return password;
     }
     //mutators
+    /**
+     * sets the username of the employee account
+     * @param user 
+     */
     public void setUserName(String user){
         userName = user;
     }
+    /**
+     * sets the password of the employee account
+     * @param pw 
+     */
     public void setPassword(String pw){
         password = pw;
     }
@@ -35,15 +51,27 @@ public class Employee extends User{
     //methods for employee
     public Movie movie;
     Scanner sc = new Scanner(System.in);
+    /**
+     * add/remove/update tickets available for the movie
+     */
     public void configureTickets(){}
+    /**
+     * add/remove/update movies available
+     */
     public void configureMovies(){
         String status = sc.next();
         movie.setMovieStatus(status);
     }
+    /**
+     * prints the top 5 movie rating
+     */
     public void configureTop5movies(){
         double rating = sc.nextDouble();
         movie.setOverallRating(rating);
     }
+    /**
+     * add/remove movie timings
+     */
     public void configureMovieListing(){
        movie.getMovieStatus();
     }

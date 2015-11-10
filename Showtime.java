@@ -76,16 +76,26 @@ public class Showtime {
     }
     
     public boolean setDate(String str) {
+        if (str.isEmpty())
+            return false;
         String strArr[] = str.split("/");
         if (strArr.length == 3)
             return setDate(str, timing.getHours()*100+timing.getMinutes());
-        else if ()
+        else if (this.isInt(str)){
+            String date = "";
+            date += timing.getDate() + "/";
+            date += (timing.getMonth() + 1) + "/";
+            date += timing.getYear();
+            return setDate(date, Integer.valueOf(str));
+        }
+        else
+            return false;
     }
     
     private boolean isInt(String str) {
         char charArr[] = str.toCharArray();
         for (char c : charArr) {
-            if (c < "0" || c > "9")
+            if (c < '0' || c > '9')
                 return false;
         }
         return true;
@@ -98,15 +108,10 @@ public class Showtime {
         Showtime showtime = new Showtime(cineplex, 1, movie, timing);
         System.out.println("Date = " + showtime.getDate());
         System.out.println("Time = " + showtime.getTiming());
-        if (showtime.setDate("30/2/2015", 1456)) {
+        if (showtime.setDate("")) {
             System.out.println("Date = " + showtime.getDate());
             System.out.println("Time = " + showtime.getTiming());
         }
         else System.out.println("Input error");
-        String str = "hello";
-        char[] c = str.toCharArray();
-        for (char d : c) {
-            System.out.println(d);
-        }
     }
 }

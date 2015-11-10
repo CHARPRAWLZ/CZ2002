@@ -1,5 +1,5 @@
 package CZ2002;
-import java.util.Scanner;
+import java.util.*;
 public class Employee extends User{
     //variables
     private String userName, password;
@@ -27,17 +27,23 @@ public class Employee extends User{
     //methods for employee
     public Movie movie;
     Scanner sc = new Scanner(System.in);
-    public void configureTickets(){}
+        
+    public void configureTickets(){
+        //add, remove, update tickets from ticket class
+    }
     public void configureMovies(){
-        String status = sc.next();
-        movie.setMovieStatus(status);
+       //add, remove, update movies from xml
     }
     public void configureTop5movies(){
-        double rating = sc.nextDouble();
-        movie.setOverallRating(rating);
+        /*
+        sort all movie overall rating
+        print top 5 movies
+        */
     }
     public void configureMovieListing(){
-       movie.getMovieStatus();
+       /*
+        
+        */
     }
     
 }

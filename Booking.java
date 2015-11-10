@@ -23,6 +23,7 @@ public class Booking {
     private String movieName;
     private String movieDate;
     private String movieTime;
+    private Payment payment;
     
     public Booking(String custName, String custMobileNumber, 
             String custEmailAddr, int custAge, String cineplexId, 
@@ -33,8 +34,8 @@ public class Booking {
         this.custMobileNumber = custMobileNumber;
         this.custEmailAddr = custEmailAddr;
         this.custAge = custAge;
-        Payment payment = new Payment(String cinemaName, String movieDate, 
-                String movieTime);
-        
+        payment = new Payment(cinemaName, movieDate, movieTime);
     }
+    
+    public 
 }

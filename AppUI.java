@@ -28,30 +28,33 @@ public class AppUI {
         // Welcome page to MOBLIMA
         System.out.println("Welcome to MOBLIMA");
         do {
-            System.out.println("1. Login as Admin");
-            System.out.println("2. Browse as Movie goer");
-            System.out.println("3. Quit");
+            System.out.println("||===========================||");
+            System.out.println("|| 1: Browse as Movie goer   ||");
+            System.out.println("|| 2: Login as Admin         ||");
+            System.out.println("|| 0: Exit                   ||");
+            System.out.println("||===========================||");
 
             System.out.print("Enter choice: ");
             choice = sc.nextLine();
             switch (choice) {
                 case "1":
-                    adminUI();
-                    choice = "3";
+                    movieGoerUI();
+                    choice = "0";
                     break;
                 case "2":
-                    movieGoerUI();
-                    choice = "3";
+                    adminUI();
+                    choice = "0";
                     break;
-                case "3":
+                case "0":
                     break;
                 default:
                     System.out.println("\nEnter a valid input!");
             }
 
-        } while (!choice.equals("3"));
+        } while (!choice.equals("0"));
         System.out.println("\n----------------------------------------");
         System.out.println("Thank you for using MOBLIMA");
+        
 
     }
 

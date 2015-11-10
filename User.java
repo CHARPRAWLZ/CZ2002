@@ -1,5 +1,7 @@
 package CZ2002;
-
+/*
+author: zach
+*/
 public class User {
     //variables
    private String userId, name, emailAddress, mobileNo;

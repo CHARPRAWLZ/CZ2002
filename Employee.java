@@ -1,9 +1,17 @@
 package CZ2002;
+/*
+author: zach
+*/
 import java.util.Scanner;
 public class Employee extends User{
     //variables
     private String userName, password;
     //constructor for employee
+    /**
+    * Constructs an instance of class Employee.
+    * @param user
+    * @param  pw
+    */
     public Employee(String user, String pw, String id, String name, String email,String number){
         super(id,name,email,number);
         this.userName = user;

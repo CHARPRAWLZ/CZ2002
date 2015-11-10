@@ -13,13 +13,13 @@ public class AppUI {
     public static void main(String args[]) {
         // Start of Cineplex and Cinema initialisation
         ArrayList<Cinema> cinemaList;
-        Cineplex cineplex1 = new Cineplex("CP1", "Cathay Cineplexes", "Woodlands", 3);
+        Cineplex cineplex1 = new Cineplex("CPA", "Cathay Cineplexes", "Woodlands", 3);
         cinemaList = cineplex1.getCinemaList();
         initCinemaType(cinemaList);
-        Cineplex cineplex2 = new Cineplex("CP2", "Cathay Cineplex", "Orchard", 3);
+        Cineplex cineplex2 = new Cineplex("CPB", "Cathay Cineplex", "Orchard", 3);
         cinemaList = cineplex2.getCinemaList();
         initCinemaType(cinemaList);
-        Cineplex cineplex3 = new Cineplex("CP3", "The Cathay Cineplex", "CBD", 3);
+        Cineplex cineplex3 = new Cineplex("CPC", "The Cathay Cineplex", "CBD", 3);
         cinemaList = cineplex3.getCinemaList();
         initCinemaType(cinemaList);
         // End of Cineplex and Cinema initialisation

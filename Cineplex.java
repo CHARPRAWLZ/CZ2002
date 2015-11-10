@@ -60,6 +60,14 @@ public class Cineplex {
     }
     
     /**
+     * Returns the location of the Cineplex
+     * @return 
+     */
+    public String getLocation(){
+        return this.locationName;
+    }
+    
+    /**
      * Returns the cinemaList of the Cineplex
      * @return 
      */
@@ -122,5 +130,5 @@ public class Cineplex {
             System.out.println("Cinema " + (i+1) + " name: " + arrayList.get(i).getName());
         }
         cineplex.getName();
-    }
+    }*/
 }

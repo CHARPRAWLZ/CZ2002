@@ -7,6 +7,18 @@ public class Employee extends User{
         this.userName = user;
         this.password = pw;
     }
+    public String getUserName(){
+        return userName;
+    }
+    public String getPassword(){
+        return password;
+    }
+    public void setUserName(String user){
+        userName = user;
+    }
+    public void setPassword(String pw){
+        password = pw;
+    }
     public Movie movie;
     Scanner sc = new Scanner(System.in);
     public void configureTickets(){}
@@ -22,7 +34,4 @@ public class Employee extends User{
        movie.getMovieStatus();
     }
     
-    
-    //
-    //testing
 }

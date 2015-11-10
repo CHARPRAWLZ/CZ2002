@@ -10,6 +10,24 @@ public class User {
        this.mobileNo = number;
    }
    public String getUserID(){
-    return userId;
+        return userId;
 }
+   public String getName(){
+        return name;
+   }
+   public String getEmail(){
+        return emailAddress;   
+   }
+   public String getMobileNumber(){
+        return mobileNo;
+   }
+   public void setName(String uname){
+        name = name;
+   }
+   public void setEmail(String email){
+        emailAddress = email;
+   }
+   public void setMobileNumber(String number){
+        mobileNo = number;
+   }
 }

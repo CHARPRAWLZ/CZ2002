@@ -10,5 +10,8 @@ package CZ2002;
  * @author calvinlee
  */
 public class Payment {
-    
+    private String transactionID;
+    public Payment() {
+        
+    }
 }

@@ -127,7 +127,10 @@ public class XML {
         } while (!choice.equals("0"));
 
     }
-
+    /**
+     * Add element
+     * @return element
+     */
     public Element addElement() {
         Element e = this.doc.createElement(this.elementName);
         this.root.appendChild(e);
@@ -140,7 +143,7 @@ public class XML {
     }
 
     /**
-     * Add child NODE with content to a parent element
+     * Add item with content to parent element
      *
      * @param parentNode Parent node
      * @param elementName Child node
@@ -152,7 +155,9 @@ public class XML {
         e.setAttribute("name", elementName);
         e.appendChild(doc.createTextNode(elementContent));
     }
-
+    /**
+     * Display all elements with items
+     */
     public void displayElement() {
         if (!this.file.exists()) {
             System.out.println("No file found");
@@ -171,7 +176,11 @@ public class XML {
             }
         }
     }
-
+    /**
+     * Display element with item by element id
+     * @param id value of element id
+     * @return boolean if id exists
+     */
     public boolean displayElement(String id) {
         boolean idExists = false;
         if (!this.file.exists()) {
@@ -197,7 +206,12 @@ public class XML {
         }
         return idExists;
     }
-
+    /**
+     * Check if item exists in an element
+     * @param id value of element id
+     * @param item name of item
+     * @return boolean if item exists
+     */
     public boolean checkItemExists(String id, String item) {
         boolean itemExists = false;
         NodeList movieList = doc.getElementsByTagName("movie");
@@ -221,6 +235,12 @@ public class XML {
         }
         return itemExists;
     }
+    /**
+     * Edit item content
+     * @param id value element id
+     * @param item name of item
+     * @param content new content
+     */
     public void editItem(String id, String item, String content) {
         NodeList movieList = doc.getElementsByTagName("movie");
         for (int i = 0; i < movieList.getLength(); i++) {
@@ -269,6 +289,7 @@ public class XML {
     /**
      * ***************************************************************************************
      */
+    
     /**
      * Set root of document, add increment counter
      *

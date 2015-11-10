@@ -322,6 +322,7 @@ public class XML {
     public Document getDoc() {
         return this.doc;
     }
+    /*
     public static void main(String argv[]) {
         XML xml = new XML("movie");
         String choice = "-1", id = "";
@@ -394,4 +395,5 @@ public class XML {
         } while (!choice.equals("0"));
 
     }
+    */
 }

@@ -31,14 +31,13 @@ public class XML {
     /**
      * Constructor for XML
      *
-     * @param file File name of XML
-     * @param elementName name of Element
+     * @param elementName name of Element (no spaces)
      */
-    public XML(String file, String elementName) {
+    public XML(String elementName) {
         //create document
         try {
             DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            this.file = new File(file);
+            this.file = new File("src/CZ2002/xml/"+elementName+".xml");
             this.doc = dBuilder.newDocument();
             Element eRoot = this.doc.createElement("root");
             if (this.file.exists()) {
@@ -56,7 +55,7 @@ public class XML {
     }
 
     public static void main(String argv[]) {
-        XML xml = new XML("src/CZ2002/allmovies.xml", "movie");
+        XML xml = new XML("movie");
         String choice = "-1", id = "";
         Scanner sc = new Scanner(System.in);
         do {

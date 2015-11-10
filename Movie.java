@@ -27,28 +27,48 @@ public class Movie extends MovieInfo {
     /* end of Constructors */
 
     /* Accessors */
+    /**
+     * returns the status of the Movie instance
+     * @return movieStatus
+     */
     public String getMovieStatus() {
         return movieStatus;
     }
-
+    /**
+     * returns the movie ID of the Movie instance
+     * @return movieID
+     */
     public String getMovieID() {
         return movieID;
     }
-    
+    /**
+     * returns the overall rating of the Movie instance
+     * @return overallRating
+     */
     public double getOverallRating() {
         return overallRating;
     }
     /* end of Accessors */
 
     /* Mutators */
+    /**
+     * sets the status of the movie
+     * @param status 
+     */
     public void setMovieStatus(String status) {
         movieStatus = status;
     }
-
+    /**
+     * set one rating of the movie
+     * @param rating 
+     */
     public void setOverallRating(double rating) {
         overallRating = rating;
     }
-
+    /**
+     * sets the overall rating of the movie
+     * @param rating 
+     */
     public void setOverallRating(double[] rating) {
         double total = 0;
         for (int i = 0; i < rating.length; i++) {

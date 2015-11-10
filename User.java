@@ -3,11 +3,11 @@ package CZ2002;
 public class User {
    private String userId, name, emailAddress, mobileNo;
    
-   public User(String id,String name,String email,String no){
+   public User(String id,String name,String email,String number){
        this.userId = id;
        this.name = name;
        this.emailAddress = email;
-       this.mobileNo = no;
+       this.mobileNo = number;
    }
    public String getUserID(){
     return userId;

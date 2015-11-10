@@ -2,8 +2,8 @@ package CZ2002;
 import java.util.Scanner;
 public class Employee extends User{
     private String userName, password;
-    public Employee(String user, String pw, String id, String name, String email,String no){
-        super(id,name,email,no);
+    public Employee(String user, String pw, String id, String name, String email,String number){
+        super(id,name,email,number);
         this.userName = user;
         this.password = pw;
     }

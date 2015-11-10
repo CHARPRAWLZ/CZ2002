@@ -3,8 +3,8 @@ import java.util.ArrayList;
 
 class MovieInfo {
 
-    public final String title;
-    public String synopsis, director, cast, movieType;
+    private final String title;
+    private String synopsis, director, cast, movieType;
 
     /* Constructor */
     public MovieInfo(String title) {

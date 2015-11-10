@@ -26,11 +26,11 @@ public class Cineplex {
 
     // non-enum version
     /**
-     * Constructor
-     * @param id
-     * @param name
-     * @param location
-     * @param cinemaNum 
+     * Constructor for Cineplex
+     * @param id ID of the Cineplex
+     * @param name name of the Cineplex
+     * @param location location of the Cineplex
+     * @param cinemaNum number of Cinema of Cineplex
      */
     public Cineplex(String id, String name, String location, int cinemaNum){
         this.cineplexID = id;
@@ -45,7 +45,7 @@ public class Cineplex {
     // get and set methods()
     /**
      * Returns the ID of the Cineplex
-     * @return 
+     * @return cineplexID
      */
     public String getID() {
         return this.cineplexID;
@@ -53,7 +53,7 @@ public class Cineplex {
     
     /**
      * Returns the name of the Cineplex
-     * @return 
+     * @return cineplexName
      */
     public String getName(){
         return this.cineplexName;
@@ -61,7 +61,7 @@ public class Cineplex {
     
     /**
      * Returns the location of the Cineplex
-     * @return 
+     * @return locationName
      */
     public String getLocation(){
         return this.locationName;
@@ -69,15 +69,15 @@ public class Cineplex {
     
     /**
      * Returns the cinemaList of the Cineplex
-     * @return 
+     * @return cinemaList
      */
     public ArrayList<Cinema> getCinemaList() {
         return this.cinemaList;
     }
     
     /**
-     * Updates the cinemaList of the CIneplex
-     * @param cinemaList 
+     * Updates the cinemaList of the Cineplex
+     * @param cinemaList List of Cinema object within the Cineplex
      */
     public void setCinemaList(ArrayList<Cinema> cinemaList) {
         this.cinemaList = cinemaList;
@@ -90,8 +90,8 @@ public class Cineplex {
     }
     */
     /**
-     * Returns the number of cinema of the Cineplex
-     * @return 
+     * Returns the number of Cinema of the Cineplex
+     * @return the number of Cinema within the Cineplex
      */
     public int getNumOfCinema() {
         return cinemaList.size();
@@ -99,8 +99,8 @@ public class Cineplex {
     
     // toString method
     /**
-     * 
-     * @return 
+     * Returns a string containing the ID, name, and location of the Cineplex
+     * @return a string that'll be used as the code for the Cineplex
      */
     public String toString() {
         return cineplexID + cineplexName + locationName;

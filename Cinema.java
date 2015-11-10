@@ -10,8 +10,8 @@ public class Cinema {
     private String cinemaType;
     
     /**
-     * Constructor
-     * @param name 
+     * Constructor for Cinema
+     * @param name name of the Cinema
      */
     public Cinema(String name) {
         this.name = name;
@@ -19,7 +19,7 @@ public class Cinema {
     
     /**
      * Returns the name of the Cinema
-     * @return 
+     * @return name
      */
     public String getName() {
         return this.name;
@@ -27,7 +27,7 @@ public class Cinema {
 
     /**
      * Updates the name of the Cinema
-     * @param name 
+     * @param name name of the Cinema
      */
     public void setName(String name) {
         this.name = name;
@@ -35,7 +35,7 @@ public class Cinema {
     
     /**
      * Returns the type of the Cinema
-     * @return 
+     * @return cinemaType
      */
     public String getCinemaType() {
         return this.cinemaType;
@@ -43,7 +43,7 @@ public class Cinema {
     
     /**
      * Updates the type of the Cinema
-     * @param cinemaType 
+     * @param cinemaType type of the Cinema
      */
     public void setCinemaType(String cinemaType) {
         this.cinemaType = cinemaType;

@@ -21,14 +21,22 @@ public class XML {
     private Document doc;
     private Element root;
 
+    /**
+     * Constructor for XML
+     */
     public XML() {
     }
 
-    public XML(String f) {
+    /**
+     * Constructor for XML
+     *
+     * @param file File name of XML
+     */
+    public XML(String file) {
         //create document
         try {
             DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            this.file = new File(f);
+            this.file = new File(file);
             this.doc = dBuilder.newDocument();
             if (this.file.exists()) {
                 this.doc = dBuilder.parse(file);
@@ -122,10 +130,10 @@ public class XML {
     }
 
     /**
-     * set root of document, add increment counter
+     * Set root of document, add increment counter
      *
-     * @param root root name
-     * @return element of root
+     * @param root Root name
+     * @return Element of root
      */
     public Element setRoot(String root) {
         Element eRoot = this.doc.createElement(root);
@@ -140,7 +148,7 @@ public class XML {
     }
 
     /**
-     * give auto-increment to an element attribute id
+     * Give auto-increment to an element attribute id
      *
      * @param element Element that has element attribute id increment
      */
@@ -153,10 +161,10 @@ public class XML {
     }
 
     /**
-     * add child NODE to an element
+     * Add child NODE to an element
      *
-     * @param parent parent element of the child
-     * @param child name of child NODE to be appended to parent
+     * @param parent Parent element of the child
+     * @param child Name of child NODE to be appended to parent
      * @return
      */
     public Element addNewChild(Element parent, String child) {
@@ -166,21 +174,21 @@ public class XML {
     }
 
     /**
-     * add text content to an element
+     * Add text content to an element
      *
-     * @param element
-     * @param content
+     * @param element Element of NODE
+     * @param content Text content to be added to element
      */
     public void addContent(Element element, String content) {
         element.appendChild(doc.createTextNode(content));
     }
 
     /**
-     * add child NODE with content to a parent element
+     * Add child NODE with content to a parent element
      *
-     * @param parentNode
-     * @param elementName
-     * @param elementContent
+     * @param parentNode Parent node
+     * @param elementName Child node
+     * @param elementContent Child content
      */
     public void addElement(Element parentNode, String elementName, String elementContent) {
         Element e = this.doc.createElement(elementName);
@@ -189,11 +197,11 @@ public class XML {
     }
 
     /**
-     * get a node element in a node list
+     * Get a node element in a node list
      *
-     * @param list list of items in xml
-     * @param index index of the element in the list
-     * @return element of NodeList
+     * @param list List of items in XML
+     * @param index Index of the element in the list
+     * @return Element of NodeList
      */
     public Element getNodeElement(NodeList list, int index) {
         Node listnode = list.item(index);
@@ -205,18 +213,18 @@ public class XML {
     }
 
     /**
-     * get the content of a node element
+     * Get the content of a node element
      *
-     * @param element parent element
-     * @param nodeName name of node in the parent element
-     * @return content of node
+     * @param element Parent element
+     * @param nodeName Name of node in the parent element
+     * @return Content of node
      */
     public String getNodeContent(Element element, String nodeName) {
         return element.getElementsByTagName(nodeName).item(0).getTextContent();
     }
 
     /**
-     * write content to file
+     * Write content to file
      */
     public void writeContent() {
         try {

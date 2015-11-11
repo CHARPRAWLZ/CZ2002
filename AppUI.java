@@ -73,7 +73,13 @@ public class AppUI {
         if (!username.equals("/")) {
             System.out.print("Password: ");
             password = sc.nextLine();
-            user.checkLogin(username, password);
+            if (user.checkLogin(username, password)) {
+                System.out.println("\n----------------");
+                System.out.println("Username : " + user.getUsername());
+                System.out.println("Name : " + user.getName());
+                System.out.println("Email : " + user.getEmail());
+                System.out.println("Mobile Number : " + user.getMobileNo());
+            }
         }
     }
 

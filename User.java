@@ -11,7 +11,7 @@ public class User {
 
     //variables
     private String id, username, password, name, email, mobileNo;
-    XML userXml;
+    private XML userXml;
 
     //constructors
     public User() {
@@ -33,13 +33,6 @@ public class User {
         this.email = email;
         this.mobileNo = mobileNo;
 
-        Element e = userXml.addElement();
-        userXml.addItem(e, "username", this.username);
-        userXml.addItem(e, "password", this.password);
-        userXml.addItem(e, "name", this.name);
-        userXml.addItem(e, "email", this.email);
-        userXml.addItem(e, "mobileNo", this.mobileNo);
-        userXml.writeContent();
 
     }
 
@@ -50,7 +43,7 @@ public class User {
      * @return id
      */
     public String getUserId() {
-        return id;
+        return this.id;
     }
     /**
      * Returns the username of the user account
@@ -58,7 +51,7 @@ public class User {
      * @return userName
      */
     public String getUsername() {
-        return username;
+        return this.username;
     }
 
     /**
@@ -67,7 +60,7 @@ public class User {
      * @return password
      */
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     /**
@@ -76,7 +69,7 @@ public class User {
      * @return name
      */
     public String getName() {
-        return name;
+        return this.name;
     }
 
     /**
@@ -85,7 +78,14 @@ public class User {
      * @return emailAddress
      */
     public String getEmail() {
-        return email;
+        return this.email;
+    }
+    /**
+     * returns the xml of user
+     * @return xml of user
+     */
+    public XML getXml() {
+        return this.userXml;
     }
 
     /**
@@ -94,7 +94,7 @@ public class User {
      * @return mobileNo
      */
     public String getMobileNo() {
-        return mobileNo;
+        return this.mobileNo;
     }
 
     //mutators
@@ -104,7 +104,7 @@ public class User {
      * @param user
      */
     public void setUsername(String user) {
-        username = user;
+        this.username = user;
     }
 
     /**
@@ -113,16 +113,16 @@ public class User {
      * @param pw
      */
     public void setPassword(String pw) {
-        password = pw;
+        this.password = pw;
     }
 
     /**
      * set the user's name
      *
-     * @param uname
+     * @param myName
      */
     public void setName(String myName) {
-        name = myName;
+        this.name = myName;
     }
 
     /**
@@ -131,7 +131,7 @@ public class User {
      * @param email
      */
     public void setEmail(String email) {
-        email = email;
+        this.email = email;
     }
 
     /**
@@ -140,7 +140,7 @@ public class User {
      * @param number
      */
     public void setMobileNo(String number) {
-        mobileNo = number;
+        this.mobileNo = number;
     }
 
     //methods for user
@@ -180,6 +180,16 @@ public class User {
             }
         }
         return false;
+    }
+    public void objectToXml() {
+        Element e = userXml.addElement();
+        userXml.addItem(e, "username", this.username);
+        userXml.addItem(e, "password", this.password);
+        userXml.addItem(e, "name", this.name);
+        userXml.addItem(e, "email", this.email);
+        userXml.addItem(e, "mobileNo", this.mobileNo);
+        userXml.writeContent();
+        this.id = userXml.getCounter();
     }
     /*
      These methods can be reused later as needed

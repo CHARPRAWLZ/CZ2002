@@ -52,6 +52,9 @@ public class AppUI {
                     login();
                     break;
                 case "2":
+                    signUp();
+                    break;
+                case "3":
                     landing();
                     break;
                 case "0":
@@ -82,6 +85,52 @@ public class AppUI {
                 System.out.println("Mobile Number : " + user.getMobileNo());
             }
         }
+    }
+
+    public static void signUp() {
+        int userCount = 0;
+        String username;
+        do {
+            System.out.println("");
+            System.out.print("Enter username : ");
+            username = sc.nextLine();
+            userCount = user.getXml().getElementCount("username", username);
+            if (userCount > 0) {
+                System.out.println("Username already exists. Please use a different username.");
+            }
+        } while (userCount > 0);
+        String password, password2;
+        do {
+            System.out.println("");
+            System.out.print("Enter password : ");
+            password = sc.nextLine();
+            System.out.print("Re-enter password : ");
+            password2 = sc.nextLine();
+            if (!password.equals(password2)) {
+                System.out.println("Password did not match. Please enter password again.");
+            }
+        } while (!password.equals(password2));
+        System.out.print("\nEnter full name : ");
+        String name = sc.nextLine();
+
+        System.out.print("\nEnter email : ");
+        String email = sc.nextLine();
+
+        System.out.print("\nEnter Mobile Number : ");
+        String mobileNo = sc.nextLine();
+        user.setUsername(username);
+        user.setPassword(password);
+        user.setName(name);
+        user.setEmail(email);
+        user.setMobileNo(mobileNo);
+        
+        System.out.println(user.getUsername());
+        System.out.println(user.getPassword());
+        System.out.println(user.getName());
+        System.out.println(user.getEmail());
+        System.out.println(user.getMobileNo());
+        user.objectToXml();
+        System.out.println(user.getUserId());
     }
 
     public static void landing() {

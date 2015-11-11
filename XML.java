@@ -47,6 +47,7 @@ public class XML {
             }
             this.root = eRoot;
             this.elementName = elementName;
+            this.writeContent();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -396,6 +397,13 @@ public class XML {
      */
     public String getElementName() {
         return this.elementName;
+    }
+    /**
+     * Get root's counter
+     * @return string counter
+     */
+    public String getCounter() {
+        return this.root.getAttribute("counter");
     }
     /*
      public static void main(String argv[]) {

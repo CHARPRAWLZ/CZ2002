@@ -282,7 +282,7 @@ public class XML {
     }
 
     /**
-     * Get item content
+     * Get item content from a nodelist
      *
      * @param nList Nodelist to get the item content from
      * @param i index of item
@@ -290,6 +290,26 @@ public class XML {
      */
     public String getItemContent(NodeList nList, int i) {
         return nList.item(i).getTextContent();
+    }
+    /**
+     * Get item content using element id
+     * @param id id of element
+     * @param itemName name of item
+     * @return string of item content
+     */
+    public String getItemContent(String id, String itemName) {
+        NodeList nList = this.doc.getElementsByTagName(this.elementName);
+        for (int i = 0; i < nList.getLength(); i++) {
+            Element e = this.getNodeElement(nList, i);
+            NodeList items = e.getElementsByTagName("item");
+            if (e.getAttribute("id").equals(id)) {
+                for (int j = 0; j < items.getLength(); j++) {
+                    String name = this.getItemName(items, j);
+                    if (name.toLowerCase().equals(itemName.toLowerCase())) return this.getItemContent(items, j);
+                }
+            }
+        }
+        return "";
     }
 
     /**

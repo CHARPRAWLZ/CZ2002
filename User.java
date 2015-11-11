@@ -158,12 +158,18 @@ public class User {
             for (i = 0; i < nList.getLength(); i++) {
                 Element e = userXml.getNodeElement(nList, i);
                 NodeList items = e.getElementsByTagName("item");
+                String id = e.getAttribute("id");
                 for (j = 0; j < items.getLength(); j++) {
                     String name = items.item(j).getAttributes().getNamedItem("name").getNodeValue();
                     String nameContent = items.item(j).getTextContent();
                     if (name.equals("password")) {
                         if (nameContent.equals(password)) {
-                            this.xmlToObject(e.getAttribute("id"));
+                            this.id = id;
+                            this.username = userXml.getItemContent(id, "username");
+                            this.password = userXml.getItemContent(id, "password");
+                            this.name = userXml.getItemContent(id, "name");
+                            this.email = userXml.getItemContent(id, "email");
+                            this.mobileNo = userXml.getItemContent(id, "mobileNo");
                             return true;
                         } else {
                             System.out.println("Password not match");
@@ -174,40 +180,6 @@ public class User {
             }
         }
         return false;
-    }
-
-    public void xmlToObject(String id) {
-        NodeList nList = userXml.getDoc().getElementsByTagName("user");
-        for (int i = 0; i < nList.getLength(); i++) {
-            Element e = userXml.getNodeElement(nList, i);
-            NodeList items = e.getElementsByTagName("item");
-            if (e.getAttribute("id").equals(id)) {
-                this.id = e.getAttribute("id");
-                for (int j = 0; j < items.getLength(); j++) {
-                    String name = items.item(j).getAttributes().getNamedItem("name").getNodeValue();
-                    String nameContent = items.item(j).getTextContent();
-                    switch (name) {
-                        case "username":
-                            this.username = nameContent;
-                            break;
-                        case "password":
-                            this.password = nameContent;
-                            break;
-                        case "name":
-                            this.name = nameContent;
-                            break;
-                        case "email":
-                            this.email = nameContent;
-                            break;
-                        case "mobileNo":
-                            this.mobileNo = nameContent;
-                            break;
-                    }
-                }
-                break;
-            }
-        }
-
     }
     /*
      These methods can be reused later as needed

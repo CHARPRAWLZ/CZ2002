@@ -59,9 +59,9 @@ public class AppUI {
                 default:
                     System.out.println("\nEnter a valid input!");
             }
-
+            System.out.println("");
         } while (!choice.equals("0"));
-        System.out.println("\n----------------------------------------");
+        System.out.println("----------------------------------------");
         System.out.println("Thank you for using MOBLIMA");
 
     }
@@ -69,10 +69,10 @@ public class AppUI {
     public static void login() {
         String username, password;
         System.out.println("\n[ Enter / to go back ]");
-        System.out.print("Username: ");
+        System.out.print("Username : ");
         username = sc.nextLine();
         if (!username.equals("/")) {
-            System.out.print("Password: ");
+            System.out.print("Password : ");
             password = sc.nextLine();
             if (user.checkLogin(username, password)) {
                 System.out.println("\n----------------");
@@ -80,7 +80,6 @@ public class AppUI {
                 System.out.println("Name : " + user.getName());
                 System.out.println("Email : " + user.getEmail());
                 System.out.println("Mobile Number : " + user.getMobileNo());
-                System.out.println("");
             }
         }
     }

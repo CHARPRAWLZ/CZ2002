@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<root counter="2">
-<movie id="1">
-<item name="Title">LOTR</item>
-<item name="Status">Coming Soon</item>
+<root counter="18">
+<movie id="14">
+<item name="Title">test</item>
+<item name="Status">Coming soon</item>
 </movie>
-<movie id="2">
-<item name="Title">Hobbit</item>
-<item name="Status">Coming Soon</item>
+<movie id="16">
+<item name="Title">test 3</item>
+<item name="Status">Coming soon</item>
+</movie>
+<movie id="18">
+<item name="Title">hello</item>
+<item name="Status">hello</item>
 </movie>
 </root>

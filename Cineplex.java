@@ -37,7 +37,7 @@ public class Cineplex {
         this.cineplexName = name;
         this.locationName = location;
         for(int i = 0; i < cinemaNum; i++) {
-            Cinema cinema = new Cinema(this.cineplexID.concat("-" + Integer.toString(i+1)));
+            Cinema cinema = new Cinema(this.cineplexID.concat(String.valueOf((char)((int)'A'+i))));
             this.cinemaList.add(cinema);
         }
     }

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<root counter="2">
+<movie id="1">
+<item name="Title">LOTR</item>
+<item name="Status">Coming Soon</item>
+</movie>
+<movie id="2">
+<item name="Title">Hobbit</item>
+<item name="Status">Coming Soon</item>
+</movie>
+</root>

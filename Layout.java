@@ -27,19 +27,14 @@ public class Layout {
          First bit: seat[7][11];
          Last bit : seat[0][0];
          */
-        this.cinemaType = cinemaType.toUpperCase();
-
-        /*switch (this.cinemaType) {
-         case "GOLD":
-         this.row = 4;
-         this.col = 6;
-         break;
-         case "NORMAL":
-         default:
-         this.row = 8;
-         this.col = 12;
-         break;
-         }*/
+        cinemaType = cinemaType.toUpperCase();
+        if (cinemaType.equals("GOLD") || cinemaType.equals("NORMAL")){
+            this.cinemaType = cinemaType;
+        }
+        else {
+            this.cinemaType = "NORMAL";
+        }
+        
         if (this.cinemaType.equals("GOLD")) {
             this.row = 4;
             this.col = 6;

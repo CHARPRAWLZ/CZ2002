@@ -17,9 +17,8 @@ public class Employee extends User{
     * @param number
     * @param age
     */
-    public Employee(String user, String pw, String id, String name, String email,String number,int age){
-        super(user,pw,id,name,email,number,age);
-        
+    public Employee(String username, String password, String name, String email, String mobileno, String dob){
+        super(username,password,name,email,mobileno,dob);    
     }
     
     //methods for employee

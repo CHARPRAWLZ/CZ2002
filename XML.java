@@ -314,42 +314,10 @@ public class XML {
      * @param node Node to print
      * @param attributeName name of attribute to print
      */
-    public void printAttrAndContent(Node node, String attributeName) {
+    private void printAttrAndContent(Node node, String attributeName) {
         System.out.println(node.getAttributes().getNamedItem(attributeName).getNodeValue()
                 + " : " + node.getTextContent());
     }
-
-    /**
-     * Set root of document, add increment counter
-     *
-     * @param root Root name
-     * @return Element of root
-     */
-    public Element setRoot(String root) {
-        Element eRoot = this.doc.createElement(root);
-        if (this.file.exists()) {
-            eRoot = this.doc.getDocumentElement();
-        } else {
-            eRoot.setAttribute("counter", "0");
-            this.doc.appendChild(eRoot);
-        }
-        this.root = eRoot;
-        return this.root;
-    }
-
-    /**
-     * Add child NODE to an element
-     *
-     * @param parent Parent element of the child
-     * @param child Name of child NODE to be appended to parent
-     * @return element of new child
-     */
-    public Element addNewChild(Element parent, String child) {
-        Element c = this.doc.createElement(child);
-        parent.appendChild(c);
-        return c;
-    }
-
     /**
      * Add text content to an element
      *
@@ -359,18 +327,6 @@ public class XML {
     public void addContent(Element element, String content) {
         element.appendChild(doc.createTextNode(content));
     }
-
-    /**
-     * Get the content of a node element
-     *
-     * @param element Parent element
-     * @param itemName Name of item
-     * @return Content of node
-     */
-    public String getItemContent(Element element, String itemName) {
-        return element.getElementsByTagName(itemName).item(0).getTextContent();
-    }
-
     /**
      * Write content to file
      */

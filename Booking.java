@@ -40,6 +40,7 @@ public class Booking {
     private String cinemaName;
     private String cinemaType;
     private String seat;*/
+    private String ageGroup;
     private Movie movie;
     private Showtime showtime;
     /*
@@ -115,22 +116,37 @@ public class Booking {
         Element e = xml.addElement();
         Payment payment = new Payment(cinema.getName(), showtime.getDate(), 
                 showtime.getTiming());
-        xml.addItem(e, "TID", payment.getTID());
-        xml.addItem(e, "custId", user.getUserID());
-        xml.addItem(e, "custName", user.getName());
-        xml.addItem(e, "custMobileNumber", user.getMobileNo());
-        xml.addItem(e, "custEmail", user.getEmail());
-        xml.addItem(e, "cineplexId", cineplex.getID());
-        xml.addItem(e, "cineplexName", cineplex.getName());
-        xml.addItem(e, "cineplexLocation", cineplex.getLocation());
-        xml.addItem(e, "cinemaName", cinema.getName());
-        xml.addItem(e, "cinemaType", cinema.getCinemaType());
-        xml.addItem(e, "seat", seat.getSeatID());
-        xml.addItem(e, "movieId", movie.getMovieID());
-        xml.addItem(e, "movieTitle", movie.getTitle());
-        xml.addItem(e, "movieDate", showtime.getDate());
-        xml.addItem(e, "movieTime", showtime.getTiming());
-        // need to calculate ticket price
+        switch(ageGroup) {
+            case "Student":
+                ticketPrice += 7;
+                break;
+            case "Adult":
+                ticketPrice += 10;
+                break;
+            case "Senior Citizen":
+                ticketPrice += 4;
+        }
+        if(cinema.getCinemaType().equalsIgnoreCase("Gold"))
+            ticketPrice += 20;
+        if(movie.getType().equalsIgnoreCase("3D"))
+            ticketPrice += 3;
+        xml.addItem(e, "TID", this.payment.getTID());
+        //xml.addItem(e, "custId", this.user.getUserID());
+        xml.addItem(e, "custName", this.user.getName());
+        xml.addItem(e, "custMobileNumber", this.user.getMobileNo());
+        xml.addItem(e, "custEmail", this.user.getEmail());
+        xml.addItem(e, "cineplexId", this.cineplex.getID());
+        xml.addItem(e, "cineplexName", this.cineplex.getName());
+        xml.addItem(e, "cineplexLocation", this.cineplex.getLocation());
+        xml.addItem(e, "cinemaName", this.cinema.getName());
+        xml.addItem(e, "cinemaType", this.cinema.getCinemaType());
+        xml.addItem(e, "seat", this.seat.getSeatID());
+        xml.addItem(e, "ageGroup", this.ageGroup);
+        xml.addItem(e, "movieId", this.movie.getMovieID());
+        xml.addItem(e, "movieTitle", this.movie.getTitle());
+        xml.addItem(e, "movieDate", this.showtime.getDate());
+        xml.addItem(e, "movieTime", this.showtime.getTiming());
+        xml.addItem(e, "ticketPrice", Double.toString(this.ticketPrice));
         
     }
 }

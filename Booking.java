@@ -48,6 +48,7 @@ public class Booking {
     private String movieDate;
     private String movieTime;*/
     private Payment payment;
+    private double ticketPrice = 0;
     /*
     public Booking(String custName, String custMobileNumber, 
             String custEmailAddr, int custAge, String cineplexId, 
@@ -130,5 +131,6 @@ public class Booking {
         xml.addItem(e, "movieDate", showtime.getDate());
         xml.addItem(e, "movieTime", showtime.getTiming());
         // need to calculate ticket price
+        
     }
 }

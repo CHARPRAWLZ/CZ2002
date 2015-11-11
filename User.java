@@ -11,9 +11,9 @@ public class User {
 
     //variables
 
-    private String userId, name, emailAddress, mobileNo, userName, password;
+    private String username, password,name,email,mobileno,dob;
     XML userXml;
-    private int age;
+
 
     //constructors
 
@@ -26,20 +26,19 @@ public class User {
      * @param name
      * @param email
      * @param number
-     * @param age
+     * @param DOB
      */
     public User() {
         userXml = new XML("user");
     }
 
-    public User(String user, String pw, String id, String name, String email, String number, int age) {
-        this.userName = user;
-        this.password = pw;
-        this.userId = id;
+    public User(String username, String password, String name, String email, String mobileno, String dob) {
+        this.username = username;
+        this.password = password;
         this.name = name;
-        this.emailAddress = email;
-        this.mobileNo = number;
-        this.age = age;
+        this.email = email;
+        this.mobileno = mobileno;
+        this.dob = dob;
 
     }
 
@@ -50,8 +49,8 @@ public class User {
      *
      * @return userName
      */
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
     /**
@@ -61,16 +60,6 @@ public class User {
      */
     public String getPassword() {
         return password;
-    }
-    //mutators
-
-    /**
-     * returns the UserID of the User instance.
-     *
-     * @return userId
-     */
-    public String getUserID() {
-        return userId;
     }
 
     /**
@@ -88,7 +77,7 @@ public class User {
      * @return emailAddress
      */
     public String getEmail() {
-        return emailAddress;
+        return email;
     }
 
     /**
@@ -97,16 +86,16 @@ public class User {
      * @return mobileNo
      */
     public String getMobileNumber() {
-        return mobileNo;
+        return mobileno;
     }
 
     /**
-     * returns the age of the user
+     * returns the date of birth of the user
      *
-     * @return age
+     * @return DOB
      */
-    public int getAge() {
-        return age;
+    public String getDateOfBirth() {
+        return dob;
     }
 
     //mutators
@@ -116,8 +105,8 @@ public class User {
      *
      * @param user
      */
-    public void setUserName(String user) {
-        userName = user;
+    public void setUsername(String user) {
+        username = user;
     }
 
     /**
@@ -144,7 +133,7 @@ public class User {
      * @param email
      */
     public void setEmail(String email) {
-        emailAddress = email;
+        email = email;
     }
 
     /**
@@ -153,16 +142,16 @@ public class User {
      * @param number
      */
     public void setMobileNumber(String number) {
-        mobileNo = number;
+        mobileno = number;
     }
 
     /**
-     * sets the user's age in terms of years
+     * sets the user's date of birth 
      *
-     * @param years
+     * @param date
      */
-    public void setAge(int years) {
-        age = years;
+    public void setDateOfBirth(String date) {
+        dob = date;
     }
 
     //methods for user

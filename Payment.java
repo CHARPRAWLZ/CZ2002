@@ -10,12 +10,23 @@ package CZ2002;
  * @author calvinlee
  */
 public class Payment {
-    private String TID;
+    private final String TID;
     
+    /**
+     * Constructor for Payment
+     * @param cinemaName name of the Cinema
+     * @param movieDate selected date for Movie
+     * @param movieTime selected time for Movie
+     */
     public Payment(String cinemaName, String movieDate, String movieTime) {
         TID = cinemaName + generateDate(movieDate) + generateTime(movieTime);
     }
     
+    /**
+     * Returns a String that consist of date data to generate the TID
+     * @param date booked date of the movie
+     * @return formatted booked date of the movie for the TID
+     */
     private String generateDate(String date){
         char[] charArr = date.toCharArray();
         String str = "", str2 = "";
@@ -36,12 +47,12 @@ public class Payment {
     }
     
     private String generateTime(String time){
-        int size = time.length();
+        //int size = time.length();
         char[] charArr = time.toCharArray();
         String hours = "", mins = "", afternoon = "";
         int i = 2;
         for (char c : charArr) {
-            if (c < '0' || c > '9'){
+            if (c < '0' || c > '9' && i != 0){
                 i--;
             }
             else {
@@ -59,7 +70,7 @@ public class Payment {
             if (i == -1)
                 break;
         }
-        System.out.println(afternoon);
+        //System.out.println(afternoon);
         if (afternoon.equals("P")) {
             int val = Integer.valueOf(hours);
             val += 12;

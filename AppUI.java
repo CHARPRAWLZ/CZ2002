@@ -28,21 +28,21 @@ public class AppUI {
         // Welcome page to MOBLIMA
         System.out.println("Welcome to MOBLIMA");
         do {
-            System.out.println("||===========================||");
-            System.out.println("|| 1: Browse as Movie goer   ||");
-            System.out.println("|| 2: Login as Admin         ||");
-            System.out.println("|| 0: Exit                   ||");
-            System.out.println("||===========================||");
+            System.out.println("||======================||");
+            System.out.println("|| 1: Login             ||");
+            System.out.println("|| 2: Continue as guest ||");
+            System.out.println("|| 0: Exit              ||");
+            System.out.println("||======================||");
 
             System.out.print("Enter choice: ");
             choice = sc.nextLine();
             switch (choice) {
                 case "1":
-                    movieGoerUI();
+                    login();
                     choice = "0";
                     break;
                 case "2":
-                    adminUI();
+                    guest();
                     choice = "0";
                     break;
                 case "0":
@@ -58,16 +58,14 @@ public class AppUI {
 
     }
 
-    private static void adminUI() {
-        System.out.println("\n----------------------------------------");
-        System.out.println("Login as Admin");
+    private static void login() {
         String username;
         System.out.print("Username: ");
         username = sc.nextLine();
     }
 
-    private static void movieGoerUI() {
-        System.out.println("movieGoerUI");
+    private static void guest() {
+        System.out.println("Continue as Guest");
     }
 
     /**

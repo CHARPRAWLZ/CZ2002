@@ -1,25 +1,50 @@
 package CZ2002;
+import java.util.Scanner;
 /*
 author: zach
 */
 public class User {
     //variables
-   private String userId, name, emailAddress, mobileNo;
+   private String userId, name, emailAddress, mobileNo, userName, password;
+   private int age;
    //constructors
    /**
     * Constructs an instance of class User.
+    * @param user
+    * @param pw
     * @param id
     * @param name
     * @param email
     * @param number 
+    * @param age
     */
-   public User(String id,String name,String email,String number){
+   public User(String user, String pw, String id, String name, String email,String number,int age){
+        this.userName = user;
+       this.password = pw;
        this.userId = id;
        this.name = name;
        this.emailAddress = email;
        this.mobileNo = number;
+       this.age = age;
+      
    }
    //accessors
+   /**
+     * Returns the username of the user account
+     * @return userName
+     */
+    public String getUserName(){
+        return userName;
+    }
+    /**
+     * Returns the password of the user account
+     * @return password
+     */
+    public String getPassword(){
+        return password;
+    }
+    //mutators
+    
    /**
     * returns the UserID of the User instance.
     * @return userId
@@ -48,13 +73,34 @@ public class User {
    public String getMobileNumber(){
         return mobileNo;
    }
+   /**
+    * returns the age of the user
+    * @return age
+    */
+   public int getAge(){
+       return age;
+   }
    //mutators
+  /**
+   * sets the username of the user account
+   * @param user 
+   */
+    public void setUserName(String user){
+        userName = user;
+    }
+   /**
+    * sets the password of the user account
+    * @param pw 
+    */
+    public void setPassword(String pw){
+        password = pw;
+    }
    /**
     * set the user's name
     * @param uname 
     */
-   public void setName(String uname){
-        name = name;
+   public void setName(String myName){
+        name = myName;
    }
    /**
     * set the user's email
@@ -70,4 +116,33 @@ public class User {
    public void setMobileNumber(String number){
         mobileNo = number;
    }
+   /**
+    * sets the user's age in terms of years
+    * @param years 
+    */
+   public void setAge(int years){
+       age = years;
+   }
+   //methods for user
+   /*
+   These methods can be reused later as needed
+   */
+   /*
+   Scanner sc = new Scanner(System.in);
+   public Movie movie;
+  
+   /*public void rateMovie(double rating){
+       System.out.println("Please rate the selected movie");
+       rating = sc.nextDouble();
+       movie.setOverallRating(rating);
+       System.out.println("Thank you for rating");
+   }
+  
+   public void reviewMovie(String review){
+       System.out.println("Please review the selected movie");
+       review = sc.next();
+   }
+   
+   public void bookMovie(){}
+   */
 }

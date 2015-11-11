@@ -2,28 +2,38 @@ package CZ2002;
 
 import java.util.*;
 import java.io.*;
+
 /**
- * 
+ *
  * @author alfiefarhana
  */
 public class AppUI {
 
-    static Scanner sc = new Scanner(System.in);
+    public static Scanner sc = new Scanner(System.in);
+    public static Movie movie;
+    public static Cineplex cineplex;
+    public static Cinema cinema;
+    public static User user;
+    public static Seat seat;
+    public static Showtime showtime;
 
-    public static void main(String args[]) {
-        // Start of Cineplex and Cinema initialisation
-        ArrayList<Cinema> cinemaList;
-        Cineplex cineplex1 = new Cineplex("CPA", "Cathay Cineplexes", "Woodlands", 3);
-        cinemaList = cineplex1.getCinemaList();
-        initCinemaType(cinemaList);
-        Cineplex cineplex2 = new Cineplex("CPB", "Cathay Cineplex", "Orchard", 3);
-        cinemaList = cineplex2.getCinemaList();
-        initCinemaType(cinemaList);
-        Cineplex cineplex3 = new Cineplex("CPC", "The Cathay Cineplex", "CBD", 3);
-        cinemaList = cineplex3.getCinemaList();
-        initCinemaType(cinemaList);
-        // End of Cineplex and Cinema initialisation
+    public static void main(String args[]) {/*
+         // Start of Cineplex and Cinema initialisation
+         ArrayList<Cinema> cinemaList;
+         Cineplex cineplex1 = new Cineplex("CPA", "Cathay Cineplexes", "Woodlands", 3);
+         cinemaList = cineplex1.getCinemaList();
+         initCinemaType(cinemaList);
+         Cineplex cineplex2 = new Cineplex("CPB", "Cathay Cineplex", "Orchard", 3);
+         cinemaList = cineplex2.getCinemaList();
+         initCinemaType(cinemaList);
+         Cineplex cineplex3 = new Cineplex("CPC", "The Cathay Cineplex", "CBD", 3);
+         cinemaList = cineplex3.getCinemaList();
+         initCinemaType(cinemaList);
+         // End of Cineplex and Cinema initialisation
+         */
+
         String choice;
+        user = new User();
 
         // Welcome page to MOBLIMA
         System.out.println("Welcome to MOBLIMA");
@@ -39,11 +49,9 @@ public class AppUI {
             switch (choice) {
                 case "1":
                     login();
-                    choice = "0";
                     break;
                 case "2":
-                    guest();
-                    choice = "0";
+                    landing();
                     break;
                 case "0":
                     break;
@@ -54,17 +62,28 @@ public class AppUI {
         } while (!choice.equals("0"));
         System.out.println("\n----------------------------------------");
         System.out.println("Thank you for using MOBLIMA");
-        
 
     }
 
-    private static void login() {
-        String username;
+    public static void login() {
+        String username, password;
+        System.out.println("\n[ Enter / to go back ]");
         System.out.print("Username: ");
         username = sc.nextLine();
+        if (!username.equals("/")) {
+            System.out.print("Password: ");
+            password = sc.nextLine();
+            if (user.checkLogin(username, password)) {
+                System.out.println("\n----------------");
+                System.out.println("Username : " + user.getUsername());
+                System.out.println("Name : " + user.getName());
+                System.out.println("Email : " + user.getEmail());
+                System.out.println("Mobile Number : " + user.getMobileNo());
+            }
+        }
     }
 
-    private static void guest() {
+    public static void landing() {
         System.out.println("Continue as Guest");
     }
 

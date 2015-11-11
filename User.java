@@ -10,7 +10,7 @@ import org.w3c.dom.NodeList;
 public class User {
 
     //variables
-    private String id, username, password, name, email, mobileNo, dob;
+    private String id, username, password, name, email, mobileNo;
     XML userXml;
 
     //constructors
@@ -29,14 +29,13 @@ public class User {
         userXml = new XML("user");
     }
 
-    public User(String username, String password, String name, String email, String mobileNo, String dob) {
+    public User(String username, String password, String name, String email, String mobileNo) {
         userXml = new XML("user");
         this.username = username;
         this.password = password;
         this.name = name;
         this.email = email;
         this.mobileNo = mobileNo;
-        this.dob = dob;
         
         Element e = userXml.addElement();
         userXml.addItem(e, "username", this.username);
@@ -44,7 +43,7 @@ public class User {
         userXml.addItem(e, "name", this.name);
         userXml.addItem(e, "email", this.email);
         userXml.addItem(e, "mobileNo", this.mobileNo);
-        userXml.addItem(e, "dob", this.dob);
+        userXml.writeContent();
 
     }
 
@@ -149,15 +148,6 @@ public class User {
         mobileNo = number;
     }
 
-    /**
-     * sets the user's date of birth
-     *
-     * @param date
-     */
-    public void setDateOfBirth(String date) {
-        dob = date;
-    }
-
     //methods for user
     public boolean checkLogin(String username, String password) {
         //check if username and password exists in xml, if yes, return true, else, false
@@ -212,7 +202,6 @@ public class User {
                         case "name": this.name = nameContent; break;
                         case "email": this.email = nameContent; break;
                         case "mobileNo": this.mobileNo = nameContent; break;
-                        case "dob": this.dob = nameContent; break;
                     }
                     /*
                     if (name.toLowerCase().equals("username")) this.username = nameContent;

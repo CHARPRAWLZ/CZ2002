@@ -1,6 +1,6 @@
 package CZ2002;
 
-import java.util.*;
+import java.util.Scanner;
 /*
 author: zach
 */

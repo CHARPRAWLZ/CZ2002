@@ -1,4 +1,5 @@
 package CZ2002;
+import java.util.Scanner;
 /*
 author: zach
 */
@@ -123,20 +124,25 @@ public class User {
        age = years;
    }
    //methods for user
+   /*
+   These methods can be reused later as needed
+   */
+   /*
+   Scanner sc = new Scanner(System.in);
    public Movie movie;
-   /**
-    * user rates a certain movie
-    * @param rating
-    */
-   public void rateMovie(double rating){
+  
+   /*public void rateMovie(double rating){
+       System.out.println("Please rate the selected movie");
+       rating = sc.nextDouble();
        movie.setOverallRating(rating);
+       System.out.println("Thank you for rating");
    }
-   /**
-    * user reviews a movie
-    */
-   public void reviewMovie(){}
-   /**
-    * user books a movie
-    */
+  
+   public void reviewMovie(String review){
+       System.out.println("Please review the selected movie");
+       review = sc.next();
+   }
+   
    public void bookMovie(){}
+   */
 }

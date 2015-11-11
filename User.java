@@ -93,15 +93,6 @@ public class User {
         return mobileNo;
     }
 
-    /**
-     * returns the date of birth of the user
-     *
-     * @return DOB
-     */
-    public String getDateOfBirth() {
-        return dob;
-    }
-
     //mutators
     /**
      * sets the username of the user account

@@ -11,14 +11,12 @@ public class Employee extends User{
     * Constructs an instance of class Employee.
     * @param user
     * @param pw
-    * @param id
     * @param name
     * @param email
     * @param number
-    * @param age
     */
-    public Employee(String username, String password, String name, String email, String mobileno, String dob){
-        super(username,password,name,email,mobileno,dob);    
+    public Employee(String username, String password, String name, String email, String mobileno){
+        super(username,password,name,email,mobileno);    
     }
     
     //methods for employee

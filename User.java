@@ -10,13 +10,10 @@ import org.w3c.dom.NodeList;
 public class User {
 
     //variables
-
-    private String username, password,name,email,mobileno,dob;
+    private String id, username, password, name, email, mobileNo, dob;
     XML userXml;
 
-
     //constructors
-
     /**
      * Constructs an instance of class User.
      *
@@ -32,18 +29,17 @@ public class User {
         userXml = new XML("user");
     }
 
-    public User(String username, String password, String name, String email, String mobileno, String dob) {
+    public User(String username, String password, String name, String email, String mobileNo, String dob) {
         this.username = username;
         this.password = password;
         this.name = name;
         this.email = email;
-        this.mobileno = mobileno;
+        this.mobileNo = mobileNo;
         this.dob = dob;
 
     }
 
     //accessors
-
     /**
      * Returns the username of the user account
      *
@@ -85,8 +81,8 @@ public class User {
      *
      * @return mobileNo
      */
-    public String getMobileNumber() {
-        return mobileno;
+    public String getMobileNo() {
+        return mobileNo;
     }
 
     /**
@@ -99,7 +95,6 @@ public class User {
     }
 
     //mutators
-
     /**
      * sets the username of the user account
      *
@@ -141,12 +136,12 @@ public class User {
      *
      * @param number
      */
-    public void setMobileNumber(String number) {
-        mobileno = number;
+    public void setMobileNo(String number) {
+        mobileNo = number;
     }
 
     /**
-     * sets the user's date of birth 
+     * sets the user's date of birth
      *
      * @param date
      */
@@ -155,10 +150,9 @@ public class User {
     }
 
     //methods for user
-
     public boolean checkLogin(String username, String password) {
         //check if username and password exists in xml, if yes, return true, else, false
-        int i,j;
+        int i, j;
         if (!userXml.getFile().exists()) {
             System.out.println("No file found");
         } else {
@@ -169,22 +163,61 @@ public class User {
                 for (j = 0; j < items.getLength(); j++) {
                     String name = items.item(j).getAttributes().getNamedItem("name").getNodeValue();
                     String nameContent = items.item(j).getTextContent();
-                    if (name.equals("username")){
-                        if (nameContent.equals(username)) continue;
-                        else break;
-                    }
-                    else if(name.equals("password")){
-                        if (nameContent.equals(password)) return true;
-                        else {
+                    if (name.equals("username")) {
+                        if (nameContent.equals(username)) {
+                            continue;
+                        } else {
+                            break;
+                        }
+                    } else if (name.equals("password")) {
+                        if (nameContent.equals(password)) {
+                            this.xmlToObject(e.getAttribute("id"));
+                            return true;
+                        } else {
                             System.out.println("Password not match");
                             return false;
                         }
                     }
                 }
             }
-            if (i==nList.getLength()) System.out.println("User not found");
+            if (i == nList.getLength()) {
+                System.out.println("User not found");
+            }
         }
         return false;
+    }
+
+    public void xmlToObject(String id) {
+        NodeList nList = userXml.getDoc().getElementsByTagName("user");
+        for (int i = 0; i < nList.getLength(); i++) {
+            Element e = userXml.getNodeElement(nList, i);
+            NodeList items = e.getElementsByTagName("item");
+            if (e.getAttribute("id").equals(id)) {
+                this.id = e.getAttribute("id");
+                for (int j = 0; j < items.getLength(); j++) {
+                    String name = items.item(j).getAttributes().getNamedItem("name").getNodeValue();
+                    String nameContent = items.item(j).getTextContent();
+                    switch(name) {
+                        case "username": this.username = nameContent; break;
+                        case "password": this.password = nameContent; break;
+                        case "name": this.name = nameContent; break;
+                        case "email": this.email = nameContent; break;
+                        case "mobileNo": this.mobileNo = nameContent; break;
+                        case "dob": this.dob = nameContent; break;
+                    }
+                    /*
+                    if (name.toLowerCase().equals("username")) this.username = nameContent;
+                    else if (name.toLowerCase().equals("password")) this.password = nameContent;
+                    else if (name.toLowerCase().equals("name")) this.name = nameContent;
+                    else if (name.toLowerCase().equals("email")) this.email = nameContent;
+                    else if (name.toLowerCase().equals("mobileNo")) this.mobileNo = nameContent;
+                    else if (name.toLowerCase().equals("dob")) this.dob = nameContent;
+                    */
+                }
+                break;
+            }
+        }
+
     }
     /*
      These methods can be reused later as needed

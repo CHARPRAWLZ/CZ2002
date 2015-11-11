@@ -9,13 +9,13 @@ import java.io.*;
  */
 public class AppUI {
 
-    private static Scanner sc = new Scanner(System.in);
-    private Movie movie;
-    private Cineplex cineplex;
-    private Cinema cinema;
-    private User user;
-    private Seat seat;
-    private Showtime showtime;
+    public static Scanner sc = new Scanner(System.in);
+    public static Movie movie;
+    public static Cineplex cineplex;
+    public static Cinema cinema;
+    public static User user;
+    public static Seat seat;
+    public static Showtime showtime;
 
     public static void main(String args[]) {/*
          // Start of Cineplex and Cinema initialisation
@@ -64,7 +64,7 @@ public class AppUI {
 
     }
 
-    private static void login() {
+    public static void login() {
         String username, password;
         System.out.println("\n[ Enter / to go back ]");
         System.out.print("Username: ");
@@ -72,10 +72,11 @@ public class AppUI {
         if (!username.equals("/")) {
             System.out.print("Password: ");
             password = sc.nextLine();
+            
         }
     }
 
-    private static void guest() {
+    public static void guest() {
         System.out.println("Continue as Guest");
     }
 

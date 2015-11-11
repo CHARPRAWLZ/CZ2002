@@ -40,7 +40,8 @@ public class AppUI {
         do {
             System.out.println("||======================||");
             System.out.println("|| 1: Login             ||");
-            System.out.println("|| 2: Continue as guest ||");
+            System.out.println("|| 2: Sign up           ||");
+            System.out.println("|| 3: Continue as guest ||");
             System.out.println("|| 0: Exit              ||");
             System.out.println("||======================||");
 
@@ -79,6 +80,7 @@ public class AppUI {
                 System.out.println("Name : " + user.getName());
                 System.out.println("Email : " + user.getEmail());
                 System.out.println("Mobile Number : " + user.getMobileNo());
+                System.out.println("");
             }
         }
     }

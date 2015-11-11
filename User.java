@@ -36,7 +36,7 @@ public class User {
         this.name = name;
         this.email = email;
         this.mobileNo = mobileNo;
-        
+
         Element e = userXml.addElement();
         userXml.addItem(e, "username", this.username);
         userXml.addItem(e, "password", this.password);
@@ -145,7 +145,11 @@ public class User {
         int i, j;
         if (!userXml.getFile().exists()) {
             System.out.println("No file found");
-        } else {
+        }
+        else if(userXml.getElementCount("username", username)==0){
+            System.out.println("User not found");
+        }
+        else {
             NodeList nList = userXml.getDoc().getElementsByTagName("user");
             for (i = 0; i < nList.getLength(); i++) {
                 Element e = userXml.getNodeElement(nList, i);
@@ -153,13 +157,7 @@ public class User {
                 for (j = 0; j < items.getLength(); j++) {
                     String name = items.item(j).getAttributes().getNamedItem("name").getNodeValue();
                     String nameContent = items.item(j).getTextContent();
-                    if (name.equals("username")) {
-                        if (nameContent.equals(username)) {
-                            continue;
-                        } else {
-                            break;
-                        }
-                    } else if (name.equals("password")) {
+                    if (name.equals("password")) {
                         if (nameContent.equals(password)) {
                             this.xmlToObject(e.getAttribute("id"));
                             return true;
@@ -169,9 +167,6 @@ public class User {
                         }
                     }
                 }
-            }
-            if (i == nList.getLength()) {
-                System.out.println("User not found");
             }
         }
         return false;
@@ -187,21 +182,31 @@ public class User {
                 for (int j = 0; j < items.getLength(); j++) {
                     String name = items.item(j).getAttributes().getNamedItem("name").getNodeValue();
                     String nameContent = items.item(j).getTextContent();
-                    switch(name) {
-                        case "username": this.username = nameContent; break;
-                        case "password": this.password = nameContent; break;
-                        case "name": this.name = nameContent; break;
-                        case "email": this.email = nameContent; break;
-                        case "mobileNo": this.mobileNo = nameContent; break;
+                    switch (name) {
+                        case "username":
+                            this.username = nameContent;
+                            break;
+                        case "password":
+                            this.password = nameContent;
+                            break;
+                        case "name":
+                            this.name = nameContent;
+                            break;
+                        case "email":
+                            this.email = nameContent;
+                            break;
+                        case "mobileNo":
+                            this.mobileNo = nameContent;
+                            break;
                     }
                     /*
-                    if (name.toLowerCase().equals("username")) this.username = nameContent;
-                    else if (name.toLowerCase().equals("password")) this.password = nameContent;
-                    else if (name.toLowerCase().equals("name")) this.name = nameContent;
-                    else if (name.toLowerCase().equals("email")) this.email = nameContent;
-                    else if (name.toLowerCase().equals("mobileNo")) this.mobileNo = nameContent;
-                    else if (name.toLowerCase().equals("dob")) this.dob = nameContent;
-                    */
+                     if (name.toLowerCase().equals("username")) this.username = nameContent;
+                     else if (name.toLowerCase().equals("password")) this.password = nameContent;
+                     else if (name.toLowerCase().equals("name")) this.name = nameContent;
+                     else if (name.toLowerCase().equals("email")) this.email = nameContent;
+                     else if (name.toLowerCase().equals("mobileNo")) this.mobileNo = nameContent;
+                     else if (name.toLowerCase().equals("dob")) this.dob = nameContent;
+                     */
                 }
                 break;
             }

@@ -1,8 +1,9 @@
 package CZ2002;
 
-/**Seat : Class
- * 
- * 
+/**
+ * Seat : Class
+ *
+ *
  * @author Hocks
  */
 public class Seat {
@@ -16,41 +17,44 @@ public class Seat {
     private final boolean exist;
 
     /* Constructors */
-    /**Creates an instance of Seat and states whether it exists or not.
-     * 
+    /**
+     * Creates an instance of Seat and states whether it exists or not.
+     *
      * @param seatRow
      * @param seatNumber
-     * @param exist 
+     * @param exist
      */
     public Seat(char seatRow, int seatNumber, boolean exist) {
         this.seatRow = Character.toUpperCase(seatRow);
         this.seatNumber = seatNumber;
         this.exist = exist;
+        this.isBooked = false;
     }
 
-    /**Creates an instance of Seat and states whether it exists or not.
-     * 
+    /**
+     * Creates an instance of Seat and states whether it exists or not.
+     *
      * @param seatID
-     * @param exist 
+     * @param exist
      */
     public Seat(String seatID, boolean exist) {
         this(seatID.charAt(0), Integer.valueOf(seatID.substring(1)), exist);
     }
 
-    /**Creates an instance of Seat.
-     * Default setting to exist.
-     * 
+    /**
+     * Creates an instance of Seat. Default setting to exist.
+     *
      * @param seatRow
-     * @param seatNumber 
+     * @param seatNumber
      */
     public Seat(char seatRow, int seatNumber) {
         this(seatRow, seatNumber, true);
     }
 
-    /**Creates an instance of Seat.
-     * Default setting to exist.
-     * 
-     * @param seatID 
+    /**
+     * Creates an instance of Seat. Default setting to exist.
+     *
+     * @param seatID
      */
     public Seat(String seatID) {
         this(seatID, true);
@@ -58,40 +62,45 @@ public class Seat {
     /* end of Constructors */
 
     /* Accessors */
-    /**Returns Seat Number in the row.
-     * 
+    /**
+     * Returns Seat Number in the row.
+     *
      * @return Seat Column Number
      */
     public int getSeatNumber() {
         return seatNumber;
     }
 
-    /**Returns the Seat Row value.
-     * 
+    /**
+     * Returns the Seat Row value.
+     *
      * @return Seat Row Value
      */
     public char getSeatRow() {
         return seatRow;
     }
 
-    /**Returns a boolean of whether the seat is booked.
-     * 
+    /**
+     * Returns a boolean of whether the seat is booked.
+     *
      * @return Booked
      */
     public boolean seatIsBooked() {
         return isBooked;
     }
 
-    /**Returns a boolean of whether the seat exists.
-     * 
+    /**
+     * Returns a boolean of whether the seat exists.
+     *
      * @return Exists
      */
     public boolean seatExist() {
         return exist;
     }
 
-    /**Returns the Seat ID.
-     * 
+    /**
+     * Returns the Seat ID.
+     *
      * @return SeatID
      */
     public String getSeatID() {
@@ -100,15 +109,17 @@ public class Seat {
     /* end of Accessors */
 
     /* Mutators */
-    /**Changes the booked value to True.
-     * 
+    /**
+     * Changes the booked value to True.
+     *
      */
     public void bookSeat() {
         isBooked = true;
     }
 
-    /**Changes the booked value to False.
-     * 
+    /**
+     * Changes the booked value to False.
+     *
      */
     public void unbookSeat() {
         isBooked = false;

@@ -33,6 +33,7 @@ public class AppUI {
          */
 
         String choice;
+        user = new User();
 
         // Welcome page to MOBLIMA
         System.out.println("Welcome to MOBLIMA");
@@ -50,7 +51,7 @@ public class AppUI {
                     login();
                     break;
                 case "2":
-                    guest();
+                    landing();
                     break;
                 case "0":
                     break;
@@ -72,11 +73,11 @@ public class AppUI {
         if (!username.equals("/")) {
             System.out.print("Password: ");
             password = sc.nextLine();
-            
+            user.checkLogin(username, password);
         }
     }
 
-    public static void guest() {
+    public static void landing() {
         System.out.println("Continue as Guest");
     }
 

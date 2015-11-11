@@ -83,10 +83,10 @@ public class Layout {
 
     /* Accessors */
     /**
-     * The layout of the 
+     * The layout of the cinema is printed out with booking status.
      */
     public void printLayout() {
-        // partition: number of seats before 
+        // partition: number of seats before walkway in between the seats
         int partition = cinemaType.equals("GOLD") ? 2 : 6;
         char row = 'A';
         int length = this.col * 2 - 4;
@@ -120,6 +120,11 @@ public class Layout {
                     " %-4d" : "%-4d"), (j + 1));
         }
         
+        System.out.println();
+        
+        System.out.println("O : Available");
+        System.out.println("X : Booked");
+        
     }
     
     /**
@@ -139,6 +144,12 @@ public class Layout {
         return data;
     }
     
+    /**
+     * Returns the seat requested.
+     * @param row
+     * @param col
+     * @return 
+     */
     public Seat getSeat(char row, int col){
         row = Character.toUpperCase(row);
         int i = 0;
@@ -149,6 +160,11 @@ public class Layout {
         return seat[i][col - 1];
     }
     
+    /**
+     * Returns the seat requested.
+     * @param seatID
+     * @return 
+     */
     public Seat getSeat(String seatID){
         char row = seatID.charAt(0);
         seatID = seatID.substring(1);
@@ -182,6 +198,22 @@ public class Layout {
     
     public static void main(String[] args){
         Layout layout = new Layout("GOLD");
+        layout.printLayout();
+        
+        Seat seat;
+        seat = layout.getSeat("A1");
+        seat.bookSeat();
+        
+        layout.printLayout();
+        
+        seat = layout.getSeat("C4");
+        seat.bookSeat();
+        
+        layout.printLayout();
+        
+        seat = layout.getSeat("A1");
+        seat.unbookSeat();
+        
         layout.printLayout();
     }
     

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<root counter="1">
+<user id="1">
+<item name="username">fifi</item>
+<item name="password">pass</item>
+<item name="name">alfie</item>
+<item name="email">fifi@fifi.com</item>
+<item name="mobileNo">123</item>
+</user>
+</root>

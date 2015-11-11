@@ -53,20 +53,12 @@ public class Employee extends User{
     //methods for employee
     public Movie movie;
     Scanner sc = new Scanner(System.in);
-<<<<<<< HEAD
         
-    public void configureTickets(){
-        //add, remove, update tickets from ticket class
-    }
-=======
-    /**
-     * add/remove/update tickets available for the movie
-     */
     public void configureTickets(){}
     /**
      * add/remove/update movies available
      */
->>>>>>> refs/remotes/origin/master
+
     public void configureMovies(){
        //add, remove, update movies from xml
     }

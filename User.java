@@ -14,21 +14,17 @@ public class User {
     XML userXml;
 
     //constructors
-    /**
-     * Constructs an instance of class User.
-     *
-     * @param user
-     * @param pw
-     * @param id
-     * @param name
-     * @param email
-     * @param number
-     * @param DOB
-     */
     public User() {
         userXml = new XML("user");
     }
-
+    /**
+     * 
+     * @param username
+     * @param password
+     * @param name
+     * @param email
+     * @param mobileNo 
+     */
     public User(String username, String password, String name, String email, String mobileNo) {
         userXml = new XML("user");
         this.username = username;
@@ -48,6 +44,14 @@ public class User {
     }
 
     //accessors
+    /**
+     * Returns the increment id of the user account
+     *
+     * @return id
+     */
+    public String getUserId() {
+        return id;
+    }
     /**
      * Returns the username of the user account
      *
@@ -199,14 +203,6 @@ public class User {
                             this.mobileNo = nameContent;
                             break;
                     }
-                    /*
-                     if (name.toLowerCase().equals("username")) this.username = nameContent;
-                     else if (name.toLowerCase().equals("password")) this.password = nameContent;
-                     else if (name.toLowerCase().equals("name")) this.name = nameContent;
-                     else if (name.toLowerCase().equals("email")) this.email = nameContent;
-                     else if (name.toLowerCase().equals("mobileNo")) this.mobileNo = nameContent;
-                     else if (name.toLowerCase().equals("dob")) this.dob = nameContent;
-                     */
                 }
                 break;
             }

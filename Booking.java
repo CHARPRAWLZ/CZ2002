@@ -147,6 +147,7 @@ public class Booking {
         xml.addItem(e, "movieDate", this.showtime.getDate());
         xml.addItem(e, "movieTime", this.showtime.getTiming());
         xml.addItem(e, "ticketPrice", Double.toString(this.ticketPrice));
+        xml.writeContent();
         
     }
 }

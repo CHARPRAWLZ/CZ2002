@@ -5,6 +5,8 @@
  */
 package CZ2002;
 
+import org.w3c.dom.*;
+
 /**
  *
  * @author calvinlee
@@ -39,6 +41,7 @@ public class Booking {
     private String cinemaType;
     private String seat;*/
     private Movie movie;
+    private Showtime showtime;
     /*
     private String movieId;
     private String movieTitle;
@@ -100,7 +103,32 @@ public class Booking {
     public void setMovie(Movie movie) {
         this.movie = movie;
     }
+    public Showtime getShowtime() {
+        return this.showtime;
+    }
+    public void setShowtime(Showtime showtime) {
+        this.showtime = showtime;
+    }
     public void confirmBooking() {
-        
+        XML xml = new XML("booking");
+        Element e = xml.addElement();
+        Payment payment = new Payment(cinema.getName(), showtime.getDate(), 
+                showtime.getTiming());
+        xml.addItem(e, "TID", payment.getTID());
+        xml.addItem(e, "custId", user.getUserID());
+        xml.addItem(e, "custName", user.getName());
+        xml.addItem(e, "custMobileNumber", user.getMobileNumber());
+        xml.addItem(e, "custEmail", user.getEmail());
+        xml.addItem(e, "cineplexId", cineplex.getID());
+        xml.addItem(e, "cineplexName", cineplex.getName());
+        xml.addItem(e, "cineplexLocation", cineplex.getLocation());
+        xml.addItem(e, "cinemaName", cinema.getName());
+        xml.addItem(e, "cinemaType", cinema.getCinemaType());
+        xml.addItem(e, "seat", seat.getSeatID());
+        xml.addItem(e, "movieId", movie.getMovieID());
+        xml.addItem(e, "movieTitle", movie.getTitle());
+        xml.addItem(e, "movieDate", showtime.getDate());
+        xml.addItem(e, "movieTime", showtime.getTiming());
+        // need to calculate ticket price
     }
 }

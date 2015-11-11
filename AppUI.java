@@ -2,27 +2,36 @@ package CZ2002;
 
 import java.util.*;
 import java.io.*;
+
 /**
- * 
+ *
  * @author alfiefarhana
  */
 public class AppUI {
 
-    static Scanner sc = new Scanner(System.in);
+    private static Scanner sc = new Scanner(System.in);
+    private Movie movie;
+    private Cineplex cineplex;
+    private Cinema cinema;
+    private User user;
+    private Seat seat;
+    private Showtime showtime;
 
-    public static void main(String args[]) {
-        // Start of Cineplex and Cinema initialisation
-        ArrayList<Cinema> cinemaList;
-        Cineplex cineplex1 = new Cineplex("CPA", "Cathay Cineplexes", "Woodlands", 3);
-        cinemaList = cineplex1.getCinemaList();
-        initCinemaType(cinemaList);
-        Cineplex cineplex2 = new Cineplex("CPB", "Cathay Cineplex", "Orchard", 3);
-        cinemaList = cineplex2.getCinemaList();
-        initCinemaType(cinemaList);
-        Cineplex cineplex3 = new Cineplex("CPC", "The Cathay Cineplex", "CBD", 3);
-        cinemaList = cineplex3.getCinemaList();
-        initCinemaType(cinemaList);
-        // End of Cineplex and Cinema initialisation
+    public static void main(String args[]) {/*
+         // Start of Cineplex and Cinema initialisation
+         ArrayList<Cinema> cinemaList;
+         Cineplex cineplex1 = new Cineplex("CPA", "Cathay Cineplexes", "Woodlands", 3);
+         cinemaList = cineplex1.getCinemaList();
+         initCinemaType(cinemaList);
+         Cineplex cineplex2 = new Cineplex("CPB", "Cathay Cineplex", "Orchard", 3);
+         cinemaList = cineplex2.getCinemaList();
+         initCinemaType(cinemaList);
+         Cineplex cineplex3 = new Cineplex("CPC", "The Cathay Cineplex", "CBD", 3);
+         cinemaList = cineplex3.getCinemaList();
+         initCinemaType(cinemaList);
+         // End of Cineplex and Cinema initialisation
+         */
+
         String choice;
 
         // Welcome page to MOBLIMA
@@ -39,11 +48,9 @@ public class AppUI {
             switch (choice) {
                 case "1":
                     login();
-                    choice = "0";
                     break;
                 case "2":
                     guest();
-                    choice = "0";
                     break;
                 case "0":
                     break;
@@ -54,14 +61,18 @@ public class AppUI {
         } while (!choice.equals("0"));
         System.out.println("\n----------------------------------------");
         System.out.println("Thank you for using MOBLIMA");
-        
 
     }
 
     private static void login() {
-        String username;
+        String username, password;
+        System.out.println("\n[ Enter / to go back ]");
         System.out.print("Username: ");
         username = sc.nextLine();
+        if (!username.equals("/")) {
+            System.out.print("Password: ");
+            password = sc.nextLine();
+        }
     }
 
     private static void guest() {

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<root counter="3">
+<cineplex id="1">
+<item name="id">CPA</item>
+<item name="name">Cathay Cineplexes</item>
+<item name="location">Woodlands</item>
+<item name="cinemaNum">3</item>
+</cineplex>
+<cineplex id="2">
+<item name="id">CPB</item>
+<item name="name">Cathay Cineplex</item>
+<item name="location">Orchard</item>
+<item name="cinemaNum">3</item>
+</cineplex>
+<cineplex id="3">
+<item name="id">CPC</item>
+<item name="name">The Cathay Cineplex</item>
+<item name="location">CBD</item>
+<item name="cinemaNum">3</item>
+</cineplex>
+</root>

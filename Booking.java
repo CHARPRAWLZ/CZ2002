@@ -36,6 +36,14 @@ public class Booking {
         this.custAge = custAge;
         payment = new Payment(cinemaName, movieDate, movieTime);
     }
-    
-    public 
+    /*
+    i'm about to add in set methods to read in data and save to the instance
+   public void setCustName(String customerName){
+       custName = customerName;
+   }
+   public void setCustMobileNumber(String phoneNumber){
+       custMobileNumber = phoneNumber;
+   }
+    to be continued...
+  */
 }

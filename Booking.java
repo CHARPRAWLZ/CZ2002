@@ -117,7 +117,7 @@ public class Booking {
         xml.addItem(e, "TID", payment.getTID());
         xml.addItem(e, "custId", user.getUserID());
         xml.addItem(e, "custName", user.getName());
-        xml.addItem(e, "custMobileNumber", user.getMobileNumber());
+        xml.addItem(e, "custMobileNumber", user.getMobileNo());
         xml.addItem(e, "custEmail", user.getEmail());
         xml.addItem(e, "cineplexId", cineplex.getID());
         xml.addItem(e, "cineplexName", cineplex.getName());

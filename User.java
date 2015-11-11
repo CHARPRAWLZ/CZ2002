@@ -30,12 +30,21 @@ public class User {
     }
 
     public User(String username, String password, String name, String email, String mobileNo, String dob) {
+        userXml = new XML("user");
         this.username = username;
         this.password = password;
         this.name = name;
         this.email = email;
         this.mobileNo = mobileNo;
         this.dob = dob;
+        
+        Element e = userXml.addElement();
+        userXml.addItem(e, "username", this.username);
+        userXml.addItem(e, "password", this.password);
+        userXml.addItem(e, "name", this.name);
+        userXml.addItem(e, "email", this.email);
+        userXml.addItem(e, "mobileNo", this.mobileNo);
+        userXml.addItem(e, "dob", this.dob);
 
     }
 

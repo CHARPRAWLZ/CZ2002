@@ -269,6 +269,19 @@ public class XML {
     }
 
     /**
+     * After creating xml, check how many elements in total
+     * @return number of elements
+     */
+    public int getElementCount() {
+        if (!this.file.exists()) {
+            System.out.println("No file found");
+        } else {
+            NodeList nList = doc.getElementsByTagName(this.elementName);
+            return nList.getLength();
+        }
+        return 0;
+    }
+    /**
      * After creating xml, check how many elements that contain an item content
      * eg. returns number of movies that has item name "status" as "Now Showing"
      *

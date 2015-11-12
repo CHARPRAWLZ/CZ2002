@@ -23,16 +23,12 @@ public class AppUI {
 
     public static void main(String args[]) {
         // Start of Cineplex and Cinema initialisation
-        ArrayList<Cinema> cinemaList;
         cineplex1 = new Cineplex("CPA", "Cathay Cineplexes", "Woodlands", 3);
-        cinemaList = cineplex1.getCinemaList();
-        initCinemaType(cinemaList);
+        initCinemaType(cineplex1);
         cineplex2 = new Cineplex("CPB", "Cathay Cineplex", "Orchard", 3);
-        cinemaList = cineplex2.getCinemaList();
-        initCinemaType(cinemaList);
+        initCinemaType(cineplex2);
         cineplex3 = new Cineplex("CPC", "The Cathay Cineplex", "CBD", 3);
-        cinemaList = cineplex3.getCinemaList();
-        initCinemaType(cinemaList);
+        initCinemaType(cineplex3);
          // End of Cineplex and Cinema initialisation
 
         // Welcome page to MOBLIMA
@@ -303,9 +299,9 @@ public class AppUI {
      *
      * @param cinemaList List of Cinema within a Cineplex
      */
-    public static void initCinemaType(ArrayList<Cinema> cinemaList) {
-        cinemaList.get(0).setCinemaType("Normal");
-        cinemaList.get(1).setCinemaType("Normal");
-        cinemaList.get(2).setCinemaType("Gold");
+    public static void initCinemaType(Cineplex cineplex) {
+        cineplex.getCinemaList().get(0).setCinemaType("NORMAL");
+        cineplex.getCinemaList().get(0).setCinemaType("NORMAL");
+        cineplex.getCinemaList().get(0).setCinemaType("GOLD");
     }
 }

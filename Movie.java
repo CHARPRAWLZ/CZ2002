@@ -78,7 +78,7 @@ public class Movie extends MovieInfo {
         overallRating = total / rating.length;
     }
     
-    public void retrieveRating()
+    public void retrieveRating(){}
     /* end of Mutators */
 
 }

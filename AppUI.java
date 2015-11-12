@@ -155,11 +155,12 @@ public class AppUI {
         String opt;
         int j;
         MovieListing movieMgr = new MovieListing();
+        String[] list = movieMgr.getMovieList();
         do {
             System.out.println("");
             System.out.println("||======= Movie Listing =======||");
-            for(int i = 0; i<movieMgr.movieList().length; i++){
-                System.out.println("   " + (i) + ": " + movieMgr.movieList()[i]);
+            for(int i = 0; i<list.length; i++){
+                System.out.println("   " + (i+1) + ": " + list[i]);
             }
             System.out.println("|| 0: Back to home             ||");
             System.out.println("|| x: Quit                     ||");
@@ -191,10 +192,14 @@ public class AppUI {
 
     public String movieInfo(String movieId) {
         String opt;
+        MovieListing movieMgr = new MovieListing();
+        String[] info = movieMgr.getMovieInfo(movieId);
         do {
             System.out.println("");
             System.out.println("||===== Movie Information =====||");
-            System.out.println("   ");
+            for (int i=0; i<info.length;i++){
+            System.out.println("   "+info[i]);
+            }
             System.out.println("|| 0: Back to movie listing    ||");
             System.out.println("|| x: Quit                     ||");
             System.out.println("||=============================||");

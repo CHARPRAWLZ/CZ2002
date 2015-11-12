@@ -13,17 +13,20 @@ public class User {
     private String id, username, password, name, email, mobileNo;
     private XML userXml;
 
+    private String[] itemName = new String[]{"username", "password", "name", "email", "mobileNo"};
+
     //constructors
     public User() {
         userXml = new XML("user");
     }
+
     /**
-     * 
+     *
      * @param username
      * @param password
      * @param name
      * @param email
-     * @param mobileNo 
+     * @param mobileNo
      */
     public User(String username, String password, String name, String email, String mobileNo) {
         userXml = new XML("user");
@@ -32,7 +35,6 @@ public class User {
         this.name = name;
         this.email = email;
         this.mobileNo = mobileNo;
-
 
     }
 
@@ -45,6 +47,7 @@ public class User {
     public String getUserId() {
         return this.id;
     }
+
     /**
      * Returns the username of the user account
      *
@@ -80,8 +83,10 @@ public class User {
     public String getEmail() {
         return this.email;
     }
+
     /**
      * returns the xml of user
+     *
      * @return xml of user
      */
     public XML getXml() {
@@ -149,21 +154,19 @@ public class User {
         int i, j;
         if (!userXml.getFile().exists()) {
             System.out.println("No file found");
-        }
-        else if(userXml.getElementCount("username", username)==0){
+        } else if (userXml.getElementCount("username", username) == 0) {
             System.out.println("User not found");
-        }
-        else {
+        } else {
             NodeList nList = userXml.getDoc().getElementsByTagName("user");
             for (i = 0; i < nList.getLength(); i++) {
                 Element e = userXml.getNodeElement(nList, i);
                 NodeList items = e.getElementsByTagName("item");
                 String id = e.getAttribute("id");
                 for (j = 0; j < items.getLength(); j++) {
-                    String name = items.item(j).getAttributes().getNamedItem("name").getNodeValue();
-                    String nameContent = items.item(j).getTextContent();
-                    if (name.equals("password")) {
-                        if (nameContent.equals(password)) {
+                    String itemName = items.item(j).getAttributes().getNamedItem("name").getNodeValue();
+                    String itemContent = items.item(j).getTextContent();
+                    if (itemName.equals("password")) {
+                        if (itemContent.equals(password)) {
                             this.id = id;
                             this.username = userXml.getItemContent(id, "username");
                             this.password = userXml.getItemContent(id, "password");
@@ -181,13 +184,10 @@ public class User {
         }
         return false;
     }
+
     public void objectToXml() {
-        Element e = userXml.addElement();
-        userXml.addItem(e, "username", this.username);
-        userXml.addItem(e, "password", this.password);
-        userXml.addItem(e, "name", this.name);
-        userXml.addItem(e, "email", this.email);
-        userXml.addItem(e, "mobileNo", this.mobileNo);
+        String[] itemContent = new String[]{this.username, this.password, this.name, this.email, this.mobileNo};
+        userXml.addItem(itemName, itemContent);
         userXml.writeContent();
         this.id = userXml.getCounter();
     }

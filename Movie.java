@@ -6,6 +6,7 @@ package CZ2002;
 public class Movie extends MovieInfo {
 
     private String movieStatus;
+    private ReviewRatingList reviewList;
     private double overallRating;
     private final String movieID;
 
@@ -76,6 +77,8 @@ public class Movie extends MovieInfo {
         }
         overallRating = total / rating.length;
     }
+    
+    public void retrieveRating()
     /* end of Mutators */
 
 }

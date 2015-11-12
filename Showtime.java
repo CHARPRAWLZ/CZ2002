@@ -1,6 +1,6 @@
 package CZ2002;
 
-import java.util.Date;
+import java.util.Calendar;
 
 /**
  * Showtime : Class Contains information on the movie that's screening, the
@@ -14,7 +14,8 @@ public class Showtime {
     private Cineplex cineplex;
     private Cinema cinema;
     private Movie movie;
-    private Date timing;
+    private Calendar timing;
+    private int status;     // 0 - Standby; 1 - Showing; 2 - Over
 
     /* Constructors */
     /**
@@ -25,12 +26,20 @@ public class Showtime {
      * @param cinemaRoom
      * @param movie
      * @param timing
+     * @param status
      */
-    public Showtime(Cineplex cineplex, int cinemaRoom, Movie movie, Date timing) {
+    public Showtime(Cineplex cineplex, int cinemaRoom, Movie movie, 
+            Calendar timing, int status) {
         this.cineplex = cineplex;
         this.cinema = this.cineplex.getCinemaList().get(cinemaRoom - 1);
         this.movie = movie;
         this.timing = timing;
+        this.status = status;
+    }
+    
+    public Showtime(Cineplex cineplex, int cinemaRoom, Movie movie, 
+            Calendar timing){
+        this(cineplex, cinemaRoom, movie, timing, 0);
     }
     /* end of Constructors */
 
@@ -104,9 +113,53 @@ public class Showtime {
      * @return Show Date
      */
     public String getDate() {
-        String date[] = timing.toString().split(" ");
-        return date[2] + " " + date[1] + " " + timing.getYear() + ", "
-                + date[0];
+        int year = this.timing.get(Calendar.YEAR);
+        int month = this.timing.get(Calendar.MONTH);
+        int date = this.timing.get(Calendar.DATE);
+        int day = this.timing.get(Calendar.DAY_OF_WEEK);
+        String monthStr, dayStr;
+        
+        switch(month){
+            case 0: monthStr = "Jan"; break;
+            case 1: monthStr = "Feb"; break;
+            case 2: monthStr = "Mar"; break;
+            case 3: monthStr = "Apr"; break;
+            case 4: monthStr = "May"; break;
+            case 5: monthStr = "Jun"; break;
+            case 6: monthStr = "Jul"; break;
+            case 7: monthStr = "Aug"; break;
+            case 8: monthStr = "Sep"; break;
+            case 9: monthStr = "Oct"; break;
+            case 10: monthStr = "Nov"; break;
+            case 11: monthStr = "Dec"; break;
+            default: monthStr = ""; break;
+        }
+        
+        switch(day){
+            case 1: dayStr = "Sunday"; break;
+            case 2: dayStr = "Monday"; break;
+            case 3: dayStr = "Tuesday"; break;
+            case 4: dayStr = "Wednesday"; break;
+            case 5: dayStr = "Thursday"; break;
+            case 6: dayStr = "Friday"; break;
+            case 7: dayStr = "Saturday"; break;
+            default: dayStr = ""; break;
+        }
+        
+        return date + " " + monthStr + " " + year + ", " + dayStr;
+    }
+    
+    /**
+     * Returns the status of the showtime.
+     * @return 
+     */
+    public String getStatus(){
+        switch (this.status){
+            case 0: return "Standby";
+            case 1: return "Showing";
+            case 2: return "Over";
+            default: return "ERROR";
+        }
     }
     /* end of Accessors */
 
@@ -124,11 +177,11 @@ public class Showtime {
         if (time < 0 || time / 100 >= 24 || time % 100 >= 60 || dateArr.length != 3) {
             return false;
         }
-        timing.setYear(Integer.valueOf(dateArr[2]));
-        timing.setMonth(Integer.valueOf(dateArr[1]) - 1);
-        timing.setDate(Integer.valueOf(dateArr[0]));
-        timing.setHours(time / 100);
-        timing.setMinutes(time % 100);
+        timing.set(Calendar.YEAR, Integer.valueOf(dateArr[2]));
+        timing.set(Calendar.MONTH, Integer.valueOf(dateArr[1]) - 1);
+        timing.set(Calendar.DATE, Integer.valueOf(dateArr[0]));
+        timing.set(Calendar.HOUR, time / 100);
+        timing.set(Calendar.MINUTE, time % 100);
         return true;
     }
 
@@ -144,16 +197,37 @@ public class Showtime {
         }
         String strArr[] = str.split("/");
         if (strArr.length == 3) {
-            return setDate(str, timing.getHours() * 100 + timing.getMinutes());
+            return setDate(str, timing.get(Calendar.HOUR) * 100 
+                    + timing.get(Calendar.MINUTE));
         } else if (this.isInt(str)) {
             String date = "";
-            date += timing.getDate() + "/";
-            date += (timing.getMonth() + 1) + "/";
-            date += timing.getYear();
+            date += timing.get(Calendar.DATE) + "/";
+            date += (timing.get(Calendar.MONTH) + 1) + "/";
+            date += timing.get(Calendar.YEAR);
             return setDate(date, Integer.valueOf(str));
         } else {
             return false;
         }
+    }
+    
+    /**
+     * Sets the showtime showing status.
+     * 0 - Standby; 1 - Showing; 2 - Over
+     * @param status 
+     */
+    public void setStatus(int status){
+        this.status = status;
+    }
+    
+    /**
+     * Advance the showtime showing status.
+     * If the status is 'Standby', the status is changed to 'Showing'.
+     * If the status is 'Showing', the status is changed to 'Over'.
+     * If the status is 'Over', nothing happens.
+     */
+    public void advanceStatus(){
+        if (this.status < 2)
+            this.status++;
     }
     /* end of Mutators */
 

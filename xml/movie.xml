@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<root counter="18">
+<root counter="22">
 <movie id="14">
 <item name="Title">test</item>
 <item name="Status">Coming soon</item>
@@ -11,5 +11,13 @@
 <movie id="18">
 <item name="Title">hello</item>
 <item name="Status">hello</item>
+</movie>
+<movie id="21">
+<item name="Title">hello</item>
+<item name="Status">goodbye</item>
+</movie>
+<movie id="22">
+<item name="Title">abc</item>
+<item name="Status">123</item>
 </movie>
 </root>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<root counter="2">
+<movieRating id="1">
+<item name="movieID">X_MEN</item>
+<item name="review">this is a review.</item>
+<item name="rating">4</item>
+</movieRating>
+<movieRating id="2">
+<item name="movieID">Wonderland</item>
+<item name="review">this is my second review.</item>
+<item name="rating">6</item>
+</movieRating>
+</root>

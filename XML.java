@@ -126,6 +126,10 @@ public class XML {
         
         return strArr;
     }
+    
+    public void refreshCurElement(){
+        this.curElement = this.doc.getDocumentElement();
+    }
 
     /**
      * Add item with content to parent element

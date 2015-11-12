@@ -17,6 +17,8 @@ public class AppUI {
     public static UserMgr userMgr;
     public static Seat seat;
     public static Showtime showtime;
+    
+    public String movieId;
 
     public static void main(String args[]) {
         // Start of Cineplex and Cinema initialisation
@@ -159,8 +161,8 @@ public class AppUI {
         do {
             System.out.println("");
             System.out.println("||======= Movie Listing =======||");
-            for(int i = 0; i<list.length; i++){
-                System.out.println("   " + (i+1) + ": " + list[i]);
+            for (int i = 0; i < list.length; i++) {
+                System.out.println("   " + (i + 1) + ": " + list[i]);
             }
             System.out.println("|| 0: Back to home             ||");
             System.out.println("|| x: Quit                     ||");
@@ -171,7 +173,8 @@ public class AppUI {
             String[] lists = movieMgr.idList();
             for (j = 1; j <= lists.length; j++) {
                 if (opt.equals(Integer.toString(j))) {
-                    this.movieInfo(lists[j - 1]);
+                    this.movieId = lists[j - 1];
+                    this.movieInfo();
                 }
             }
             if (j == lists.length + 1) {
@@ -190,16 +193,20 @@ public class AppUI {
         return opt;
     }
 
-    public String movieInfo(String movieId) {
+    public String movieInfo() {
         String opt;
         MovieListing movieMgr = new MovieListing();
-        String[] info = movieMgr.getMovieInfo(movieId);
+        String[] info = movieMgr.getMovieInfo(this.movieId);
+        String[][] itemName = movieMgr.getItemName();
         do {
             System.out.println("");
             System.out.println("||===== Movie Information =====||");
-            for (int i=0; i<info.length;i++){
-            System.out.println("   "+info[i]);
+            for (int i = 0; i < info.length; i++) {
+                System.out.println("   " + itemName[1][i] + " : " + info[i]);
             }
+            System.out.println("||                             ||");
+            System.out.println("|| 1: View review rating       ||");
+            System.out.println("|| 2: View Showtimes           ||");
             System.out.println("|| 0: Back to movie listing    ||");
             System.out.println("|| x: Quit                     ||");
             System.out.println("||=============================||");
@@ -207,6 +214,12 @@ public class AppUI {
             System.out.print("Enter choice: ");
             opt = sc.nextLine();
             switch (opt) {
+                case "1":
+                    this.rating();
+                    break;
+                case "2":
+                    this.cineplex();
+                    break;
                 case "0":
                     this.movieList();
                     break;
@@ -219,7 +232,54 @@ public class AppUI {
         exitProgram(opt);
         return opt;
     }
+    public String rating() {
+        String opt;
+        do {
+            System.out.println("");
+            System.out.println("||======= Review Rating ========||");
+            System.out.println("|| 0: Back to movie information ||");
+            System.out.println("|| x: Quit                      ||");
+            System.out.println("||==============================||");
 
+            System.out.print("Enter choice: ");
+            opt = sc.nextLine();
+            switch (opt) {
+                case "0":
+                    this.movieInfo();
+                    break;
+                case "x":
+                    break;
+                default:
+                    System.out.println("- Enter a valid input -");
+            }
+        } while (!opt.matches("x"));
+        exitProgram(opt);
+        return opt;
+    }
+    public String cineplex() {
+        String opt;
+        do {
+            System.out.println("");
+            System.out.println("||========== Cineplex ==========||");
+            System.out.println("|| 0: Back to movie information ||");
+            System.out.println("|| x: Quit                      ||");
+            System.out.println("||==============================||");
+
+            System.out.print("Enter choice: ");
+            opt = sc.nextLine();
+            switch (opt) {
+                case "0":
+                    this.movieInfo();
+                    break;
+                case "x":
+                    break;
+                default:
+                    System.out.println("- Enter a valid input -");
+            }
+        } while (!opt.matches("x"));
+        exitProgram(opt);
+        return opt;
+    }
     public static void exitProgram(String option) {
         if (option.equals("x")) {
             System.out.println("----------------------------------------");

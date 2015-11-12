@@ -6,12 +6,13 @@ public class MovieListing {
 
     private ArrayList<Movie> movieList = new <Movie> ArrayList();
     private final XML xml;
-    private final String[] itemName;
+    private final String[][] itemName;
 
     /* Constructors */
     public MovieListing() {
         xml = new XML("movie");
-        this.itemName = new String[]{"title","synopsis","director","cast","movieType","movieStatus","overallRating"};
+        this.itemName = new String[][]{{"title","synopsis","director","cast","movieType","movieStatus","overallRating"},
+            {"Title","Synopsis","Director","Cast","Movie type","Movie status","Overall Rating"}};
 
     }
     /* end of Construcors */
@@ -34,14 +35,17 @@ public class MovieListing {
         return title;
     }
     public String[] getMovieInfo(String id) {
-        String[] itemContent = new String[this.itemName.length];
-        for (int i=0;i<itemName.length;i++) {
-            itemContent[i] = xml.getItemContent(id, this.itemName[i]);
+        String[] itemContent = new String[this.itemName[0].length];
+        for (int i=0;i<itemName[0].length;i++) {
+            itemContent[i] = xml.getItemContent(id, this.itemName[0][i]);
         }
         return itemContent;
     }
     public String[] idList() {
         return xml.getElement();
+    }
+    public String[][] getItemName() {
+        return this.itemName;
     }
 
     /* end of Accessors */

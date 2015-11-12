@@ -2,7 +2,7 @@ package CZ2002;
 
 public class CinemaMgr {
 
-    Cineplex[] cineplex = new Cineplex[3];
+    private Cineplex[] cineplex = new Cineplex[3];
     
     public CinemaMgr(){
         cineplex[0] = new Cineplex("GV", "Golden Village", "Vivo City", 6);

@@ -17,6 +17,7 @@ public class AppUI {
     public static UserMgr userMgr;
     public static Seat seat;
     public static Showtime showtime;
+    public static AdminUI adminUI;
     
     public String movieId;
 
@@ -38,6 +39,7 @@ public class AppUI {
         System.out.println("Welcome to MOBLIMA");
         AppUI ui = new AppUI();
         userMgr = new UserMgr();
+        adminUI = new AdminUI();
         ui.auth();
     }
 

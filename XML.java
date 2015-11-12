@@ -270,6 +270,7 @@ public class XML {
 
     /**
      * After creating xml, check how many elements in total
+     *
      * @return number of elements
      */
     public int getElementCount() {
@@ -281,6 +282,7 @@ public class XML {
         }
         return 0;
     }
+
     /**
      * After creating xml, check how many elements that contain an item content
      * eg. returns number of movies that has item name "status" as "Now Showing"
@@ -309,6 +311,21 @@ public class XML {
             }
         }
         return count;
+    }
+
+    public String[] getElement() {
+        if (!this.file.exists()) {
+            System.out.println("No file found");
+        } else {
+            NodeList nList = doc.getElementsByTagName(this.elementName);
+            String[] arrId = new String[nList.getLength()];
+            for (int i = 0; i < nList.getLength(); i++) {
+                Element e = this.getNodeElement(nList, i);
+                arrId[i] = e.getAttribute("id");
+            }
+            return arrId;
+        }
+        return null;
     }
 
     /**
@@ -385,16 +402,6 @@ public class XML {
     }
 
     /**
-     * Add text content to an element
-     *
-     * @param element Element of NODE
-     * @param content Text content to be added to element
-     */
-    public void addContent(Element element, String content) {
-        element.appendChild(doc.createTextNode(content));
-    }
-
-    /**
      * Write content to file
      */
     public void writeContent() {
@@ -456,6 +463,7 @@ public class XML {
 
     public static void main(String argv[]) {
         XML xml = new XML("movie");
+        String[] itemName = new String[]{"title", "synopsis", "director", "cast", "movieType", "movieStatus", "overallRating"};
         String choice = "-1", id = "";
         Scanner sc = new Scanner(System.in);
         do {
@@ -473,24 +481,25 @@ public class XML {
             choice = sc.nextLine();
             switch (choice) {
                 case "1":
-                    String[] itemName = new String[]{"Title","Status"};
                     String[] itemContent = new String[itemName.length];
-                    System.out.println("\n[ Enter / to go back ]");
-                    System.out.print("Enter title: ");
-                    itemContent[0] = sc.nextLine();
-                    if (itemContent[0].equals("/")) {
-                        break;
+                    for (int i = 0; i < itemName.length; i++) {
+                        System.out.print("Enter " + itemName[i] + " : ");
+                        itemContent[i] = sc.nextLine();
                     }
-
-                    System.out.print("Enter status: ");
-                    itemContent[1] = sc.nextLine();
                     xml.addItem(itemName, itemContent);
                     xml.writeContent();
                     System.out.println("- Movie added into database -");
 
                     break;
                 case "2":
-                    xml.displayElement();
+                    String[] arrId;
+                    arrId = xml.getElement();
+                    for (int i = 0; i < arrId.length; i++) {
+                        System.out.println("id : "+arrId[i]);
+                        for (int j = 0; j < itemName.length; j++) {
+                            System.out.println(itemName[j] + " : " + xml.getItemContent(arrId[i], itemName[j]));
+                        }
+                    }
                     break;
                 case "3":
                     System.out.print("Enter item name: ");
@@ -508,19 +517,11 @@ public class XML {
                     System.out.print("Enter movie id: ");
                     id = sc.nextLine();
                     if (xml.displayElement(id) == true) {
-                        System.out.println("\n[ Enter / to go back ]");
                         System.out.print("Enter item name: ");
                         String name = sc.nextLine();
-                        if (name.equals("/")) {
-                            break;
-                        }
                         if (xml.checkItemExists(id, name) == true) {
-                            System.out.println("\n[ Enter / to go back ]");
                             System.out.print("Enter new value: ");
                             String val = sc.nextLine();
-                            if (val.equals("/")) {
-                                break;
-                            }
                             xml.editItem(id, name, val);
                             xml.displayElement(id);
                             xml.writeContent();

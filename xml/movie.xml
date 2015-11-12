@@ -1,23 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<root counter="22">
-<movie id="14">
-<item name="Title">test</item>
-<item name="Status">Coming soon</item>
-</movie>
-<movie id="16">
-<item name="Title">test 3</item>
-<item name="Status">Coming soon</item>
-</movie>
-<movie id="18">
-<item name="Title">hello</item>
-<item name="Status">hello</item>
-</movie>
-<movie id="21">
-<item name="Title">hello</item>
-<item name="Status">goodbye</item>
-</movie>
-<movie id="22">
-<item name="Title">abc</item>
-<item name="Status">123</item>
+<root counter="1">
+<movie id="1">
+<item name="title">LOTR</item>
+<item name="synopsis">LOTR synopsis</item>
+<item name="director">LOTR director</item>
+<item name="cast">LOTR cast</item>
+<item name="movieType">normal</item>
+<item name="movieStatus">Now Showing</item>
+<item name="overallRating">5</item>
 </movie>
 </root>

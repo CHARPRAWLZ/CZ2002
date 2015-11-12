@@ -16,15 +16,23 @@ public class RankingMgr {
     private String[] movie;
     private String[] booking;
     private int[] ticket;
-    //private double[] rating;
     private int[] topFiveIndex;
     private String[][] topFive;
     private int topTicketSales;
     private int topIndex;
     private double topOverallRatings;
+    
+    /**
+     * Constructor for RankingMgr
+     */
     public RankingMgr() {
         
     }
+    
+    /**
+     * Returns a 2D array that contains the top 5 Movie name and total ticket sales
+     * @return 2D array that contains the top 5 Movie name and total ticket sales
+     */
     public String[][] rankingTicketSales() {
         topFiveIndex = new int[5];
         topFive = new String[5][2];
@@ -61,6 +69,11 @@ public class RankingMgr {
         }
         return topFive;
     }
+    
+    /**
+     * Returns a 2D array that contains the top 5 Movie name and overall review ratings
+     * @return 2D array that contains the top 5 Movie name and overall review ratings
+     */
     public String[][] rankingReviewsRating() {
         topFiveIndex = new int[5];
         topFive = new String[5][2];
@@ -80,7 +93,6 @@ public class RankingMgr {
         }
         for(int i = 0; i < 5; i++) {
             topFive[i][0] = movieXML.getItemContent(movie[topFiveIndex[i]], "movieName");
-            //topFive[i][1] = Integer.toString(ticket[topFiveIndex[i]]);
             topFive[i][1] = movieXML.getItemContent(movie[topFiveIndex[i]], "overallRating");
         }
         return topFive;

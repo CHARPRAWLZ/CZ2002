@@ -78,10 +78,11 @@ public class ShowTimeMgr {
         int cinemaRoom, status;
         Cineplex cineplex;
         Movie movie;
-        Calendar timing;
+        Calendar timing = Calendar.getInstance();
         
-        //initialize String variables
+        //initialize variables
         cineplexID = movieID = date = time = "";
+        cinemaRoom = status = 0;
         
         // declare corresponding boolean flags
         boolean cineplexIDflag, movieIDflag, dateFlag, timeFlag, roomFlag, 
@@ -128,9 +129,84 @@ public class ShowTimeMgr {
                     roomFlag || statusFlag)){
                 cineplex = this.cineplex.findCineplex(cineplexID);
                 movie = this.movieList.findMovie(movieID);
+                setTime(timing, time);
+                setDate(timing, date);
+                
+                addToArrayList(cineplex, cinemaRoom, movie, timing, status);
             }
         }
         
+    }
+    
+    public void setTime(Calendar timing, String time){
+        int hour, min, am_pm;
+        
+        hour = Integer.parseInt(time.substring(0, 2));
+        min = Integer.parseInt(time.substring(3,5));
+        am_pm = (time.charAt(6) == 'A') ? Calendar.AM : Calendar.PM;
+        
+        timing.set(Calendar.HOUR, hour);
+        timing.set(Calendar.MINUTE, min);
+        timing.set(Calendar.AM_PM, am_pm);
+    }
+    
+    public void setDate(Calendar timing, String date){
+        int date_of_month, month, year, day;
+        
+        date_of_month = Integer.parseInt(date.substring(0, 2));
+        year = Integer.parseInt(date.substring(7,11));
+        
+        switch(date.charAt(3)){
+            case 'J':
+                if (date.charAt(4) == 'a'){
+                    month = Calendar.JANUARY;
+                } else if (date.charAt(6) == 'n'){
+                    month = Calendar.JUNE;
+                } else{
+                    month = Calendar.JULY;
+                }break;
+            case 'F':
+                month = Calendar.FEBRUARY; break;
+            case 'M':
+                if (date.charAt(6) == 'r'){
+                    month = Calendar.MARCH;
+                } else {
+                    month = Calendar.MAY;
+                }
+            case 'A':
+                if (date.charAt(5) == 'p'){
+                    month = Calendar.APRIL;
+                } else {
+                    month = Calendar.AUGUST;
+                } break;
+            case 'S': month = Calendar.SEPTEMBER; break;
+            case 'O': month = Calendar.OCTOBER; break;
+            case 'N': month = Calendar.NOVEMBER; break;
+            case 'D': month = Calendar.DECEMBER; break;
+            default: month = 0;
+        }
+        
+        switch(date.charAt(13)){
+            case 'M': day = Calendar.MONDAY; break;
+            case 'T': if (date.charAt(14) == 'u'){
+                day = Calendar.TUESDAY;
+            } else {
+                day = Calendar.THURSDAY;
+            } break;
+            case 'W': day = Calendar.WEDNESDAY; break;
+            case 'F': day = Calendar.FRIDAY; break;
+            case 'S': if (date.charAt(14) == a){
+                day = Calendar.SATURDAY;
+            } else {
+                day = Calendar.SUNDAY;
+            } break;
+            default: day = 1;
+        }
+        
+        timing.set(Calendar.DATE, date_of_month);
+        timing.set(Calendar.MONTH, month);
+        timing.set(Calendar.YEAR, year);
+        timing.set(Calendar.DAY_OF_WEEK, day);
     }
     
     /**

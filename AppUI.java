@@ -12,7 +12,8 @@ public class AppUI {
 
     public static Scanner sc = new Scanner(System.in);
     public static Movie movie;
-    public static Cineplex cineplex1, cineplex2, cineplex3;
+    //public static Cineplex cineplex1, cineplex2, cineplex3;
+    public static CinemaMgr cinemaMgr;
     public static Cinema cinema;
     public static UserMgr userMgr;
     public static Seat seat;
@@ -22,17 +23,19 @@ public class AppUI {
 
     public static void main(String args[]) {
         // Start of Cineplex and Cinema initialisation
+        /*
         cineplex1 = new Cineplex("CPA", "Cathay Cineplexes", "Woodlands", 3);
         initCinemaType(cineplex1);
         cineplex2 = new Cineplex("CPB", "Cathay Cineplex", "Orchard", 3);
         initCinemaType(cineplex2);
         cineplex3 = new Cineplex("CPC", "The Cathay Cineplex", "CBD", 3);
-        initCinemaType(cineplex3);
+        initCinemaType(cineplex3);*/
          // End of Cineplex and Cinema initialisation
 
         // Welcome page to MOBLIMA
         System.out.println("Welcome to MOBLIMA");
         AppUI ui = new AppUI();
+        cinemaMgr = new CinemaMgr();
         userMgr = new UserMgr();
         ui.auth();
     }
@@ -262,12 +265,12 @@ public class AppUI {
         do {
             System.out.println("");
             System.out.println("||========== Cineplex ==========||");
-            System.out.println("   1: " + cineplex1.getName());
-            System.out.println("   2: " + cineplex1.getName() + " Gold Class");
-            System.out.println("   3: " + cineplex2.getName());
-            System.out.println("   4: " + cineplex2.getName() + " Gold Class");
-            System.out.println("   5: " + cineplex3.getName());
-            System.out.println("   6: " + cineplex3.getName() + " Gold Class");
+            System.out.println("   1: "+cinemaMgr.getCineplex(0).getName());
+            System.out.println("   2: "+cinemaMgr.getCineplex(0).getName() + " Gold Class");
+            System.out.println("   3: "+cinemaMgr.getCineplex(1).getName());
+            System.out.println("   4: "+cinemaMgr.getCineplex(1).getName() + " Gold Class");
+            System.out.println("   5: "+cinemaMgr.getCineplex(2).getName());
+            System.out.println("   6: "+cinemaMgr.getCineplex(2).getName() + " Gold Class");
             System.out.println("|| 0: Back to movie information ||");
             System.out.println("|| x: Quit                      ||");
             System.out.println("||==============================||");
@@ -301,9 +304,10 @@ public class AppUI {
      *
      * @param cinemaList List of Cinema within a Cineplex
      */
+    /*
     public static void initCinemaType(Cineplex cineplex) {
         cineplex.getCinemaList().get(0).setCinemaType("NORMAL");
         cineplex.getCinemaList().get(0).setCinemaType("NORMAL");
         cineplex.getCinemaList().get(0).setCinemaType("GOLD");
-    }
+    }*/
 }

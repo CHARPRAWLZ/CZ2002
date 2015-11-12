@@ -7,7 +7,8 @@ public class Cinema {
 
     private String name;
     //private Seat[] seat;
-    private String cinemaType;
+    private String cinemaType = "NORMAL";
+    private Layout layout;
     
     /**
      * Constructor for Cinema
@@ -15,6 +16,7 @@ public class Cinema {
      */
     public Cinema(String name) {
         this.name = name;
+        this.layout = new Layout(cinemaType);
     }
     
     /**

@@ -6,7 +6,7 @@
         <item name="director">LOTR director</item>
         <item name="cast">LOTR cast</item>
         <item name="movieType">normal</item>
-        <item name="movieStatus">LOTR moviestatus</item>
+        <item name="movieStatus">Now Showing</item>
         <item name="overallRating">5</item>
     </movie>
     <movie id="2">
@@ -15,7 +15,7 @@
         <item name="director">Hobbit director</item>
         <item name="cast">Hobbit cast</item>
         <item name="movieType">normal</item>
-        <item name="movieStatus">Hobbit moviestatus</item>
+        <item name="movieStatus">Coming soon</item>
         <item name="overallRating">6</item>
     </movie>
     <movie id="3">
@@ -24,7 +24,7 @@
         <item name="director">Harrypotter director</item>
         <item name="cast">Harrypotter cast</item>
         <item name="movieType">normal</item>
-        <item name="movieStatus">Harrypotter moviestatus</item>
+        <item name="movieStatus">Now Showing</item>
         <item name="overallRating">6</item>
     </movie>
     <movie id="4">
@@ -33,7 +33,7 @@
         <item name="director">Harrypotter director</item>
         <item name="cast">Harrypotter cast</item>
         <item name="movieType">3D</item>
-        <item name="movieStatus">Harrypotter moviestatus</item>
+        <item name="movieStatus">Now Showing</item>
         <item name="overallRating">6</item>
     </movie>
 <movie id="5">

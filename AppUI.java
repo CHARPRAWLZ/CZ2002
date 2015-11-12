@@ -17,7 +17,7 @@ public class AppUI {
     public static UserMgr userMgr;
     public static Seat seat;
     public static Showtime showtime;
-    
+
     public String movieId;
 
     public static void main(String args[]) {
@@ -228,6 +228,7 @@ public class AppUI {
         exitProgram(opt);
         return opt;
     }
+
     public String rating() {
         String opt;
         do {
@@ -241,7 +242,8 @@ public class AppUI {
             System.out.print("Enter choice: ");
             opt = sc.nextLine();
             switch (opt) {
-                case "1": break;
+                case "1":
+                    break;
                 case "0":
                     this.movieInfo();
                     break;
@@ -254,17 +256,18 @@ public class AppUI {
         exitProgram(opt);
         return opt;
     }
+
     public String cineplex() {
         String opt;
         do {
             System.out.println("");
             System.out.println("||========== Cineplex ==========||");
-            System.out.println("   1: "+cineplex1.getName());
-            System.out.println("   2: "+cineplex1.getName() + " Gold Class");
-            System.out.println("   3: "+cineplex2.getName());
-            System.out.println("   4: "+cineplex2.getName() + " Gold Class");
-            System.out.println("   5: "+cineplex3.getName());
-            System.out.println("   6: "+cineplex3.getName() + " Gold Class");
+            System.out.println("   1: " + cineplex1.getName());
+            System.out.println("   2: " + cineplex1.getName() + " Gold Class");
+            System.out.println("   3: " + cineplex2.getName());
+            System.out.println("   4: " + cineplex2.getName() + " Gold Class");
+            System.out.println("   5: " + cineplex3.getName());
+            System.out.println("   6: " + cineplex3.getName() + " Gold Class");
             System.out.println("|| 0: Back to movie information ||");
             System.out.println("|| x: Quit                      ||");
             System.out.println("||==============================||");
@@ -284,6 +287,7 @@ public class AppUI {
         exitProgram(opt);
         return opt;
     }
+
     public static void exitProgram(String option) {
         if (option.equals("x")) {
             System.out.println("----------------------------------------");

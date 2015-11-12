@@ -18,7 +18,7 @@ public class AdminUI {
     private static Seat seat;
     private static Showtime showtime;
     private static AppUI appUI;
-    private static MovieListing movieListing;
+    private static MovieListing movieMgr;
 
     private String movieId;
     private XML movieXml;
@@ -26,9 +26,9 @@ public class AdminUI {
     public AdminUI() {
         appUI = new AppUI();
         movieXml = new XML("movie");
-        movieListing = new MovieListing();
+        movieMgr = new MovieListing();
     }
-    
+
     public String adminOpt() {
         String opt;
         do {
@@ -66,6 +66,7 @@ public class AdminUI {
             System.out.println("|| 1: Manage movies            ||");
             System.out.println("|| 2: Manage showtimes         ||");
             System.out.println("|| 3: Manage system settings   ||");
+            System.out.println("|| 0: Back to admin option     ||");
             System.out.println("|| x: Quit                     ||");
             System.out.println("||=============================||");
 
@@ -73,12 +74,14 @@ public class AdminUI {
             opt = sc.nextLine();
             switch (opt) {
                 case "1":
-                    this.movieMgr();
+                    this.movieManage();
                     break;
                 case "2":
                     break;
                 case "3":
                     break;
+                case "0":
+                    this.adminOpt();
                 case "x":
                     break;
                 default:
@@ -89,72 +92,40 @@ public class AdminUI {
         return opt;
     }
 
-    public String movieMgr() {
-        String[][] itemName = movieListing.getItemName();
+    public String movieManage() {
+        String[][] itemName = movieMgr.getItemName();
         String opt, id;
         do {
-            System.out.println("||=============================||");
-            System.out.println("|| 1: Create Movie             ||");
-            System.out.println("|| 2: List all movies          ||");
-            System.out.println("|| 3: List movies by item      ||");
-            System.out.println("|| 4: Read movie by movie id   ||");
-            System.out.println("|| 5: Update movie by movie id ||");
-            System.out.println("|| 6: Delete movie by movie id ||");
-            System.out.println("|| 7: Element count            ||");
-            System.out.println("|| x: Exit                     ||");
-            System.out.println("||=============================||");
+            System.out.println("");
+            System.out.println("||========= MANAGE MOVIE =========||");
+            System.out.println("|| 1: Create Movie                ||");
+            System.out.println("|| 2: Get movie by id             ||");
+            System.out.println("|| 3: Update movie by id          ||");
+            System.out.println("|| 4: Delete movie by id          ||");
+            System.out.println("|| 5: List all movies             ||");
+            System.out.println("|| 6: List movies by item content ||");
+            System.out.println("|| 0: Back to home                ||");
+            System.out.println("|| x: Exit                        ||");
+            System.out.println("||================================||");
             System.out.print("Enter choice: ");
             opt = sc.nextLine();
             switch (opt) {
-                case "1": movieListing.createMovie();
+                case "1":
+                    movieMgr.createMovie();
                     break;
-                 case "2":
-                     String[] movieIds = movieListing.getMovieList();
-                     for(int i=0;i<movieIds.length;i++){
-                         System.out.println(itemName[1][i]+" : "+movieIds[i]);
-                     }
-                      break;
-                     /*
-                 String[] arrId;
-                 arrId = movieXml.getElement();
-                 for (int i = 0; i < arrId.length; i++) {
-                 System.out.println("id : " + arrId[i]);
-                 for (int j = 0; j < itemName.length; j++) {
-                 System.out.println(itemName[1][j] + " : " + movieXml.getItemContent(arrId[i], itemName[1][j]));
-                 }
-                 }
-                 if (arrId.length == 0) {
-                 System.out.println("No element found");
-                 }
-                 break;
-                 case "3":
-                 System.out.print("Enter item name: ");
-                 String name2 = sc.nextLine();
-                 System.out.print("Enter item content: ");
-                 String content2 = sc.nextLine();
-                 movieXml.displayElement(name2, content2);
-                 break;
-                 case "4":
-                 System.out.print("Enter movie id: ");
-                 id = sc.nextLine();
-                 movieXml.displayElement(id);
-                 break;
-                 case "5":
-                 System.out.print("Enter movie id: ");
-                 id = sc.nextLine();
-                 if (xml.displayElement(id) == true) {
-                 System.out.print("Enter item name: ");
-                 String name = sc.nextLine();
-                 if (xml.checkItemExists(id, name) == true) {
-                 System.out.print("Enter new value: ");
-                 String val = sc.nextLine();
-                 xml.editItem(id, name, val);
-                 xml.displayElement(id);
-                 xml.writeContent();
-                 System.out.println("- Movie has been updated -");
-                 }
-                 }
-                 break;
+                case "2":
+                    movieMgr.getMovie();
+                    break;
+                case "3":
+                    movieMgr.updateMovie();
+                    break;
+                case "5":
+                    movieMgr.listAllMovies();
+                    break;
+                case "6":
+                    movieMgr.listByContent();
+                    break;
+                /*
                  case "6":
                  System.out.print("Enter movie id: ");
                  id = sc.nextLine();
@@ -163,14 +134,12 @@ public class AdminUI {
                  xml.writeContent();
                  System.out.println("- Movie is deleted -");
                  }
-                 break;
-                 case "7":
-                 System.out.print("Enter item name: ");
-                 String name3 = sc.nextLine();
-                 System.out.print("Enter item content: ");
-                 String content3 = sc.nextLine();
-                 System.out.println(xml.getElementCount(name3, content3));
                  */
+                case "0":
+                    this.homepage();
+                    break;
+                case "x":
+                    break;
                 default:
                     System.out.println("- Enter a valid input -");
                     break;

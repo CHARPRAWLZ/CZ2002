@@ -153,12 +153,13 @@ public class AppUI {
 
     public String movieList() {
         String opt;
-        String[] lists = new String[]{"Harry Potter","Lord of the Rings","Hobbit"};
+        int j;
+        String[] lists = new String[]{"Harry Potter", "Lord of the Rings", "Hobbit"};
         do {
             System.out.println("");
             System.out.println("||======= Movie Listing =======||");
-            for (int i = 0; i < lists.length; i++) {
-            System.out.println("   "+(i+1)+": "+lists[i]);
+            for (int i = 1; i <= lists.length; i++) {
+                System.out.println("   " + (i) + ": " + lists[i - 1]);
             }
             System.out.println("|| 0: Back to home             ||");
             System.out.println("|| x: Quit                     ||");
@@ -166,14 +167,21 @@ public class AppUI {
 
             System.out.print("Enter choice: ");
             opt = sc.nextLine();
-            switch (opt) {
-                case "0":
-                    this.homepage();
-                    break;
-                case "x":
-                    break;
-                default:
-                    System.out.println("\nEnter a valid input!");
+            for (j = 1; j <= lists.length; j++) {
+                if (opt.equals(Integer.toString(j))) {
+                    this.movieInfo(opt);
+                }
+            }
+            if (j == lists.length + 1) {
+                switch (opt) {
+                    case "0":
+                        this.homepage();
+                        break;
+                    case "x":
+                        break;
+                    default:
+                        System.out.println("\nEnter a valid input!");
+                }
             }
         } while (!opt.matches("x"));
         exitProgram(opt);
@@ -182,24 +190,23 @@ public class AppUI {
 
     public String movieInfo(String optMovieList) {
         String opt;
-        int optInt;
         do {
             System.out.println("");
             System.out.println("||===== Movie Information =====||");
-            System.out.println("   1: Harry Potter");
-            System.out.println("   2: Lord of the Rings");
-            System.out.println("   3: Hobbit");
             System.out.println("|| 0: Back to movie listing    ||");
             System.out.println("|| x: Quit                     ||");
             System.out.println("||=============================||");
 
             System.out.print("Enter choice: ");
             opt = sc.nextLine();
-            optInt = Integer.parseInt(opt);
-            if (optInt >= 1 && optInt <= 3) ; else if (opt.equals("0")) {
-                this.movieList();
-            }else if (!opt.equals("x")){
-                System.out.println("\nEnter a valid input!");
+            switch (opt) {
+                case "0":
+                    this.movieList();
+                    break;
+                case "x":
+                    break;
+                default:
+                    System.out.println("\nEnter a valid input!");
             }
         } while (!opt.matches("x"));
         exitProgram(opt);

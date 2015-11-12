@@ -1,13 +1,17 @@
 package CZ2002;
+
+import java.util.Random;
+
 /**
  * Cinema class
  * @author calvinlee
  */
 public class Cinema {
 
+    private Random rand = new Random();
     private String name;
     //private Seat[] seat;
-    private String cinemaType = "NORMAL";
+    private String cinemaType = (rand.nextInt(2) == 0) ? "NORMAL" : "GOLD";
     private Layout layout;
     
     /**

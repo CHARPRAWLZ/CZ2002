@@ -149,6 +149,10 @@ public class Showtime {
         return date + " " + monthStr + " " + year + ", " + dayStr;
     }
     
+    public Calendar getCalendar(){
+        return timing;
+    }
+    
     /**
      * Returns the status of the showtime.
      * @return 

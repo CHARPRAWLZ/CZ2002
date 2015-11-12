@@ -72,30 +72,18 @@ public class MovieListing {
         System.out.println("- Movie added into database -");
     }
 
-    public void getMovie() {
-        System.out.print("Enter movie id: ");
-        String id = sc.nextLine();
-        if (xml.checkIdExists(id)) {
-            String[] info = this.getMovieInfo(id);
-            System.out.println("\n------------------");
-            for (int j = 0; j < info.length; j++) {
-                System.out.println("   " + itemName[0][j] + " : " + info[j]);
-            }
-        }
-    }
     public void getMovie(String id) {
         if (xml.checkIdExists(id)) {
             String[] info = this.getMovieInfo(id);
             System.out.println("\n------------------");
+            System.out.println("MOVIE ID : " + id);
             for (int j = 0; j < info.length; j++) {
                 System.out.println("   " + itemName[0][j] + " : " + info[j]);
             }
         }
     }
 
-    public void updateMovie() {
-        System.out.print("Enter movie id: ");
-        String id = sc.nextLine();
+    public void updateMovie(String id) {
         if (xml.checkIdExists(id)) {
             System.out.print("Enter item name: ");
             String name = sc.nextLine();
@@ -104,13 +92,20 @@ public class MovieListing {
                 String val = sc.nextLine();
                 System.out.println(name);
                 System.out.println(val);
-                /*
                 xml.editItem(id, name, val);
                 xml.writeContent();
                 getMovie(id);
-                */
                 System.out.println("- Movie has been updated -");
             }
+        }
+    }
+    public void deleteMovie(String id) {
+        if (xml.checkIdExists(id)) {
+                xml.editItem(id, "movieStatus", "End Of Showing");
+                xml.writeContent();
+                getMovie(id);
+                System.out.println("- Movie has been deleted -");
+            
         }
     }
 
@@ -126,16 +121,12 @@ public class MovieListing {
         }
     }
 
-    public void listByContent() {
-        System.out.print("Enter item name: ");
-        String name2 = sc.nextLine();
-        System.out.print("Enter item content: ");
-        String content2 = sc.nextLine();
-        ArrayList<String> x = xml.getElement(name2, content2);
-        for (int i = 0; i < x.size(); i++) {
+    public void listByContent(String name, String content) {
+        ArrayList<String> ids = xml.getElement(name, content);
+        for (int i = 0; i < ids.size(); i++) {
             System.out.println("\n------------------");
-            System.out.println("MOVIE ID : " + x.get(i));
-            String[] info = this.getMovieInfo(x.get(i));
+            System.out.println("MOVIE ID : " + ids.get(i));
+            String[] info = this.getMovieInfo(ids.get(i));
             for (int j = 0; j < info.length; j++) {
                 System.out.println("   " + itemName[0][j] + " : " + info[j]);
             }

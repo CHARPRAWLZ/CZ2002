@@ -268,7 +268,7 @@ public class XML {
             if (e.getAttribute("id").equals(id)) {
                 NodeList items = e.getElementsByTagName("item");
                 for (int j = 0; j < items.getLength(); j++) {
-                    String name = this.getItemName(nList, j);
+                    String name = this.getItemName(items, j);
                     if (item.toLowerCase().equals(name.toLowerCase())) {
                         items.item(j).setTextContent(content);
                         break;

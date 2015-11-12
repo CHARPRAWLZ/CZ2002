@@ -2,7 +2,6 @@ package CZ2002;
 
 import java.util.*;
 import java.io.*;
-import java.util.ArrayList;
 
 /**
  *
@@ -10,7 +9,7 @@ import java.util.ArrayList;
  */
 public class AdminUI {
 
-    private static Scanner sc = new Scanner(System.in);
+    private static Scanner sc;
     private static Movie movie;
     private static Cineplex cineplex1, cineplex2, cineplex3;
     private static Cinema cinema;
@@ -27,6 +26,7 @@ public class AdminUI {
         appUI = new AppUI();
         movieXml = new XML("movie");
         movieMgr = new MovieListing();
+        sc = new Scanner(System.in);
     }
 
     public String adminOpt() {
@@ -114,27 +114,30 @@ public class AdminUI {
                     movieMgr.createMovie();
                     break;
                 case "2":
-                    movieMgr.getMovie();
+                    System.out.print("Enter movie id: ");
+                    id = sc.nextLine();
+                    movieMgr.getMovie(id);
                     break;
                 case "3":
-                    movieMgr.updateMovie();
+                    System.out.print("Enter movie id: ");
+                    id = sc.nextLine();
+                    movieMgr.updateMovie(id);
+                    break;
+                case "4":
+                    System.out.print("Enter movie id: ");
+                    id = sc.nextLine();
+                    movieMgr.deleteMovie(id);
                     break;
                 case "5":
                     movieMgr.listAllMovies();
                     break;
                 case "6":
-                    movieMgr.listByContent();
+                    System.out.print("Enter item name: ");
+                    String name = sc.nextLine();
+                    System.out.print("Enter item content: ");
+                    String content = sc.nextLine();
+                    movieMgr.listByContent(name, content);
                     break;
-                /*
-                 case "6":
-                 System.out.print("Enter movie id: ");
-                 id = sc.nextLine();
-                 if (xml.displayElement(id) == true) {
-                 xml.deleteItem(id);
-                 xml.writeContent();
-                 System.out.println("- Movie is deleted -");
-                 }
-                 */
                 case "0":
                     this.homepage();
                     break;

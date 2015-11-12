@@ -6,7 +6,7 @@
         <item name="director">LOTR director</item>
         <item name="cast">LOTR cast</item>
         <item name="movieType">normal</item>
-        <item name="movieStatus">Now Showing</item>
+        <item name="movieStatus">coming soon</item>
         <item name="overallRating">5</item>
     </movie>
     <movie id="2">
@@ -56,11 +56,11 @@
 </movie>
 <movie id="7">
 <item name="title">title</item>
-<item name="synopsis">syn</item>
+<item name="synopsis">Synopsis</item>
 <item name="director">dir</item>
 <item name="cast">cast 2</item>
 <item name="movieType">normal</item>
-<item name="movieStatus">Now Showing</item>
+<item name="movieStatus">End Of Showing</item>
 <item name="overallRating">5</item>
 </movie>
 </root>

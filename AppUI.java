@@ -17,7 +17,7 @@ public class AppUI {
     public static Seat seat;
     public static Showtime showtime;
 
-    public static void main(String args[]) {/*
+    public static void main(String args[]) {
          // Start of Cineplex and Cinema initialisation
          ArrayList<Cinema> cinemaList;
          Cineplex cineplex1 = new Cineplex("CPA", "Cathay Cineplexes", "Woodlands", 3);
@@ -30,7 +30,6 @@ public class AppUI {
          cinemaList = cineplex3.getCinemaList();
          initCinemaType(cinemaList);
          // End of Cineplex and Cinema initialisation
-         */
 
         // Welcome page to MOBLIMA
         System.out.println("Welcome to MOBLIMA");
@@ -154,12 +153,16 @@ public class AppUI {
     public String movieList() {
         String opt;
         int j;
-        String[] lists = new String[]{"Harry Potter", "Lord of the Rings", "Hobbit"};
+        XML movieXml = new XML("movie");
+        String[] lists = movieXml.getElement();
         do {
             System.out.println("");
             System.out.println("||======= Movie Listing =======||");
             for (int i = 1; i <= lists.length; i++) {
-                System.out.println("   " + (i) + ": " + lists[i - 1]);
+                String title = movieXml.getItemContent(lists[i - 1], "title");
+                String movieType = movieXml.getItemContent(lists[i - 1], "movieType");
+                if (!movieType.equals("normal")) title += " ("+movieType+")";
+                System.out.println("   " + (i) + ": " + title);
             }
             System.out.println("|| 0: Back to home             ||");
             System.out.println("|| x: Quit                     ||");
@@ -169,7 +172,7 @@ public class AppUI {
             opt = sc.nextLine();
             for (j = 1; j <= lists.length; j++) {
                 if (opt.equals(Integer.toString(j))) {
-                    this.movieInfo(opt);
+                    this.movieInfo(lists[j-1]);
                 }
             }
             if (j == lists.length + 1) {
@@ -188,11 +191,12 @@ public class AppUI {
         return opt;
     }
 
-    public String movieInfo(String optMovieList) {
+    public String movieInfo(String movieId) {
         String opt;
         do {
             System.out.println("");
             System.out.println("||===== Movie Information =====||");
+            System.out.println("   ");
             System.out.println("|| 0: Back to movie listing    ||");
             System.out.println("|| x: Quit                     ||");
             System.out.println("||=============================||");

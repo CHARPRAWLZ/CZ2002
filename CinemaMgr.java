@@ -18,6 +18,10 @@ public class CinemaMgr {
         return cineplexName;
     }
     
+    public Cineplex getCineplex(int choice){
+        return cineplex[choice];
+    }
+    
     public Cinema[] getCinemaList(int choice){
         int size = cineplex[choice].getNumOfCinema();
         Cinema[] cinema = new Cinema[3];

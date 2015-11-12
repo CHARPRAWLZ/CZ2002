@@ -24,9 +24,6 @@ public class ShowTimeMgr {
     
     /* Mutators */
     // contains methods for manipulating showtime entries in XML file
-    public Showtime addShowtimeUI(){
-        
-    }
     
     public Showtime addShowtime(Cineplex cineplex, int cinemaRoom, Movie movie,
             Calendar timing, int status){
@@ -42,22 +39,97 @@ public class ShowTimeMgr {
         time = getTiming(timing);
         
         // create entry and update local ArrayList
-        showtimeEntry = new Showtime(cineplex, cinemaRoom, movie, timing, status);
-        showtimes.add(showtimeEntry);
+        showtimeEntry = addToArrayList(cineplex, cinemaRoom, movie, timing, 
+                status);
         
         // create entry and update XML database
         String[] arr1 = new String[]{"cineplexID", "cinemaRoom", "movieID", 
             "date", "time", "status"};
         String[] arr2 = new String[]{cineplexID, String.valueOf(cinemaRoom), 
             movieID, date, time, String.valueOf(status)};
+        xml.refreshCurElement();
         xml.addItem(arr1, arr2);
+        
+        // returns created entry
+        return showtimeEntry;
+    }
+    
+    private Showtime addToArrayList(Cineplex cineplex, int cinemaRoom, Movie 
+            movie, Calendar timing, int status){
+        
+        // create eny and update local ArrayList
+        Showtime entry = new Showtime(cineplex, cinemaRoom, movie, timing, 
+                status);
+        showtimes.add(entry);
+        
+        // returns created entry
+        return entry;
     }
     
     /* end of Mutators */
     
     private void generateList(){
         
+        // declare entry variable
+        Showtime showtimeEntry;
         
+        // declare variables for storing from retrieved data
+        String cineplexID, movieID, date, time;
+        int cinemaRoom, status;
+        Cineplex cineplex;
+        Movie movie;
+        Calendar timing;
+        
+        //initialize String variables
+        cineplexID = movieID = date = time = "";
+        
+        // declare corresponding boolean flags
+        boolean cineplexIDflag, movieIDflag, dateFlag, timeFlag, roomFlag, 
+                statusFlag;
+        
+        // retrieve data
+        String retrievedList[][] = xml.retrieveData("None");
+        
+        // parse array
+        for (String[] subArr : retrievedList){
+            
+            // initialize
+            cineplexIDflag = movieIDflag = dateFlag = timeFlag = roomFlag = 
+                    statusFlag = true;
+            
+            for (int i = 0; i < subArr.length; i+=2){
+                
+                if (cineplexIDflag && subArr[i].equals("cineplexID")){
+                    cineplexID = subArr[i+1];
+                    cineplexIDflag = false;
+                } else if (movieIDflag && subArr[i].equals("movieID")){
+                    movieID = subArr[i+1];
+                    movieIDflag = false;
+                } else if (dateFlag && subArr[i].equals("date")){
+                    date = subArr[i+1];
+                    dateFlag = false;
+                } else if (timeFlag && subArr[i].equals("time")){
+                    time = subArr[i+1];
+                    timeFlag = false;
+                } else if (roomFlag && subArr[i].equals("cinemaRoom")){
+                    cinemaRoom = Integer.parseInt(subArr[i+1]);
+                    roomFlag = false;
+                } else if (statusFlag && subArr[i].equals("status")){
+                    status = Integer.parseInt(subArr[i+1]);
+                    statusFlag = false;
+                } else {
+                    System.out.println("Error generating List.");
+                    return;
+                }
+            }
+            
+            // append to ArrayList if all fields are filled
+            if (!(cineplexIDflag || movieIDflag || dateFlag || timeFlag || 
+                    roomFlag || statusFlag)){
+                cineplex = this.cineplex.findCineplex(cineplexID);
+                movie = this.movieList.findMovie(movieID);
+            }
+        }
         
     }
     

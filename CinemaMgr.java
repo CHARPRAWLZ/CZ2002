@@ -35,4 +35,13 @@ public class CinemaMgr {
         return getCinemaList(cineplex)[cinemaChoice];
     }
     
+    public Cineplex findCineplex(String cineplexID){
+        for (Cineplex c : cineplex){
+            if (c.getID().equals(cineplexID)){
+                return c;
+            }
+        }
+        return null;
+    }
+    
 }

@@ -157,5 +157,14 @@ public class MovieListing {
             }
         }
     }
+    
+    public Movie findMovie(String movieID){
+        for (Movie m : movieList){
+            if (m.getMovieID().equals(movieID)){
+                return m;
+            }
+        }
+        return null;
+    }
 
 }

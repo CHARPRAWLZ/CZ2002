@@ -361,6 +361,21 @@ public class XML {
         }
         return arrId;
     }
+    /**
+     * Return array of element id based on specified item content
+     * @param itemName array of name of item
+     * @param itemContent array of content of item
+     * @return array of element id
+     */
+    public String[] getElement(String[] itemName, String[] itemContent) {
+        NodeList nList = doc.getElementsByTagName(this.elementName);
+        String[] arrId = new String[nList.getLength()];
+        for (int i = 0; i < nList.getLength(); i++) {
+            Element e = this.getNodeElement(nList, i);
+            arrId[i] = e.getAttribute("id");
+        }
+        return arrId;
+    }
 
     /**
      * Get item name

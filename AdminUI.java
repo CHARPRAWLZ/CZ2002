@@ -59,7 +59,7 @@ public class AdminUI {
     public String movieMgr() {
         String[][] itemName = new String[][]{{"title", "synopsis", "director", "cast", "movieType", "movieStatus", "overallRating"},
                 {"Title","Synopsis","Director","Cast","Movie Type","Movie Status","Overall R"}};
-        String opt;
+        String opt,id;
         do {
             System.out.println("||=============================||");
             System.out.println("|| 1: Create Movie             ||");
@@ -75,23 +75,23 @@ public class AdminUI {
             opt = sc.nextLine();
             switch (opt) {
                 case "1":
-                    String[] itemContent = new String[itemName.length];
-                    for (int i = 0; i < itemName.length; i++) {
-                        System.out.print("Enter " + itemName[i] + " : ");
+                    String[] itemContent = new String[itemName[0].length];
+                    for (int i = 0; i < itemName[0].length; i++) {
+                        System.out.print("Enter " + itemName[1][i] + " : ");
                         itemContent[i] = sc.nextLine();
                     }
-                    xml.addItem(itemName, itemContent);
-                    xml.writeContent();
+                    movieXml.addItem(itemName[0], itemContent);
+                    movieXml.writeContent();
                     System.out.println("- Movie added into database -");
 
                     break;
                 case "2":
                     String[] arrId;
-                    arrId = xml.getElement();
+                    arrId = movieXml.getElement();
                     for (int i = 0; i < arrId.length; i++) {
                         System.out.println("id : " + arrId[i]);
                         for (int j = 0; j < itemName.length; j++) {
-                            System.out.println(itemName[j] + " : " + xml.getItemContent(arrId[i], itemName[j]));
+                            System.out.println(itemName[1][j] + " : " + movieXml.getItemContent(arrId[i], itemName[1][j]));
                         }
                     }
                     if (arrId.length == 0) {
@@ -103,12 +103,12 @@ public class AdminUI {
                     String name2 = sc.nextLine();
                     System.out.print("Enter item content: ");
                     String content2 = sc.nextLine();
-                    xml.displayElement(name2, content2);
+                    movieXml.displayElement(name2, content2);
                     break;
                 case "4":
                     System.out.print("Enter movie id: ");
                     id = sc.nextLine();
-                    xml.displayElement(id);
+                    movieXml.displayElement(id);
                     break;
                 case "5":
                     System.out.print("Enter movie id: ");

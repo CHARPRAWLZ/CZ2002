@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class ShowTimeMgr {
     
-    private XML file;
+    private XML xml = new XML("showtime");
     private ArrayList <Showtime> showtimes = new <Showtime> ArrayList();
     private MovieListing movieList;
     

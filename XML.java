@@ -8,6 +8,8 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.*;
 import java.util.Scanner;
 import javax.xml.xpath.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -84,7 +86,7 @@ public class XML {
     }
 
     public void enterEntryItem(String itemName, String content) {
-        NodeList list = this.curElement.getChildNodes();
+        NodeList list = this.curElement.getElementsByTagName("item");
         for (int i = 0; i < list.getLength(); i++) {
             Element e = (Element) list.item(i);
             if (itemName.equals(e.getAttribute("name"))) {
@@ -92,6 +94,58 @@ public class XML {
                 break;
             }
         }
+    }
+    
+    public String[][] retrieveData(String filter){
+        ArrayList <String[]> entries = new <String[]> ArrayList();
+        String[] arrEntry;
+        NodeList mainList = this.root.getElementsByTagName(this.elementName);
+        int size = ((Element) mainList.item(0)).getElementsByTagName("item").
+                getLength();
+        for (int i = 0; i < mainList.getLength(); i++){
+            arrEntry = new String[size*2];
+            Element e = (Element) mainList.item(i);
+            NodeList childList = e.getElementsByTagName("item");
+            boolean filterFlag = false;
+            for (int j = 0; j < childList.getLength(); j++){
+                Node n = childList.item(j);
+                if (n.getTextContent().equals(filter)){
+                    filterFlag = true;
+                }
+                arrEntry[j*2] = ((Element) n).getAttribute("name");
+                arrEntry[j*2+1] = n.getTextContent();
+            }
+            if (filterFlag){
+                entries.add(arrEntry);
+            }
+        }
+        
+        List <String[]> list = entries;
+        String[][] strArr = list.toArray(new String[list.size()][]);
+        
+        /*for (int i = 0; i < strArr.length; i++){
+            System.out.println(strArr[i][0] + " : " + strArr[i][1]);
+            System.out.println(strArr[i][2] + " : " + strArr[i][3]);
+            System.out.println(strArr[i][4] + " : " + strArr[i][5]);
+            System.out.println("==================");
+        }*/
+        
+        return strArr;
+        
+        /*String[][] list = new String[filteredList.getLength()][];
+        System.out.println("Entering for loop");
+        for (int i = 0; i < filteredList.getLength(); i++){
+            curElement = (Element) filteredList.item(i).getParentNode();
+            System.out.println(curElement.getNodeName());
+            NodeList childList = curElement.getChildNodes();
+            list[i] = new String[childList.getLength() * 2];
+            for (int j = 0; j < childList.getLength(); j++){
+                Node node = childList.item(j);
+                list[i][j*2] = node.getNodeName();
+                list[i][j*2+1] = node.getTextContent();
+            }
+        }
+        return list;*/
     }
 
     /**

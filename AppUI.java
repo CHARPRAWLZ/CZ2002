@@ -12,7 +12,7 @@ public class AppUI {
 
     public static Scanner sc = new Scanner(System.in);
     public static Movie movie;
-    public static Cineplex cineplex;
+    public static Cineplex cineplex1, cineplex2, cineplex3;
     public static Cinema cinema;
     public static UserMgr userMgr;
     public static Seat seat;
@@ -23,13 +23,13 @@ public class AppUI {
     public static void main(String args[]) {
         // Start of Cineplex and Cinema initialisation
         ArrayList<Cinema> cinemaList;
-        Cineplex cineplex1 = new Cineplex("CPA", "Cathay Cineplexes", "Woodlands", 3);
+        cineplex1 = new Cineplex("CPA", "Cathay Cineplexes", "Woodlands", 3);
         cinemaList = cineplex1.getCinemaList();
         initCinemaType(cinemaList);
-        Cineplex cineplex2 = new Cineplex("CPB", "Cathay Cineplex", "Orchard", 3);
+        cineplex2 = new Cineplex("CPB", "Cathay Cineplex", "Orchard", 3);
         cinemaList = cineplex2.getCinemaList();
         initCinemaType(cinemaList);
-        Cineplex cineplex3 = new Cineplex("CPC", "The Cathay Cineplex", "CBD", 3);
+        cineplex3 = new Cineplex("CPC", "The Cathay Cineplex", "CBD", 3);
         cinemaList = cineplex3.getCinemaList();
         initCinemaType(cinemaList);
          // End of Cineplex and Cinema initialisation
@@ -37,12 +37,12 @@ public class AppUI {
         // Welcome page to MOBLIMA
         System.out.println("Welcome to MOBLIMA");
         AppUI ui = new AppUI();
+        userMgr = new UserMgr();
         ui.auth();
     }
 
     public String auth() {
         String opt;
-        userMgr = new UserMgr();
         do {
             System.out.println("");
             System.out.println("||=== AUTHENTICATION ===||");
@@ -237,6 +237,7 @@ public class AppUI {
         do {
             System.out.println("");
             System.out.println("||======= Review Rating ========||");
+            System.out.println("|| 1: Create rating             ||");
             System.out.println("|| 0: Back to movie information ||");
             System.out.println("|| x: Quit                      ||");
             System.out.println("||==============================||");
@@ -244,6 +245,7 @@ public class AppUI {
             System.out.print("Enter choice: ");
             opt = sc.nextLine();
             switch (opt) {
+                case "1": break;
                 case "0":
                     this.movieInfo();
                     break;
@@ -261,6 +263,12 @@ public class AppUI {
         do {
             System.out.println("");
             System.out.println("||========== Cineplex ==========||");
+            System.out.println("   1: "+cineplex1.getName());
+            System.out.println("   2: "+cineplex1.getName() + " Gold Class");
+            System.out.println("   3: "+cineplex2.getName());
+            System.out.println("   4: "+cineplex2.getName() + " Gold Class");
+            System.out.println("   5: "+cineplex3.getName());
+            System.out.println("   6: "+cineplex3.getName() + " Gold Class");
             System.out.println("|| 0: Back to movie information ||");
             System.out.println("|| x: Quit                      ||");
             System.out.println("||==============================||");

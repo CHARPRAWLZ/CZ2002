@@ -1,5 +1,10 @@
 package CZ2002;
-
+/**
+ * This class is a control class. 
+ * It takes in information from the entity class ReviewRating.java, 
+ * process it and pass back information to the class Movie.java
+ * @author Zach
+ */
 import java.util.ArrayList;
 
 public class ReviewRatingList {
@@ -10,30 +15,48 @@ public class ReviewRatingList {
     private int count = 0;
     private double total = 0;
     private double overallRating = 0;
-    
     /* Constructors */
+    /**
+     * Creates a database of reviews and ratings
+     * @param movieID 
+     */
     public ReviewRatingList(String movieID){
         this.movieID = movieID;
         this.xml = new XML("movieRating");
         generateList(this.movieID);
     }
-    
+    /**
+     * Creates a new empty list of review and ratings for a given movie
+     * @param movie 
+     */
     public ReviewRatingList(Movie movie){
         this(movie.getMovieID());
     }
     /* end of Constructors */
     
     /* Accessors */
+    /**
+     * Gets the list of reviews
+     * @return reviewList
+     */
     public ArrayList <ReviewRating> getListArr(){
         return reviewList;
     }
-    
+    /**
+     * Gets the list of overallRatings 
+     * @return overallRating
+     */
     public double getOverallRating(){
         return this.overallRating;
     }
     /* end of Accessors */
     
     /* Mutators */
+    /**
+     * Adds in a new review and rating to the database records
+     * @param review
+     * @param rating 
+     */
     public void addReview(String review, int rating){
         // ArrayList update, add new review
         //ReviewRating newReview = new ReviewRating(this.movieID, review, rating);
@@ -49,11 +72,21 @@ public class ReviewRatingList {
         xml.enterEntryItem("rating", String.valueOf(rating));
         xml.writeContent();
     }
-    
+    /**
+     * Adds the new review and rating to the movie itself
+     * @param review
+     * @param rating 
+     */
     private void addToArrayList(String review, int rating){
         addToArrayList(this.movieID, review, rating);
     }
-    
+    /**
+     * This increment the total ratings and review of the movie
+     * and computes the new overall rating for the movie
+     * @param movieID
+     * @param review
+     * @param rating 
+     */
     private void addToArrayList(String movieID, String review, int rating){
         ReviewRating newReview = new ReviewRating(this.movieID, review, rating);
         reviewList.add(newReview);
@@ -62,7 +95,10 @@ public class ReviewRatingList {
         this.count++;
         this.overallRating = this.total / this.count;
     }
-    
+    /**
+     * Searches the database for the movie using movieID
+     * @param movieID 
+     */
     private void generateList(String movieID){
         ReviewRating reviewEntry;
         String review = "";

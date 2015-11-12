@@ -5,7 +5,10 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 /**
- *
+ * This class manages the users in the database. 
+ * It controls the creation of user accounts, logging in to the account
+ * as well as checking if the account has already been logged in to prevent
+ * multiple login so as not to compromise security
  * @author alfiefarhana
  */
 public class UserMgr {
@@ -14,13 +17,21 @@ public class UserMgr {
     private final String[] itemName;
     User user;
     private final XML userXml;
-
+ 
+    /**
+     * Creates a new UserManager with the attributes username, password, name, email and mobileNo
+     * It creates a new user and stores it into the database
+     */
     public UserMgr() {
         this.itemName = new String[]{"username", "password", "name", "email", "mobileNo"};
         user = new User();
         userXml = new XML("user");
     }
-
+    /**
+     * Prompts for a username and password then checks the database entry containing the user's account
+     * ensures that the password is the correct one to grant access
+     * @return false unless login credentials are entered correctly
+     */
     public boolean login() {
         String username, password;
         System.out.print("Username : ");
@@ -37,7 +48,14 @@ public class UserMgr {
         }
         return false;
     }
-
+    /**
+     * Creates a new user account and stores it in the database
+     * Prompts for desired username, if it doesn't already exist in the database, use it.
+     * Next, prompt the desired password and prompts for the entered password to confirm
+     * After login credentials entered, prompts for the user's details
+     * Then saves everything into the database
+     * @return 
+     */
     public boolean signUp() {
         int userCount = 0;
         String username;
@@ -78,7 +96,10 @@ public class UserMgr {
         System.out.println("- You have successfully signed up for MOBLIMA! -");
         return true;
     }
-
+    /**
+     * Checks if the user is already logged in
+     * @return false unless a user object with the same userId already exists 
+     */
     public boolean isLoggedIn() {
         if (user.getUserId() != null) {
             return true;
@@ -87,8 +108,13 @@ public class UserMgr {
     }
 
     //methods for user
+    /**
+     * check if username and password exists in the database
+     * @param username
+     * @param password
+     * @return false unless both username and it's corresponding password exists in the database
+     */
     public boolean checkLogin(String username, String password) {
-        //check if username and password exists in xml, if yes, return true, else, false
         int i, j;
         if (userXml.getElementCount("username", username) == 0) {
             System.out.println("- User not found -");
@@ -114,7 +140,9 @@ public class UserMgr {
         }
         return false;
     }
-
+    /**
+     * adds the user object to the database
+     */
     public void objectToXml() {
         String[] itemContent = new String[]{user.getUsername(), user.getPassword(), user.getName(), user.getEmail(), user.getMobileNo()};
         userXml.addItem(itemName, itemContent);
@@ -123,7 +151,7 @@ public class UserMgr {
     }
 
     /**
-     * returns the xml of user
+     * returns the database entry of user
      *
      * @return xml of user
      */

@@ -13,7 +13,7 @@ public class AppUI {
     public static Movie movie;
     public static Cineplex cineplex;
     public static Cinema cinema;
-    public static User user;
+    public static UserMgr userMgr;
     public static Seat seat;
     public static Showtime showtime;
 
@@ -32,109 +32,186 @@ public class AppUI {
          // End of Cineplex and Cinema initialisation
          */
 
-        String choice;
-        user = new User();
-
         // Welcome page to MOBLIMA
         System.out.println("Welcome to MOBLIMA");
+        AppUI ui = new AppUI();
+        ui.auth();
+    }
+
+    public String auth() {
+        String opt;
+        userMgr = new UserMgr();
         do {
-            System.out.println("||======================||");
+            System.out.println("");
+            System.out.println("||=== AUTHENTICATION ===||");
             System.out.println("|| 1: Login             ||");
             System.out.println("|| 2: Sign up           ||");
             System.out.println("|| 3: Continue as guest ||");
-            System.out.println("|| 0: Exit              ||");
+            System.out.println("|| x: Quit              ||");
             System.out.println("||======================||");
 
             System.out.print("Enter choice: ");
-            choice = sc.nextLine();
-            switch (choice) {
+            opt = sc.nextLine();
+            switch (opt) {
                 case "1":
-                    login();
+                    if (userMgr.login()) {
+                        this.homepage();
+                    }
                     break;
                 case "2":
-                    signUp();
+                    if (userMgr.signUp()) {
+                        this.homepage();
+                    }
                     break;
                 case "3":
-                    landing();
+                    this.homepage();
                     break;
-                case "0":
+                case "x":
                     break;
                 default:
                     System.out.println("\nEnter a valid input!");
             }
-            System.out.println("");
-        } while (!choice.equals("0"));
-        System.out.println("----------------------------------------");
-        System.out.println("Thank you for using MOBLIMA");
-
+        } while (!opt.matches("x"));
+        exitProgram(opt);
+        return opt;
     }
 
-    public static void login() {
-        String username, password;
-        System.out.println("\n[ Enter / to go back ]");
-        System.out.print("Username : ");
-        username = sc.nextLine();
-        if (!username.equals("/")) {
-            System.out.print("Password : ");
-            password = sc.nextLine();
-            if (user.checkLogin(username, password)) {
-                System.out.println("\n----------------");
-                System.out.println("Username : " + user.getUsername());
-                System.out.println("Name : " + user.getName());
-                System.out.println("Email : " + user.getEmail());
-                System.out.println("Mobile Number : " + user.getMobileNo());
+    public String homepage() {
+        String opt;
+        do {
+            System.out.println("");
+            System.out.println("||============ HOME ===========||");
+            System.out.println("|| 1: List Movies              ||");
+            System.out.println("|| 2: List top 5 movie ranking ||");
+            if (userMgr.isLoggedIn()) {
+                System.out.println("|| 3: View booking history     ||");
+            } else {
+                System.out.println("|| 0: Back to authentication   ||");
             }
+            System.out.println("|| x: Quit                     ||");
+            System.out.println("||=============================||");
+
+            System.out.print("Enter choice: ");
+            opt = sc.nextLine();
+            switch (opt) {
+                case "1":
+                    this.movieList();
+                    break;
+                case "2":
+                    this.topRanking();
+                    break;
+                case "3":
+                    if (userMgr.isLoggedIn()) {
+                        System.out.println("- booking history listed -");
+                    }
+                    break;
+                case "0":
+                    this.auth();
+                    break;
+                case "x":
+                    break;
+                default:
+                    System.out.println("\nEnter a valid input!");
+            }
+        } while (!opt.matches("x"));
+        exitProgram(opt);
+        return opt;
+    }
+
+    public String topRanking() {
+        String opt;
+        do {
+            System.out.println("");
+            System.out.println("||====== LIST TOP 5 MOVIE RANKING =======||");
+            System.out.println("|| 1: List by ticket sales               ||");
+            System.out.println("|| 2: List by overall reviewer's ratings ||");
+            System.out.println("|| 0: Back to home                       ||");
+            System.out.println("|| x: Quit                               ||");
+            System.out.println("||=======================================||");
+
+            System.out.print("Enter choice: ");
+            opt = sc.nextLine();
+            switch (opt) {
+                case "1":
+                    System.out.println("- list by ticket sales -");
+                    break;
+                case "2":
+                    System.out.println("- list by overall ratings -");
+                    break;
+                case "0":
+                    this.homepage();
+                    break;
+                case "x":
+                    break;
+                default:
+                    System.out.println("\nEnter a valid input!");
+            }
+        } while (!opt.matches("x"));
+        exitProgram(opt);
+        return opt;
+    }
+
+    public String movieList() {
+        String opt;
+        String[] lists = new String[]{"Harry Potter","Lord of the Rings","Hobbit"};
+        do {
+            System.out.println("");
+            System.out.println("||======= Movie Listing =======||");
+            for (int i = 0; i < lists.length; i++) {
+            System.out.println("   "+(i+1)+": "+lists[i]);
+            }
+            System.out.println("|| 0: Back to home             ||");
+            System.out.println("|| x: Quit                     ||");
+            System.out.println("||=============================||");
+
+            System.out.print("Enter choice: ");
+            opt = sc.nextLine();
+            switch (opt) {
+                case "0":
+                    this.homepage();
+                    break;
+                case "x":
+                    break;
+                default:
+                    System.out.println("\nEnter a valid input!");
+            }
+        } while (!opt.matches("x"));
+        exitProgram(opt);
+        return opt;
+    }
+
+    public String movieInfo(String optMovieList) {
+        String opt;
+        int optInt;
+        do {
+            System.out.println("");
+            System.out.println("||===== Movie Information =====||");
+            System.out.println("   1: Harry Potter");
+            System.out.println("   2: Lord of the Rings");
+            System.out.println("   3: Hobbit");
+            System.out.println("|| 0: Back to movie listing    ||");
+            System.out.println("|| x: Quit                     ||");
+            System.out.println("||=============================||");
+
+            System.out.print("Enter choice: ");
+            opt = sc.nextLine();
+            optInt = Integer.parseInt(opt);
+            if (optInt >= 1 && optInt <= 3) ; else if (opt.equals("0")) {
+                this.movieList();
+            }else if (!opt.equals("x")){
+                System.out.println("\nEnter a valid input!");
+            }
+        } while (!opt.matches("x"));
+        exitProgram(opt);
+        return opt;
+    }
+
+    public static void exitProgram(String option) {
+        if (option.equals("x")) {
+            System.out.println("----------------------------------------");
+            System.out.println("Thank you for using MOBLIMA");
+            System.exit(0);
         }
-    }
-
-    public static void signUp() {
-        int userCount = 0;
-        String username;
-        do {
-            System.out.println("");
-            System.out.print("Enter username : ");
-            username = sc.nextLine();
-            userCount = user.getXml().getElementCount("username", username);
-            if (userCount > 0) {
-                System.out.println("Username already exists. Please use a different username.");
-            }
-        } while (userCount > 0);
-        String password, password2;
-        do {
-            System.out.println("");
-            System.out.print("Enter password : ");
-            password = sc.nextLine();
-            System.out.print("Re-enter password : ");
-            password2 = sc.nextLine();
-            if (!password.equals(password2)) {
-                System.out.println("Password did not match. Please enter password again.");
-            }
-        } while (!password.equals(password2));
-        System.out.print("\nEnter full name : ");
-        String name = sc.nextLine();
-
-        System.out.print("\nEnter email : ");
-        String email = sc.nextLine();
-
-        System.out.print("\nEnter Mobile Number : ");
-        String mobileNo = sc.nextLine();
-        user.setUsername(username);
-        user.setPassword(password);
-        user.setName(name);
-        user.setEmail(email);
-        user.setMobileNo(mobileNo);
-        
-        System.out.println(user.getUsername());
-        System.out.println(user.getPassword());
-        System.out.println(user.getName());
-        System.out.println(user.getEmail());
-        System.out.println(user.getMobileNo());
-        user.objectToXml();
-        System.out.println(user.getUserId());
-    }
-
-    public static void landing() {
-        System.out.println("Continue as Guest");
     }
 
     /**

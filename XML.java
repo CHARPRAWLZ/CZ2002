@@ -114,19 +114,16 @@ public class XML {
      * Display all elements with items
      */
     public void displayElement() {
-        if (!this.file.exists()) {
-            System.out.println("No file found");
-        } else {
-            NodeList nList = this.doc.getElementsByTagName(this.elementName);
-            for (int i = 0; i < nList.getLength(); i++) {
-                Element e = this.getNodeElement(nList, i);
-                System.out.println("---------------");
-                System.out.println(e.getNodeName() + " id : " + e.getAttribute("id"));
-                NodeList items = e.getElementsByTagName("item");
-                for (int j = 0; j < items.getLength(); j++) {
-                    this.printAttrAndContent(items.item(j), "name");
-                }
+        NodeList nList = this.doc.getElementsByTagName(this.elementName);
+        for (int i = 0; i < nList.getLength(); i++) {
+            Element e = this.getNodeElement(nList, i);
+            System.out.println("---------------");
+            System.out.println(e.getNodeName() + " id : " + e.getAttribute("id"));
+            NodeList items = e.getElementsByTagName("item");
+            for (int j = 0; j < items.getLength(); j++) {
+                this.printAttrAndContent(items.item(j), "name");
             }
+
         }
     }
 
@@ -138,26 +135,23 @@ public class XML {
      */
     public boolean displayElement(String id) {
         boolean idExists = false;
-        if (!this.file.exists()) {
-            System.out.println("No file found");
-        } else {
-            NodeList nList = doc.getElementsByTagName(this.elementName);
-            for (int i = 0; i < nList.getLength(); i++) {
-                Element e = this.getNodeElement(nList, i);
-                if (e.getAttribute("id").equals(id)) {
-                    idExists = true;
-                    System.out.println("---------------");
-                    System.out.println(e.getNodeName() + " id: " + e.getAttribute("id"));
-                    NodeList items = e.getElementsByTagName("item");
-                    for (int j = 0; j < items.getLength(); j++) {
-                        this.printAttrAndContent(items.item(j), "name");
-                    }
-                    break;
+        NodeList nList = doc.getElementsByTagName(this.elementName);
+        for (int i = 0; i < nList.getLength(); i++) {
+            Element e = this.getNodeElement(nList, i);
+            if (e.getAttribute("id").equals(id)) {
+                idExists = true;
+                System.out.println("---------------");
+                System.out.println(e.getNodeName() + " id: " + e.getAttribute("id"));
+                NodeList items = e.getElementsByTagName("item");
+                for (int j = 0; j < items.getLength(); j++) {
+                    this.printAttrAndContent(items.item(j), "name");
                 }
+                break;
             }
-            if (idExists == false) {
-                System.out.println("Id not found");
-            }
+        }
+        if (idExists == false) {
+            System.out.println("Id not found");
+
         }
         return idExists;
     }
@@ -293,39 +287,34 @@ public class XML {
      */
     public int getElementCount(String itemName, String itemContent) {
         int count = 0;
-        if (!this.file.exists()) {
-            System.out.println("No file found");
-        } else {
-            NodeList nList = doc.getElementsByTagName(this.elementName);
-            for (int i = 0; i < nList.getLength(); i++) {
-                Element e = this.getNodeElement(nList, i);
-                NodeList items = e.getElementsByTagName("item");
-                for (int j = 0; j < items.getLength(); j++) {
-                    String name = this.getItemName(items, j);
-                    String nameContent = this.getItemContent(items, j);
-                    if (name.toLowerCase().equals(itemName.toLowerCase())
-                            && nameContent.equals(itemContent)) {
-                        count++;
-                    }
+        NodeList nList = doc.getElementsByTagName(this.elementName);
+        for (int i = 0; i < nList.getLength(); i++) {
+            Element e = this.getNodeElement(nList, i);
+            NodeList items = e.getElementsByTagName("item");
+            for (int j = 0; j < items.getLength(); j++) {
+                String name = this.getItemName(items, j);
+                String nameContent = this.getItemContent(items, j);
+                if (name.toLowerCase().equals(itemName.toLowerCase())
+                        && nameContent.equals(itemContent)) {
+                    count++;
                 }
             }
+
         }
         return count;
     }
-
+    /**
+     * return array of element id
+     * @return array of element id
+     */
     public String[] getElement() {
-        if (!this.file.exists()) {
-            System.out.println("No file found");
-        } else {
-            NodeList nList = doc.getElementsByTagName(this.elementName);
-            String[] arrId = new String[nList.getLength()];
-            for (int i = 0; i < nList.getLength(); i++) {
-                Element e = this.getNodeElement(nList, i);
-                arrId[i] = e.getAttribute("id");
-            }
-            return arrId;
+        NodeList nList = doc.getElementsByTagName(this.elementName);
+        String[] arrId = new String[nList.getLength()];
+        for (int i = 0; i < nList.getLength(); i++) {
+            Element e = this.getNodeElement(nList, i);
+            arrId[i] = e.getAttribute("id");
         }
-        return null;
+        return arrId;
     }
 
     /**
@@ -495,10 +484,13 @@ public class XML {
                     String[] arrId;
                     arrId = xml.getElement();
                     for (int i = 0; i < arrId.length; i++) {
-                        System.out.println("id : "+arrId[i]);
+                        System.out.println("id : " + arrId[i]);
                         for (int j = 0; j < itemName.length; j++) {
                             System.out.println(itemName[j] + " : " + xml.getItemContent(arrId[i], itemName[j]));
                         }
+                    }
+                    if (arrId.length == 0) {
+                        System.out.println("No element found");
                     }
                     break;
                 case "3":

@@ -123,29 +123,8 @@ public class XML {
 
         List<String[]> list = entries;
         String[][] strArr = list.toArray(new String[list.size()][]);
-
-        /*for (int i = 0; i < strArr.length; i++){
-         System.out.println(strArr[i][0] + " : " + strArr[i][1]);
-         System.out.println(strArr[i][2] + " : " + strArr[i][3]);
-         System.out.println(strArr[i][4] + " : " + strArr[i][5]);
-         System.out.println("==================");
-         }*/
+        
         return strArr;
-
-        /*String[][] list = new String[filteredList.getLength()][];
-         System.out.println("Entering for loop");
-         for (int i = 0; i < filteredList.getLength(); i++){
-         curElement = (Element) filteredList.item(i).getParentNode();
-         System.out.println(curElement.getNodeName());
-         NodeList childList = curElement.getChildNodes();
-         list[i] = new String[childList.getLength() * 2];
-         for (int j = 0; j < childList.getLength(); j++){
-         Node node = childList.item(j);
-         list[i][j*2] = node.getNodeName();
-         list[i][j*2+1] = node.getTextContent();
-         }
-         }
-         return list;*/
     }
 
     /**

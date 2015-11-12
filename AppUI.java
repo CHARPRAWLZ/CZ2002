@@ -121,6 +121,8 @@ public class AppUI {
 
     public String topRanking() {
         String opt;
+        RankingMgr ranking = new RankingMgr();
+        String[][] topFiveRanking;
         do {
             System.out.println("");
             System.out.println("||====== LIST TOP 5 MOVIE RANKING =======||");
@@ -134,10 +136,18 @@ public class AppUI {
             opt = sc.nextLine();
             switch (opt) {
                 case "1":
+                    topFiveRanking = ranking.rankingTicketSales();
                     System.out.println("- list by ticket sales -");
+                    for(int i = 0; i < 5; i++) {
+                        System.out.println("1) " + topFiveRanking[i][0] + " - " + topFiveRanking[i][1]);
+                    }
                     break;
                 case "2":
+                    topFiveRanking = ranking.rankingReviewsRating();
                     System.out.println("- list by overall ratings -");
+                    for(int i = 0; i < 5; i++) {
+                        System.out.println("1) " + topFiveRanking[i][0] + " - " + topFiveRanking[i][1]);
+                    }
                     break;
                 case "0":
                     this.homepage();

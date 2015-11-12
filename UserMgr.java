@@ -16,7 +16,8 @@ public class UserMgr {
     public static Scanner sc = new Scanner(System.in);
     private final String[] itemName;
     User user;
-    private final XML userXml;
+    private final XML userXml, employeeXml;
+    AdminUI adminUI;
  
     /**
      * Creates a new UserManager with the attributes username, password, name, email and mobileNo
@@ -25,7 +26,9 @@ public class UserMgr {
     public UserMgr() {
         this.itemName = new String[]{"username", "password", "name", "email", "mobileNo"};
         user = new User();
+        adminUI = new AdminUI();
         userXml = new XML("user");
+        employeeXml = new XML("employee");
     }
     /**
      * Prompts for a username and password then checks the database entry containing the user's account
@@ -40,10 +43,13 @@ public class UserMgr {
         password = sc.nextLine();
         if (this.checkLogin(username, password)) {
             System.out.println("\n----------------");
-            System.out.println("Username : " + user.getUsername());
+            System.out.print("Username : " + user.getUsername());
+            if (this.isAdmin()) System.out.println(" (ADMIN)");
+            else System.out.println("");
             System.out.println("Name : " + user.getName());
             System.out.println("Email : " + user.getEmail());
             System.out.println("Mobile Number : " + user.getMobileNo());
+            if (this.isAdmin()) adminUI.adminOpt();
             return true;
         }
         return false;
@@ -106,6 +112,10 @@ public class UserMgr {
         }
         return false;
     }
+    public boolean isAdmin() {
+        if(employeeXml.getElementCount("username", this.user.getUsername())==0) return false;
+        return true;
+    }
 
     //methods for user
     /**
@@ -143,7 +153,7 @@ public class UserMgr {
     /**
      * adds the user object to the database
      */
-    public void objectToXml() {
+    private void objectToXml() {
         String[] itemContent = new String[]{user.getUsername(), user.getPassword(), user.getName(), user.getEmail(), user.getMobileNo()};
         userXml.addItem(itemName, itemContent);
         userXml.writeContent();

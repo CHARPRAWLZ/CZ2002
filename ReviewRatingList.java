@@ -8,8 +8,10 @@ public class ReviewRatingList {
     private final String movieID;
     private ArrayList <ReviewRating> reviewList = new <ReviewRating> ArrayList();
     private int count = 0;
+    private double total = 0;
     private double overallRating = 0;
     
+    /* Constructors */
     public ReviewRatingList(String movieID){
         this.movieID = movieID;
         this.xml = new XML("movieRating");
@@ -17,14 +19,21 @@ public class ReviewRatingList {
     }
     
     public ReviewRatingList(Movie movie){
-        this.movieID = movie.getMovieID();
-        //this.generateList(this.movieID);
+        this(movie.getMovieID());
     }
+    /* end of Constructors */
     
+    /* Accessors */
     public ArrayList <ReviewRating> getListArr(){
         return reviewList;
     }
     
+    public double getOverallRating(){
+        return this.overallRating;
+    }
+    /* end of Accessors */
+    
+    /* Mutators */
     public void addReview(String review, int rating){
         // ArrayList update, add new review
         //ReviewRating newReview = new ReviewRating(this.movieID, review, rating);
@@ -48,6 +57,10 @@ public class ReviewRatingList {
     private void addToArrayList(String movieID, String review, int rating){
         ReviewRating newReview = new ReviewRating(this.movieID, review, rating);
         reviewList.add(newReview);
+        
+        this.total += rating;
+        this.count++;
+        this.overallRating = this.total / this.count;
     }
     
     private void generateList(String movieID){
@@ -87,6 +100,7 @@ public class ReviewRatingList {
             }
         }
     }
+    /* end of Mutators */
     
     public static void main(String[] args){
         //System.out.println("start");

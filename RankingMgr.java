@@ -16,11 +16,12 @@ public class RankingMgr {
     private String[] movie;
     private String[] booking;
     private int[] ticket;
-    private double[] rating;
+    //private double[] rating;
     private int[] topFiveIndex;
     private String[][] topFive;
-    private int top;
+    private int topTicketSales;
     private int topIndex;
+    private double topOverallRatings;
     public RankingMgr() {
         
     }
@@ -32,7 +33,6 @@ public class RankingMgr {
         movie = movieXML.getElement();
         booking = bookingXML.getElement();
         ticket = new int[movieXML.getElement().length];
-        rating = new double[movieXML.getElement().length];
         for(int i = 0; i < movie.length; i++) {
             int count = 0;
             for(int j = 0; j < bookingXML.getElement().length; j++) {
@@ -44,12 +44,12 @@ public class RankingMgr {
             ticket[i] = count;
         }
         for(int i = 0; i < 5; i++) {
-            top = 0;
+            topTicketSales = 0;
             topIndex = 0;
             for(int j = 0; j < ticket.length; j++) {
-                if(ticket[i] > top) {
-                    top = ticket[i];
-                    topIndex = i;
+                if(ticket[j] > topTicketSales) {
+                    topTicketSales = ticket[j];
+                    topIndex = j;
                 }
             }
             topFiveIndex[i] = topIndex;
@@ -61,7 +61,28 @@ public class RankingMgr {
         }
         return topFive;
     }
-    public void rankingReviewsRating() {
-        
+    public String[][] rankingReviewsRating() {
+        topFiveIndex = new int[5];
+        topFive = new String[5][2];
+        movieXML = new XML("movie");
+        movie = movieXML.getElement();
+        for(int i = 0; i < 5; i++) {
+            topOverallRatings = 0;
+            topIndex = 0;
+            for(int j = 0; j < ticket.length; j++) {
+                if(Double.parseDouble(movieXML.getItemContent(movie[j], "overallRating")) > topOverallRatings) {
+                    topOverallRatings = Double.parseDouble(movieXML.getItemContent(movie[j], "overallRating"));
+                    topIndex = j;
+                }
+            }
+            topFiveIndex[i] = topIndex;
+            movie[topIndex] = "";
+        }
+        for(int i = 0; i < 5; i++) {
+            topFive[i][0] = movieXML.getItemContent(movie[topFiveIndex[i]], "movieName");
+            //topFive[i][1] = Integer.toString(ticket[topFiveIndex[i]]);
+            topFive[i][1] = movieXML.getItemContent(movie[topFiveIndex[i]], "overallRating");
+        }
+        return topFive;
     }
 }

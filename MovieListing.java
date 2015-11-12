@@ -100,16 +100,24 @@ public class MovieListing {
         String movieID, title, synopsis, director, cast, type, movieStatus;
         movieID = title = synopsis = director = cast = type = movieStatus = "";
         
-        // flags of variables
+        // flags of variables to ensure data entry once per variable
         boolean movieIDflag, titleFlag, synopsisFlag, directorFlag, castFlag, 
                 typeFlag, statusFlag;
         
+        // retrive 2D array list of variable data
         String retrievedList[][] = xml.retrieveData("None");
+        
         for (String[] subList : retrievedList) {
+            
+            // empty all Strings
             movieID = title = synopsis = director = cast = type = movieStatus 
                     = "";
+            
+            // open flag gates
             movieIDflag = titleFlag = synopsisFlag = directorFlag = castFlag =
                     typeFlag = statusFlag = true;
+            
+            // close flag gates upon successful write
             for (int j = 0; j < subList.length; j+=2) {
                 if (movieIDflag && subList[j].equals("movieID")) {
                     movieIDflag = false;
@@ -137,6 +145,7 @@ public class MovieListing {
                 }
             }
             
+            // as long as these variables and written, append to ArrayList
             if (!(movieIDflag || titleFlag)){
                 addToArrayList(movieID, title, synopsis, director, cast, type, 
                         movieStatus);

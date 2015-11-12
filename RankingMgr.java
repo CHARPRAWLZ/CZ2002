@@ -19,12 +19,14 @@ public class RankingMgr {
     public RankingMgr() {
         movieXML = new XML("movie");
         bookingXML = new XML("booking");
-        movie = new String[movieXML.getElement()];
-        ticket = new String[movieXML.getElementCount()];
-        rating = new double[movieXML.getElementCount()];
+        movie = movieXML.getElement();
+        ticket = new String[movieXML.getElement().length];
+        rating = new double[movieXML.getElement().length];
     }
     public void rankingTicketSales() {
-        
+        for(int i = 0; i < movie.length; i++) {
+            
+        }
     }
     public void rankingReviewsRating() {
         

@@ -6,6 +6,8 @@
 package CZ2002;
 
 //import org.w3c.dom.*;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  *
@@ -23,6 +25,7 @@ public class Booking {
     private Payment payment;
     private double ticketPrice = 0;
     private XML bookingXML;
+    private XML holidayXML;
     private String[] itemName;
     
     public Booking() {
@@ -66,10 +69,14 @@ public class Booking {
     }
     public void confirmBooking() {
         bookingXML = new XML("booking");
+        holidayXML = new XML("holiday");
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, 1);
+        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+        String formatted = format1.format(cal.getTime());
         this.itemName = new String[]{"tid", "custId", "custName", "custMobileNumber", "custEmail", "cineplexId", "cineplexName", "cineplexLocation", "cinemaName", "cinemaType", "seat", "ageGroup", "movieId", "movieTitle", "movieDate", "movieTime", "ticketPrice"};
         this.payment = new Payment(cinema.getName(), showtime.getDate(), 
                 showtime.getTiming());
-        
         switch(ageGroup) {
             case "Student":
                 this.ticketPrice += 7;
@@ -79,6 +86,10 @@ public class Booking {
                 break;
             case "Senior Citizen":
                 this.ticketPrice += 4;
+        }
+        for(int i = 0; i < holidayXML.getElement().length; i++) {
+            if(formatted.equals(holidayXML.getItemContent(holidayXML.getElement()[i], "date")))
+                this.ticketPrice += 3;
         }
         if(cinema.getCinemaType().equalsIgnoreCase("Gold"))
             this.ticketPrice += 20;

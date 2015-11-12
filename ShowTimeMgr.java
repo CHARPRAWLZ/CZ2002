@@ -6,11 +6,12 @@ public class ShowTimeMgr {
     private XML xml = new XML("showtime");
     private ArrayList <Showtime> showtimes = new <Showtime> ArrayList();
     private MovieListing movieList;
+    private CinemaMgr cineplex = new CinemaMgr();
     
     /* Constructors */
     public ShowTimeMgr(MovieListing movieList){
         this.movieList = movieList;
-        readMovieListing(); // Generate showtime listing from XML file
+        generateList(); // Generate showtime listing from XML file
     }
     /* end of Constructors */
     
@@ -29,14 +30,14 @@ public class ShowTimeMgr {
         
     }
     
+    public void 
+    
     /* end of Mutators */
     
-    private void readMovieListing(){
-        // gets the whole list of listing from the XML file.
-        file = new XML("/xml/showtime.xml");
+    private void generateList(){
+        
+        
         
     }
-    
-    
     
 }

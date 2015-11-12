@@ -1,10 +1,10 @@
 package CZ2002;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 
 public class MovieListing {
 
-    private ArrayList<Movie> movieList = new <Movie> ArrayList();
+    //private ArrayList<Movie> movieList = new <Movie> ArrayList();
     private final XML xml;
     private final String[][] itemName;
 

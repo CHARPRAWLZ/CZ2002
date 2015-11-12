@@ -12,69 +12,22 @@ import org.w3c.dom.*;
  * @author calvinlee
  */
 public class Booking {
-    /*
-    private String custName;
-    private String custMobileNumber;
-    private String custEmailAddr;
-    private int custAge;*/
-    private User user;
-    /*
-    private String cineplexId;
-    private String cineplexName;
-    private String cinemaName;
-    private String cinemaType;
-    private String seat;
-    private String movieId;
-    private String movieName;
-    private String movieDate;
-    private String movieTime;
-    private Payment payment;*/
     
+    private User user;
     private Cineplex cineplex;
-    /*
-    private String cineplexId;
-    private String cineplexName;*/
     private Cinema cinema;
     private Seat seat;
-    /*
-    private String cinemaName;
-    private String cinemaType;
-    private String seat;*/
     private String ageGroup;
     private Movie movie;
     private Showtime showtime;
-    /*
-    private String movieId;
-    private String movieTitle;
-    private String movieDate;
-    private String movieTime;*/
     private Payment payment;
     private double ticketPrice = 0;
-    /*
-    public Booking(String custName, String custMobileNumber, 
-            String custEmailAddr, int custAge, String cineplexId, 
-            String cineplexName, String cinemaName, String cinemaType, 
-            String seat, String movieId, String movieName, String movieDate, 
-            String movieTime) {
-        this.custName = custName;
-        this.custMobileNumber = custMobileNumber;
-        this.custEmailAddr = custEmailAddr;
-        this.custAge = custAge;
-        payment = new Payment(cinemaName, movieDate, movieTime);
-    }*/
+    private XML bookingXML;
+    private String [] itemName;
+    
     public Booking() {
         
     }
-    /*
-    i'm about to add in set methods to read in data and save to the instance
-   public void setCustName(String customerName){
-       custName = customerName;
-   }
-   public void setCustMobileNumber(String phoneNumber){
-       custMobileNumber = phoneNumber;
-   }
-    to be continued...
-  */
     public User getUser() {
         return this.user;
     }
@@ -112,25 +65,27 @@ public class Booking {
         this.showtime = showtime;
     }
     public void confirmBooking() {
-        XML xml = new XML("booking");
-        Element e = xml.addElement();
-        Payment payment = new Payment(cinema.getName(), showtime.getDate(), 
+        bookingXML = new XML("booking");
+        this.itemName = new String[]{"tid", "custName", "custMobileNumber", "custEmail", "cineplexId", "cineplexName", "cineplexLocation", "cinemaName", "cinemaType", "seat", "ageGroup", "movieId", "movieTitle", "movieDate", "movieTime", "ticketPrice"};
+        this.payment = new Payment(cinema.getName(), showtime.getDate(), 
                 showtime.getTiming());
+        
         switch(ageGroup) {
             case "Student":
-                ticketPrice += 7;
+                this.ticketPrice += 7;
                 break;
             case "Adult":
-                ticketPrice += 10;
+                this.ticketPrice += 10;
                 break;
             case "Senior Citizen":
-                ticketPrice += 4;
+                this.ticketPrice += 4;
         }
         if(cinema.getCinemaType().equalsIgnoreCase("Gold"))
-            ticketPrice += 20;
+            this.ticketPrice += 20;
         if(movie.getType().equalsIgnoreCase("3D"))
-            ticketPrice += 3;
-        xml.addItem(e, "TID", this.payment.getTID());
+            this.ticketPrice += 3;
+        /*
+        bookingXML.addItem("TID", this.payment.getTID());
         //xml.addItem(e, "custId", this.user.getUserID());
         xml.addItem(e, "custName", this.user.getName());
         xml.addItem(e, "custMobileNumber", this.user.getMobileNo());
@@ -147,7 +102,13 @@ public class Booking {
         xml.addItem(e, "movieDate", this.showtime.getDate());
         xml.addItem(e, "movieTime", this.showtime.getTiming());
         xml.addItem(e, "ticketPrice", Double.toString(this.ticketPrice));
-        xml.writeContent();
+        xml.writeContent();*/
+        this.objectToXml();
         
+    }
+    public void objectToXml() {
+        String[] itemContent = new String[]{this.payment.getTID(), this.user.getName(), this.user.getMobileNo(), this.user.getEmail(), this.cineplex.getID(), this.cineplex.getName(), this.cineplex.getLocation(), this.cinema.getName(), this.cinema.getCinemaType(), this.seat.getSeatID(), this.ageGroup, this.movie.getMovieID(), this.movie.getTitle(), this.showtime.getDate(), this.showtime.getTiming(), Double.toString(this.ticketPrice)};
+        bookingXML.addItem(itemName, itemContent);
+        bookingXML.writeContent();
     }
 }

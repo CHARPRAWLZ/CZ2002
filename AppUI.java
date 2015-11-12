@@ -2,6 +2,7 @@ package CZ2002;
 
 import java.util.*;
 import java.io.*;
+import java.util.ArrayList;
 
 /**
  *
@@ -18,17 +19,17 @@ public class AppUI {
     public static Showtime showtime;
 
     public static void main(String args[]) {
-         // Start of Cineplex and Cinema initialisation
-         ArrayList<Cinema> cinemaList;
-         Cineplex cineplex1 = new Cineplex("CPA", "Cathay Cineplexes", "Woodlands", 3);
-         cinemaList = cineplex1.getCinemaList();
-         initCinemaType(cinemaList);
-         Cineplex cineplex2 = new Cineplex("CPB", "Cathay Cineplex", "Orchard", 3);
-         cinemaList = cineplex2.getCinemaList();
-         initCinemaType(cinemaList);
-         Cineplex cineplex3 = new Cineplex("CPC", "The Cathay Cineplex", "CBD", 3);
-         cinemaList = cineplex3.getCinemaList();
-         initCinemaType(cinemaList);
+        // Start of Cineplex and Cinema initialisation
+        ArrayList<Cinema> cinemaList;
+        Cineplex cineplex1 = new Cineplex("CPA", "Cathay Cineplexes", "Woodlands", 3);
+        cinemaList = cineplex1.getCinemaList();
+        initCinemaType(cinemaList);
+        Cineplex cineplex2 = new Cineplex("CPB", "Cathay Cineplex", "Orchard", 3);
+        cinemaList = cineplex2.getCinemaList();
+        initCinemaType(cinemaList);
+        Cineplex cineplex3 = new Cineplex("CPC", "The Cathay Cineplex", "CBD", 3);
+        cinemaList = cineplex3.getCinemaList();
+        initCinemaType(cinemaList);
          // End of Cineplex and Cinema initialisation
 
         // Welcome page to MOBLIMA
@@ -68,7 +69,7 @@ public class AppUI {
                 case "x":
                     break;
                 default:
-                    System.out.println("\nEnter a valid input!");
+                    System.out.println("- Enter a valid input -");
             }
         } while (!opt.matches("x"));
         exitProgram(opt);
@@ -110,7 +111,7 @@ public class AppUI {
                 case "x":
                     break;
                 default:
-                    System.out.println("\nEnter a valid input!");
+                    System.out.println("- Enter a valid input -");
             }
         } while (!opt.matches("x"));
         exitProgram(opt);
@@ -143,7 +144,7 @@ public class AppUI {
                 case "x":
                     break;
                 default:
-                    System.out.println("\nEnter a valid input!");
+                    System.out.println("- Enter a valid input -");
             }
         } while (!opt.matches("x"));
         exitProgram(opt);
@@ -153,16 +154,12 @@ public class AppUI {
     public String movieList() {
         String opt;
         int j;
-        XML movieXml = new XML("movie");
-        String[] lists = movieXml.getElement();
+        MovieListing movieMgr = new MovieListing();
         do {
             System.out.println("");
             System.out.println("||======= Movie Listing =======||");
-            for (int i = 1; i <= lists.length; i++) {
-                String title = movieXml.getItemContent(lists[i - 1], "title");
-                String movieType = movieXml.getItemContent(lists[i - 1], "movieType");
-                if (!movieType.equals("normal")) title += " ("+movieType+")";
-                System.out.println("   " + (i) + ": " + title);
+            for(int i = 0; i<movieMgr.movieList().length; i++){
+                System.out.println("   " + (i) + ": " + movieMgr.movieList()[i]);
             }
             System.out.println("|| 0: Back to home             ||");
             System.out.println("|| x: Quit                     ||");
@@ -170,9 +167,10 @@ public class AppUI {
 
             System.out.print("Enter choice: ");
             opt = sc.nextLine();
+            String[] lists = movieMgr.idList();
             for (j = 1; j <= lists.length; j++) {
                 if (opt.equals(Integer.toString(j))) {
-                    this.movieInfo(lists[j-1]);
+                    this.movieInfo(lists[j - 1]);
                 }
             }
             if (j == lists.length + 1) {
@@ -183,7 +181,7 @@ public class AppUI {
                     case "x":
                         break;
                     default:
-                        System.out.println("\nEnter a valid input!");
+                        System.out.println("- Enter a valid input -");
                 }
             }
         } while (!opt.matches("x"));
@@ -210,7 +208,7 @@ public class AppUI {
                 case "x":
                     break;
                 default:
-                    System.out.println("\nEnter a valid input!");
+                    System.out.println("- Enter a valid input -");
             }
         } while (!opt.matches("x"));
         exitProgram(opt);

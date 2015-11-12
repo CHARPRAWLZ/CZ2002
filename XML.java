@@ -95,57 +95,56 @@ public class XML {
             }
         }
     }
-    
-    public String[][] retrieveData(String filter){
-        ArrayList <String[]> entries = new <String[]> ArrayList();
+
+    public String[][] retrieveData(String filter) {
+        ArrayList<String[]> entries = new <String[]> ArrayList();
         String[] arrEntry;
         NodeList mainList = this.root.getElementsByTagName(this.elementName);
         int size = ((Element) mainList.item(0)).getElementsByTagName("item").
                 getLength();
-        for (int i = 0; i < mainList.getLength(); i++){
-            arrEntry = new String[size*2];
+        for (int i = 0; i < mainList.getLength(); i++) {
+            arrEntry = new String[size * 2];
             Element e = (Element) mainList.item(i);
             NodeList childList = e.getElementsByTagName("item");
             boolean filterFlag = false;
-            for (int j = 0; j < childList.getLength(); j++){
+            for (int j = 0; j < childList.getLength(); j++) {
                 Node n = childList.item(j);
-                if (n.getTextContent().equals(filter)){
+                if (n.getTextContent().equals(filter)) {
                     filterFlag = true;
                 }
-                arrEntry[j*2] = ((Element) n).getAttribute("name");
-                arrEntry[j*2+1] = n.getTextContent();
+                arrEntry[j * 2] = ((Element) n).getAttribute("name");
+                arrEntry[j * 2 + 1] = n.getTextContent();
             }
-            if (filterFlag){
+            if (filterFlag) {
                 entries.add(arrEntry);
             }
         }
-        
-        List <String[]> list = entries;
+
+        List<String[]> list = entries;
         String[][] strArr = list.toArray(new String[list.size()][]);
-        
+
         /*for (int i = 0; i < strArr.length; i++){
-            System.out.println(strArr[i][0] + " : " + strArr[i][1]);
-            System.out.println(strArr[i][2] + " : " + strArr[i][3]);
-            System.out.println(strArr[i][4] + " : " + strArr[i][5]);
-            System.out.println("==================");
-        }*/
-        
+         System.out.println(strArr[i][0] + " : " + strArr[i][1]);
+         System.out.println(strArr[i][2] + " : " + strArr[i][3]);
+         System.out.println(strArr[i][4] + " : " + strArr[i][5]);
+         System.out.println("==================");
+         }*/
         return strArr;
-        
+
         /*String[][] list = new String[filteredList.getLength()][];
-        System.out.println("Entering for loop");
-        for (int i = 0; i < filteredList.getLength(); i++){
-            curElement = (Element) filteredList.item(i).getParentNode();
-            System.out.println(curElement.getNodeName());
-            NodeList childList = curElement.getChildNodes();
-            list[i] = new String[childList.getLength() * 2];
-            for (int j = 0; j < childList.getLength(); j++){
-                Node node = childList.item(j);
-                list[i][j*2] = node.getNodeName();
-                list[i][j*2+1] = node.getTextContent();
-            }
-        }
-        return list;*/
+         System.out.println("Entering for loop");
+         for (int i = 0; i < filteredList.getLength(); i++){
+         curElement = (Element) filteredList.item(i).getParentNode();
+         System.out.println(curElement.getNodeName());
+         NodeList childList = curElement.getChildNodes();
+         list[i] = new String[childList.getLength() * 2];
+         for (int j = 0; j < childList.getLength(); j++){
+         Node node = childList.item(j);
+         list[i][j*2] = node.getNodeName();
+         list[i][j*2+1] = node.getTextContent();
+         }
+         }
+         return list;*/
     }
 
     /**
@@ -167,7 +166,7 @@ public class XML {
     /**
      * Display all elements with items
      */
-    public void displayElement() {
+    private void displayElement() {
         NodeList nList = this.doc.getElementsByTagName(this.elementName);
         for (int i = 0; i < nList.getLength(); i++) {
             Element e = this.getNodeElement(nList, i);
@@ -187,7 +186,7 @@ public class XML {
      * @param id value of element id
      * @return boolean if id exists
      */
-    public boolean displayElement(String id) {
+    private boolean displayElement(String id) {
         boolean idExists = false;
         NodeList nList = doc.getElementsByTagName(this.elementName);
         for (int i = 0; i < nList.getLength(); i++) {
@@ -216,7 +215,7 @@ public class XML {
      * @param item name of item
      * @param content content that is to be filtered
      */
-    public void displayElement(String item, String content) {
+    private void displayElement(String item, String content) {
         NodeList nList = doc.getElementsByTagName(this.elementName);
         for (int i = 0; i < nList.getLength(); i++) {
             Element e = this.getNodeElement(nList, i);
@@ -241,27 +240,17 @@ public class XML {
      * @return boolean if item exists
      */
     public boolean checkItemExists(String id, String item) {
-        boolean itemExists = false;
         NodeList nList = doc.getElementsByTagName(this.elementName);
         for (int i = 0; i < nList.getLength(); i++) {
             Element e = this.getNodeElement(nList, i);
             if (e.getAttribute("id").equals(id)) {
-                NodeList items = e.getElementsByTagName("item");
-                for (int j = 0; j < items.getLength(); j++) {
-                    String name = this.getItemName(items, j);
-                    if (item.toLowerCase().equals(name.toLowerCase())) {
-                        itemExists = true;
-                        break;
-                    }
+                if (!this.getItemContent(id, item).equals("")) {
+                    return true;
                 }
-                break;
             }
         }
-        if (itemExists == false) {
-            System.out.println("Item name not found");
-
-        }
-        return itemExists;
+        System.out.println("Item name not found");
+        return false;
     }
 
     /**
@@ -357,8 +346,10 @@ public class XML {
         }
         return count;
     }
+
     /**
      * return array of element id
+     *
      * @return array of element id
      */
     public String[] getElement() {

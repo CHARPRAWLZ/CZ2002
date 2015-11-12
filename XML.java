@@ -109,7 +109,8 @@ public class XML {
             boolean filterFlag = false;
             for (int j = 0; j < childList.getLength(); j++) {
                 Node n = childList.item(j);
-                if (n.getTextContent().equals(filter)) {
+                if (n.getTextContent().equals(filter) ||
+                        filter.equals("None")) {
                     filterFlag = true;
                 }
                 arrEntry[j * 2] = ((Element) n).getAttribute("name");

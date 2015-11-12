@@ -23,7 +23,7 @@ public class Booking {
     private Payment payment;
     private double ticketPrice = 0;
     private XML bookingXML;
-    private String [] itemName;
+    private String[] itemName;
     
     public Booking() {
         

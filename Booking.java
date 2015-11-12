@@ -66,7 +66,7 @@ public class Booking {
     }
     public void confirmBooking() {
         bookingXML = new XML("booking");
-        this.itemName = new String[]{"tid", "custName", "custMobileNumber", "custEmail", "cineplexId", "cineplexName", "cineplexLocation", "cinemaName", "cinemaType", "seat", "ageGroup", "movieId", "movieTitle", "movieDate", "movieTime", "ticketPrice"};
+        this.itemName = new String[]{"tid", "custId", "custName", "custMobileNumber", "custEmail", "cineplexId", "cineplexName", "cineplexLocation", "cinemaName", "cinemaType", "seat", "ageGroup", "movieId", "movieTitle", "movieDate", "movieTime", "ticketPrice"};
         this.payment = new Payment(cinema.getName(), showtime.getDate(), 
                 showtime.getTiming());
         
@@ -107,7 +107,7 @@ public class Booking {
         
     }
     public void objectToXml() {
-        String[] itemContent = new String[]{this.payment.getTID(), this.user.getName(), this.user.getMobileNo(), this.user.getEmail(), this.cineplex.getID(), this.cineplex.getName(), this.cineplex.getLocation(), this.cinema.getName(), this.cinema.getCinemaType(), this.seat.getSeatID(), this.ageGroup, this.movie.getMovieID(), this.movie.getTitle(), this.showtime.getDate(), this.showtime.getTiming(), Double.toString(this.ticketPrice)};
+        String[] itemContent = new String[]{this.payment.getTID(), this.user.getUserId(), this.user.getName(), this.user.getMobileNo(), this.user.getEmail(), this.cineplex.getID(), this.cineplex.getName(), this.cineplex.getLocation(), this.cinema.getName(), this.cinema.getCinemaType(), this.seat.getSeatID(), this.ageGroup, this.movie.getMovieID(), this.movie.getTitle(), this.showtime.getDate(), this.showtime.getTiming(), Double.toString(this.ticketPrice)};
         bookingXML.addItem(itemName, itemContent);
         bookingXML.writeContent();
     }

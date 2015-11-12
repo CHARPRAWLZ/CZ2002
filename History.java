@@ -24,4 +24,15 @@ public class History{
         return date;
     }
     */
+    private XML booking;
+    private String userId;
+    private String[] history;
+    public History() {
+        
+    }
+    public String[] getUserHistory(String userId) {
+        this.userId = userId;
+        booking = new XML("booking");
+        return history;
+    }
 }

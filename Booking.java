@@ -5,7 +5,7 @@
  */
 package CZ2002;
 
-import org.w3c.dom.*;
+//import org.w3c.dom.*;
 
 /**
  *

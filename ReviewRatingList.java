@@ -13,17 +13,23 @@ public class ReviewRatingList {
     public ReviewRatingList(String movieID){
         this.movieID = movieID;
         this.xml = new XML("movieRating");
+        generateList(this.movieID);
     }
     
     public ReviewRatingList(Movie movie){
         this.movieID = movie.getMovieID();
-        this.generateList(this.movieID);
+        //this.generateList(this.movieID);
+    }
+    
+    public ArrayList <ReviewRating> getListArr(){
+        return reviewList;
     }
     
     public void addReview(String review, int rating){
         // ArrayList update, add new review
-        ReviewRating newReview = new ReviewRating(this.movieID, review, rating);
-        reviewList.add(newReview);
+        //ReviewRating newReview = new ReviewRating(this.movieID, review, rating);
+        //reviewList.add(newReview);
+        addToArrayList(review, rating);
         
         // XML update, add new review
         String[] str = new String[]{"movieID", "review", "rating"};
@@ -35,19 +41,71 @@ public class ReviewRatingList {
         xml.writeContent();
     }
     
+    private void addToArrayList(String review, int rating){
+        addToArrayList(this.movieID, review, rating);
+    }
+    
+    private void addToArrayList(String movieID, String review, int rating){
+        ReviewRating newReview = new ReviewRating(this.movieID, review, rating);
+        reviewList.add(newReview);
+    }
+    
     private void generateList(String movieID){
-        xml = new XML("movieRating");
-        String review;
-        double rating;
-        
+        ReviewRating reviewEntry;
+        String review = "";
+        int rating = 0;
+        boolean movieFlag, reviewFlag, ratingFlag;
+        //String retrievedList[][] = xml.retrieveData(this.movieID);
+        String retrievedList[][] = xml.retrieveData(this.movieID);
+        for (String[] subList : retrievedList) {
+            movieFlag = false;
+            reviewFlag = ratingFlag = true;
+            for (int j = 0; j < subList.length; j+=2) {
+                if (subList[j].equals("movieID")) {
+                    movieFlag = true;
+                } else if (reviewFlag && subList[j].equals("review")) {
+                    review = subList[j+1];
+                    reviewFlag = false;
+                } else if (ratingFlag && subList[j].equals("rating")) {
+                    rating = Integer.parseInt(subList[j+1]);
+                    ratingFlag = false;
+                } else {
+                    System.out.println("\n\nError in generating Review Rating "
+                            + "List.");
+                    review = "";
+                    rating = 0;
+                }
+            }
+            
+            if (movieFlag && !(reviewFlag || ratingFlag)){
+                addToArrayList(movieID, review, rating);
+            }
+            else {
+                System.out.println("\n\n2Error in generating Review Rating "
+                        + "List.");
+                return;
+            }
+        }
     }
     
     public static void main(String[] args){
-        //XML xml = new XML("movieRating");
-        ReviewRatingList reviewList = new ReviewRatingList("Wonderland");
-        String review = "this is my second review.";
-        int rating = 6;
-        reviewList.addReview(review, rating);
+        //System.out.println("start");
+        String movieID = "X_MEN";
+        ReviewRatingList reviewList = new ReviewRatingList(movieID);
+        ArrayList <ReviewRating> reviewListArr = reviewList.getListArr();
+        
+        //System.out.println("start 2");
+        
+        for (ReviewRating rr : reviewListArr){
+            System.out.println("========================");
+            System.out.println("movieID : " + rr.getMovieID());
+            System.out.println("review  : " + rr.getReview());
+            System.out.println("rating  : " + rr.getRating());
+        }
+        
+        /*String review = "This is a third review.";
+        int rating = 7;
+        reviewList.addReview(review, rating);*/
     }
     
 }

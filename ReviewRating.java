@@ -7,16 +7,21 @@ public class ReviewRating {
     private String review;
     
     public ReviewRating(String movieID, String review, int rating){
+        this.movieID = movieID;
         this.review = review;
         this.rating = rating;
     }
     
+    public String getMovieID(){
+        return this.movieID;
+    }
+    
     public String getReview(){
-        return review;
+        return this.review;
     }
     
     public double getRating(){
-        return rating;
+        return this.rating;
     }
     
 }

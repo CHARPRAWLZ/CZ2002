@@ -5,10 +5,22 @@
  */
 package CZ2002;
 
+//import java.util.ArrayList;
 /**
  *
  * @author calvinlee
  */
 public class RankingMgr {
-    
+    private XML movieXML;
+    private XML bookingXML;
+    public RankingMgr() {
+        movieXML = new XML("movie");
+        bookingXML = new XML("booking");
+    }
+    public void rankingTicketSales() {
+        
+    }
+    public void rankingReviewsRating() {
+        
+    }
 }

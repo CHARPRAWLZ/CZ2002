@@ -11,19 +11,17 @@ public class Movie extends MovieInfo {
     private final String movieID;
 
     /* Constructors */
-    public Movie(String title, String movieID) {
-        super(title);
-        this.movieID = movieID;
-        this.movieStatus = "Coming Soon";
-        this.overallRating = 0;
-    }
-
-    public Movie(String title, String movieID, String synopsis, String director, String cast,
-            String type, String movieStatus, double overallRating) {
+    public Movie(String movieID, String title, String synopsis, String director, String cast,
+            String type, String movieStatus) {
         super(title, synopsis, director, cast, type);
         this.movieID = movieID;
         this.movieStatus = movieStatus;
-        this.overallRating = overallRating;
+        this.reviewList = new ReviewRatingList(movieID);
+        this.overallRating = this.reviewList.getOverallRating();
+    }
+    
+    public Movie(String movieID, String title) {
+        this(movieID, title, "", "", "", "", "Coming Soon");
     }
     /* end of Constructors */
 
@@ -77,8 +75,18 @@ public class Movie extends MovieInfo {
         }
         overallRating = total / rating.length;
     }
-    
-    public void retrieveRating(){}
     /* end of Mutators */
 
+    public static void main(String[] args){
+        
+        Movie movie = new Movie("X_MEN", "X-MEN", "My Synopsis", "Zad", "Hocks,"
+                + " Cal, Fiefie", "Blockbuster", "Coming Soon");
+        
+        System.out.println("Movie title: " + movie.getTitle());
+        System.out.println("Overall Rating: " + movie.getOverallRating());
+        System.out.println("Synopsis: " + movie.getSynopsis());
+        System.out.println("Director: " + movie.getDirector());
+        System.out.println("Casts   : " + movie.getCast());
+        
+    }
 }

@@ -35,14 +35,10 @@ public class ReviewRatingList {
     
     /* Mutators */
     public void addReview(String review, int rating){
-        // ArrayList update, add new review
-        //ReviewRating newReview = new ReviewRating(this.movieID, review, rating);
-        //reviewList.add(newReview);
         addToArrayList(review, rating);
         
         // XML update, add new review
         String[] str = new String[]{"movieID", "review", "rating"};
-        //String str = "movieID";
         xml.createEntry(str);
         xml.enterEntryItem("movieID", movieID);
         xml.enterEntryItem("review", review);
@@ -68,7 +64,6 @@ public class ReviewRatingList {
         String review = "";
         int rating = 0;
         boolean movieFlag, reviewFlag, ratingFlag;
-        //String retrievedList[][] = xml.retrieveData(this.movieID);
         String retrievedList[][] = xml.retrieveData(this.movieID);
         for (String[] subList : retrievedList) {
             movieFlag = false;

@@ -88,7 +88,7 @@ public class ReviewRatingList {
      * @param rating 
      */
     private void addToArrayList(String movieID, String review, int rating){
-        ReviewRating newReview = new ReviewRating(movieID, review, rating);
+        ReviewRating newReview = new ReviewRating(this.movieID, review, rating);
         reviewList.add(newReview);
         
         this.total += rating;

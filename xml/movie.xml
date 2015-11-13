@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <root counter="4">
     <movie id="1">
-        <item name="title">LOTR Title</item>
-        <item name="synopsis">LOTR synopsis</item>
-        <item name="director">LOTR director</item>
-        <item name="cast">LOTR cast</item>
+        <item name="title">Lord of the Rings</item>
+        <item name="synopsis">The Lord of the Rings is an epic high-fantasy novel written by English author J. R. R. Tolkien. The story began as a sequel to Tolkien's 1937 fantasy novel The Hobbit, but eventually developed into a much larger work.</item>
+        <item name="director">Peter Jackson</item>
+        <item name="cast">Elijah Wood, Ian McKellen, Liv Tyler, Viggo Mortensen, Sean Astin, Cate Blanchet</item>
         <item name="movieType">normal</item>
-        <item name="movieStatus">coming soon</item>
+        <item name="movieStatus">Coming Soon</item>
         <item name="overallRating">5</item>
     </movie>
     <movie id="2">
-        <item name="title">Hobbit Title</item>
+        <item name="title">Hobbit</item>
         <item name="synopsis">Hobbit synopsis</item>
         <item name="director">Hobbit director</item>
         <item name="cast">Hobbit cast</item>

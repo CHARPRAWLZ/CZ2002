@@ -2,9 +2,11 @@ package CZ2002;
 
 import java.util.*;
 import java.io.*;
+
 /**
- * This is the main screen when you start the application
- * This is also the main class
+ * This is the main screen when you start the application This is also the main
+ * class
+ *
  * @author alfiefarhana
  */
 public class AppUI {
@@ -28,10 +30,12 @@ public class AppUI {
         AppUI ui = new AppUI();
         ui.auth();
     }
-/**
- * Choose to login to book movie or continue as guest to view information
- * @return choice
- */
+
+    /**
+     * Choose to login to book movie or continue as guest to view information
+     *
+     * @return choice
+     */
     public String auth() {
         String opt;
         do {
@@ -68,11 +72,13 @@ public class AppUI {
         exitProgram(opt);
         return opt;
     }
-/**
- * The home screen when you logged in
- * Allow you to list movies and top 5 movie rating
- * @return option
- */
+
+    /**
+     * The home screen when you logged in Allow you to list movies and top 5
+     * movie rating
+     *
+     * @return option
+     */
     public String homepage() {
         String opt;
         do {
@@ -114,10 +120,12 @@ public class AppUI {
         exitProgram(opt);
         return opt;
     }
-/**
- * This screen shows the top 5 movies
- * @return 
- */
+
+    /**
+     * This screen shows the top 5 movies
+     *
+     * @return
+     */
     public String topRanking() {
         String opt;
         RankingMgr ranking = new RankingMgr();
@@ -160,9 +168,11 @@ public class AppUI {
         exitProgram(opt);
         return opt;
     }
+
     /**
      * Lists all the movies
-     * @return 
+     *
+     * @return
      */
     public String movieList() {
         String opt;
@@ -203,13 +213,16 @@ public class AppUI {
         exitProgram(opt);
         return opt;
     }
-/**
- * displays information about the movie
- * @return 
- */
+
+    /**
+     * displays information about the movie
+     *
+     * @return
+     */
     public String movieInfo() {
         String opt;
         MovieListing movieMgr = new MovieListing();
+        reviewMgr = new ReviewRatingList(this.movieId);
         String[] info = movieMgr.getMovieInfo(this.movieId);
         String[][] itemName = movieMgr.getItemName();
         do {
@@ -218,6 +231,7 @@ public class AppUI {
             for (int i = 0; i < info.length; i++) {
                 System.out.println("   " + itemName[1][i] + " : " + info[i]);
             }
+            System.out.format("   Overall Rating: %.2f\n",reviewMgr.getOverallRating());
             System.out.println("||                             ||");
             System.out.println("|| 1: View review rating       ||");
             System.out.println("|| 2: View Showtimes           ||");
@@ -246,16 +260,28 @@ public class AppUI {
         exitProgram(opt);
         return opt;
     }
-/**
- * manages the rating of a movie
- * @return 
- */
+
+    /**
+     * manages the rating of a movie
+     *
+     * @return
+     */
     public String rating() {
-        String opt;
+        String opt, rating, review;
+        MovieListing movieMgr = new MovieListing();
         do {
             System.out.println("");
             System.out.println("||======= REVIEW RATING ========||");
-            System.out.println("Display rating");
+                System.out.println("   Title : " + movieMgr.getMovieInfo(this.movieId)[0]);
+            reviewMgr = new ReviewRatingList(this.movieId);
+            ArrayList<ReviewRating> reviewListArr = reviewMgr.getListArr();
+            for (ReviewRating rr : reviewListArr) {
+                System.out.println("   ---------------");
+                System.out.println("   review  : " + rr.getReview());
+                System.out.println("   rating  : " + rr.getRating());
+            }
+
+            System.out.println("||                              ||");
             if (userMgr.isLoggedIn()) {
                 System.out.println("|| 1: Create rating             ||");
             }
@@ -268,7 +294,11 @@ public class AppUI {
             switch (opt) {
                 case "1":
                     if (userMgr.isLoggedIn()) {
-                        System.out.println("create rating");
+                        System.out.print("Rating (1-5): ");
+                        rating = sc.nextLine();
+                        System.out.print("Review: ");
+                        review = sc.nextLine();
+                        reviewMgr.addReview(review, Integer.parseInt(rating));
                     }
                     break;
                 case "0":
@@ -283,10 +313,11 @@ public class AppUI {
         exitProgram(opt);
         return opt;
     }
-/**
- * 
- * @return 
- */
+
+    /**
+     *
+     * @return
+     */
     public String cineplex() {
         String opt;
         do {
@@ -322,9 +353,11 @@ public class AppUI {
         exitProgram(opt);
         return opt;
     }
+
     /**
      * display the dates available for movie
-     * @return 
+     *
+     * @return
      */
     public String dateListing() {
         String opt;
@@ -360,9 +393,11 @@ public class AppUI {
         exitProgram(opt);
         return opt;
     }
+
     /**
      * display the timings available
-     * @return 
+     *
+     * @return
      */
     public String showtime() {
         String opt;
@@ -398,9 +433,11 @@ public class AppUI {
         exitProgram(opt);
         return opt;
     }
+
     /**
      * view the layout of the cinema
-     * @return 
+     *
+     * @return
      */
     public String viewLayout() {
         String opt;
@@ -430,9 +467,11 @@ public class AppUI {
         exitProgram(opt);
         return opt;
     }
+
     /**
      * choose the seat to book
-     * @return 
+     *
+     * @return
      */
     public String selectSeat() {
         String opt;
@@ -462,9 +501,11 @@ public class AppUI {
         exitProgram(opt);
         return opt;
     }
+
     /**
      * books the selected seat
-     * @return 
+     *
+     * @return
      */
     public String book() {
         String opt;
@@ -494,9 +535,11 @@ public class AppUI {
         exitProgram(opt);
         return opt;
     }
+
     /**
      * displays booking history
-     * @return 
+     *
+     * @return
      */
     public String bookingHistory() {
         String opt;
@@ -522,9 +565,11 @@ public class AppUI {
         exitProgram(opt);
         return opt;
     }
+
     /**
      * exits the whole application when the "x" is clicked
-     * @param option 
+     *
+     * @param option
      */
     public static void exitProgram(String option) {
         if (option.equals("x")) {

@@ -195,7 +195,7 @@ public class ShowTimeMgr {
             } break;
             case 'W': day = Calendar.WEDNESDAY; break;
             case 'F': day = Calendar.FRIDAY; break;
-            case 'S': if (date.charAt(14) == a){
+            case 'S': if (date.charAt(14) == 'a'){
                 day = Calendar.SATURDAY;
             } else {
                 day = Calendar.SUNDAY;

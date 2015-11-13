@@ -10,23 +10,13 @@ import java.io.*;
 public class AdminUI {
 
     private static Scanner sc;
-    private static Movie movie;
-    private static Cineplex cineplex1, cineplex2, cineplex3;
-    private static Cinema cinema;
-    private static UserMgr userMgr;
-    private static Seat seat;
-    private static Showtime showtime;
     private static AppUI appUI;
     private static MovieListing movieMgr;
-
-    private String movieId;
-    private XML movieXml;
     /**
      * Create a new instance of AdminUI, movie and movleMgr 
      */
     public AdminUI() {
         appUI = new AppUI();
-        movieXml = new XML("movie");
         movieMgr = new MovieListing();
         sc = new Scanner(System.in);
     }
@@ -177,7 +167,9 @@ public class AdminUI {
             System.out.println("");
             System.out.println("||======== SYSTEM SETTINGS =======||");
             System.out.println("|| 1: Manage holidays             ||");
+            /*
             System.out.println("|| 2: Manage ticket prices        ||");
+            */
             System.out.println("|| 0: Back to home                ||");
             System.out.println("|| x: Exit                        ||");
             System.out.println("||================================||");
@@ -187,8 +179,10 @@ public class AdminUI {
                 case "1":
                     this.holidayMgr();
                     break;
+                    /*
                 case "2":
                     break;
+                    */
                 case "0":
                     this.homepage();
                     break;

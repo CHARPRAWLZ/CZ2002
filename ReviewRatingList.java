@@ -88,7 +88,7 @@ public class ReviewRatingList {
      * @param rating 
      */
     private void addToArrayList(String movieID, String review, int rating){
-        ReviewRating newReview = new ReviewRating(movieID, review, rating);
+        ReviewRating newReview = new ReviewRating(this.movieID, review, rating);
         reviewList.add(newReview);
         
         this.total += rating;
@@ -109,7 +109,7 @@ public class ReviewRatingList {
         for (String[] subList : retrievedList) {
             movieFlag = false;
             reviewFlag = ratingFlag = true;
-            for (int j = 0; j < subList.length; j+=2) {
+            for (int j = 2; j < subList.length; j+=2) {
                 if (subList[j].equals("movieID")) {
                     movieFlag = true;
                 } else if (reviewFlag && subList[j].equals("review")) {

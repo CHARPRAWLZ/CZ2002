@@ -24,8 +24,7 @@ public class AppUI {
     public static void main(String args[]) {
         cinemaMgr = new CinemaMgr();
         userMgr = new UserMgr();
-        
-        
+
         System.out.println("Welcome to MOBLIMA");
         AppUI ui = new AppUI();
         ui.auth();
@@ -129,14 +128,14 @@ public class AppUI {
                 case "1":
                     topFiveRanking = ranking.rankingTicketSales();
                     System.out.println("- list by ticket sales -");
-                    for(int i = 0; i < 5; i++) {
+                    for (int i = 0; i < 5; i++) {
                         System.out.println("1) " + topFiveRanking[i][0] + " - " + topFiveRanking[i][1]);
                     }
                     break;
                 case "2":
                     topFiveRanking = ranking.rankingReviewsRating();
                     System.out.println("- list by overall ratings -");
-                    for(int i = 0; i < 5; i++) {
+                    for (int i = 0; i < 5; i++) {
                         System.out.println("1) " + topFiveRanking[i][0] + " - " + topFiveRanking[i][1]);
                     }
                     break;
@@ -238,7 +237,10 @@ public class AppUI {
         do {
             System.out.println("");
             System.out.println("||======= REVIEW RATING ========||");
-            System.out.println("|| 1: Create rating             ||");
+            System.out.println("Display rating");
+            if (userMgr.isLoggedIn()) {
+                System.out.println("|| 1: Create rating             ||");
+            }
             System.out.println("|| 0: Back to movie information ||");
             System.out.println("|| x: Quit                      ||");
             System.out.println("||==============================||");
@@ -247,6 +249,9 @@ public class AppUI {
             opt = sc.nextLine();
             switch (opt) {
                 case "1":
+                    if (userMgr.isLoggedIn()) {
+                        System.out.println("create rating");
+                    }
                     break;
                 case "0":
                     this.movieInfo();
@@ -266,12 +271,12 @@ public class AppUI {
         do {
             System.out.println("");
             System.out.println("||========== CINEPLEX ==========||");
-            System.out.println("   1: "+cinemaMgr.getCineplex(0).getName());
-            System.out.println("   2: "+cinemaMgr.getCineplex(0).getName() + " Gold Class");
-            System.out.println("   3: "+cinemaMgr.getCineplex(1).getName());
-            System.out.println("   4: "+cinemaMgr.getCineplex(1).getName() + " Gold Class");
-            System.out.println("   5: "+cinemaMgr.getCineplex(2).getName());
-            System.out.println("   6: "+cinemaMgr.getCineplex(2).getName() + " Gold Class");
+            System.out.println("   1: " + cinemaMgr.getCineplex(0).getName());
+            System.out.println("   2: " + cinemaMgr.getCineplex(0).getName() + " Gold Class");
+            System.out.println("   3: " + cinemaMgr.getCineplex(1).getName());
+            System.out.println("   4: " + cinemaMgr.getCineplex(1).getName() + " Gold Class");
+            System.out.println("   5: " + cinemaMgr.getCineplex(2).getName());
+            System.out.println("   6: " + cinemaMgr.getCineplex(2).getName() + " Gold Class");
             System.out.println("|| 0: Back to movie information ||");
             System.out.println("|| x: Quit                      ||");
             System.out.println("||==============================||");
@@ -296,6 +301,7 @@ public class AppUI {
         exitProgram(opt);
         return opt;
     }
+
     public String dateListing() {
         String opt;
         do {
@@ -330,6 +336,7 @@ public class AppUI {
         exitProgram(opt);
         return opt;
     }
+
     public String showtime() {
         String opt;
         do {
@@ -364,6 +371,7 @@ public class AppUI {
         exitProgram(opt);
         return opt;
     }
+
     public String viewLayout() {
         String opt;
         do {
@@ -392,6 +400,7 @@ public class AppUI {
         exitProgram(opt);
         return opt;
     }
+
     public String selectSeat() {
         String opt;
         do {
@@ -420,6 +429,7 @@ public class AppUI {
         exitProgram(opt);
         return opt;
     }
+
     public String book() {
         String opt;
         do {
@@ -448,11 +458,12 @@ public class AppUI {
         exitProgram(opt);
         return opt;
     }
+
     public String bookingHistory() {
         String opt;
         do {
             System.out.println("");
-            System.out.println("||======BOOKING HISTORY ========||");
+            System.out.println("||====== BOOKING HISTORY =======||");
             System.out.println("|| 0: Back to home              ||");
             System.out.println("|| x: Quit                      ||");
             System.out.println("||==============================||");

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<root counter="7">
+<root counter="4">
     <movie id="1">
         <item name="title">LOTR Title</item>
         <item name="synopsis">LOTR synopsis</item>
@@ -36,31 +36,4 @@
         <item name="movieStatus">Now Showing</item>
         <item name="overallRating">6</item>
     </movie>
-<movie id="5">
-<item name="title">hello</item>
-<item name="synopsis">syn</item>
-<item name="director">dir</item>
-<item name="cast">cast</item>
-<item name="movieType">3D</item>
-<item name="movieStatus">now showing</item>
-<item name="overallRating">3</item>
-</movie>
-<movie id="6">
-<item name="title">Testing</item>
-<item name="synopsis">Testing synopsis</item>
-<item name="director">testing director</item>
-<item name="cast">testing cast</item>
-<item name="movieType">3D</item>
-<item name="movieStatus">Coming Soon</item>
-<item name="overallRating">4</item>
-</movie>
-<movie id="7">
-<item name="title">title</item>
-<item name="synopsis">Synopsis</item>
-<item name="director">dir</item>
-<item name="cast">cast 2</item>
-<item name="movieType">normal</item>
-<item name="movieStatus">End Of Showing</item>
-<item name="overallRating">5</item>
-</movie>
 </root>

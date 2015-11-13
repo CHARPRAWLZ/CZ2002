@@ -109,7 +109,7 @@ public class XML {
             arrEntry[1] = e.getAttribute("id");
             NodeList childList = e.getElementsByTagName("item");
             boolean filterFlag = false;
-            for (int j = 0; j < childList.getLength(); j++) {
+            for (int j = 2; j < childList.getLength(); j++) {
                 Node n = childList.item(j);
                 if (n.getTextContent().equals(filter)
                         || filter.equals("None")) {

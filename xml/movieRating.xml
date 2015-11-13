@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<root counter="5">
+<movieRating id="1">
+<item name="movieID">1</item>
+<item name="review">this is a review.</item>
+<item name="rating">4</item>
+</movieRating>
+<movieRating id="2">
+<item name="movieID">2</item>
+<item name="review">this is my second review.</item>
+<item name="rating">6</item>
+</movieRating>
+<movieRating id="3">
+<item name="movieID">1</item>
+<item name="review">This lotr is awesome</item>
+<item name="rating">5</item>
+</movieRating>
+<movieRating id="4">
+<item name="movieID">1</item>
+<item name="review">This is bad</item>
+<item name="rating">1</item>
+</movieRating>
+<movieRating id="5">
+<item name="movieID">1</item>
+<item name="review">Awesome movie</item>
+<item name="rating">5</item>
+</movieRating>
+</root>

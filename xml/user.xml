@@ -1,10 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<root counter="1">
+<root counter="5">
 <user id="1">
 <item name="username">fifi</item>
 <item name="password">pass</item>
+<item name="name">Alfie</item>
+<item name="email">fifi@fifi</item>
+<item name="mobileNo">123</item>
+</user>
+<user id="2">
+<item name="username">Alfie</item>
+<item name="password">pass</item>
 <item name="name">Alfie Farhana</item>
-<item name="email">alfie@gmail.com</item>
+<item name="email">alfie@farhana.com</item>
 <item name="mobileNo">87654321</item>
+</user>
+<user id="3">
+<item name="username">Zad</item>
+<item name="password">password</item>
+<item name="name">Rohaizad</item>
+<item name="email">zad@rohaizad.com</item>
+<item name="mobileNo">98989898</item>
+</user>
+<user id="4">
+<item name="username">admin</item>
+<item name="password">password</item>
+<item name="name">Administration</item>
+<item name="email">admin@appui.java</item>
+<item name="mobileNo">87654567</item>
+</user>
+<user id="5">
+<item name="username">zacharias</item>
+<item name="password">hahaha</item>
+<item name="name">Zacharias Tan</item>
+<item name="email">ZTAN029@e.ntu.edu.sg</item>
+<item name="mobileNo">81275200</item>
 </user>
 </root>

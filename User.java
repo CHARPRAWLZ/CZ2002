@@ -1,52 +1,51 @@
 package CZ2002;
 
-import java.util.Scanner;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
 /*
  author: zach
  */
-
 public class User {
 
     //variables
-    private String id, username, password, name, email, mobileNo, dob;
-    XML userXml;
+    private String id, username, password, name, email, mobileNo;
 
     //constructors
-    /**
-     * Constructs an instance of class User.
-     *
-     * @param user
-     * @param pw
-     * @param id
-     * @param name
-     * @param email
-     * @param number
-     * @param DOB
-     */
     public User() {
-        userXml = new XML("user");
     }
 
-    public User(String username, String password, String name, String email, String mobileNo, String dob) {
+    /**
+     *
+     * @param username
+     * @param password
+     * @param name
+     * @param email
+     * @param mobileNo
+     */
+    public User(String username, String password, String name, String email, String mobileNo) {
         this.username = username;
         this.password = password;
         this.name = name;
         this.email = email;
         this.mobileNo = mobileNo;
-        this.dob = dob;
 
     }
 
     //accessors
+    /**
+     * Returns the increment id of the user account
+     *
+     * @return id
+     */
+    public String getUserId() {
+        return this.id;
+    }
+
     /**
      * Returns the username of the user account
      *
      * @return userName
      */
     public String getUsername() {
-        return username;
+        return this.username;
     }
 
     /**
@@ -55,7 +54,7 @@ public class User {
      * @return password
      */
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     /**
@@ -64,7 +63,7 @@ public class User {
      * @return name
      */
     public String getName() {
-        return name;
+        return this.name;
     }
 
     /**
@@ -73,7 +72,7 @@ public class User {
      * @return emailAddress
      */
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
     /**
@@ -82,26 +81,26 @@ public class User {
      * @return mobileNo
      */
     public String getMobileNo() {
-        return mobileNo;
-    }
-
-    /**
-     * returns the date of birth of the user
-     *
-     * @return DOB
-     */
-    public String getDateOfBirth() {
-        return dob;
+        return this.mobileNo;
     }
 
     //mutators
+    /**
+     * sets the id of the user account
+     *
+     * @param id
+     */
+    public void setUserId(String id) {
+        this.id = id;
+    }
+
     /**
      * sets the username of the user account
      *
      * @param user
      */
     public void setUsername(String user) {
-        username = user;
+        this.username = user;
     }
 
     /**
@@ -110,16 +109,16 @@ public class User {
      * @param pw
      */
     public void setPassword(String pw) {
-        password = pw;
+        this.password = pw;
     }
 
     /**
      * set the user's name
      *
-     * @param uname
+     * @param myName
      */
     public void setName(String myName) {
-        name = myName;
+        this.name = myName;
     }
 
     /**
@@ -128,7 +127,7 @@ public class User {
      * @param email
      */
     public void setEmail(String email) {
-        email = email;
+        this.email = email;
     }
 
     /**
@@ -137,88 +136,9 @@ public class User {
      * @param number
      */
     public void setMobileNo(String number) {
-        mobileNo = number;
+        this.mobileNo = number;
     }
 
-    /**
-     * sets the user's date of birth
-     *
-     * @param date
-     */
-    public void setDateOfBirth(String date) {
-        dob = date;
-    }
-
-    //methods for user
-    public boolean checkLogin(String username, String password) {
-        //check if username and password exists in xml, if yes, return true, else, false
-        int i, j;
-        if (!userXml.getFile().exists()) {
-            System.out.println("No file found");
-        } else {
-            NodeList nList = userXml.getDoc().getElementsByTagName("user");
-            for (i = 0; i < nList.getLength(); i++) {
-                Element e = userXml.getNodeElement(nList, i);
-                NodeList items = e.getElementsByTagName("item");
-                for (j = 0; j < items.getLength(); j++) {
-                    String name = items.item(j).getAttributes().getNamedItem("name").getNodeValue();
-                    String nameContent = items.item(j).getTextContent();
-                    if (name.equals("username")) {
-                        if (nameContent.equals(username)) {
-                            continue;
-                        } else {
-                            break;
-                        }
-                    } else if (name.equals("password")) {
-                        if (nameContent.equals(password)) {
-                            this.xmlToObject(e.getAttribute("id"));
-                            return true;
-                        } else {
-                            System.out.println("Password not match");
-                            return false;
-                        }
-                    }
-                }
-            }
-            if (i == nList.getLength()) {
-                System.out.println("User not found");
-            }
-        }
-        return false;
-    }
-
-    public void xmlToObject(String id) {
-        NodeList nList = userXml.getDoc().getElementsByTagName("user");
-        for (int i = 0; i < nList.getLength(); i++) {
-            Element e = userXml.getNodeElement(nList, i);
-            NodeList items = e.getElementsByTagName("item");
-            if (e.getAttribute("id").equals(id)) {
-                this.id = e.getAttribute("id");
-                for (int j = 0; j < items.getLength(); j++) {
-                    String name = items.item(j).getAttributes().getNamedItem("name").getNodeValue();
-                    String nameContent = items.item(j).getTextContent();
-                    switch(name) {
-                        case "username": this.username = nameContent; break;
-                        case "password": this.password = nameContent; break;
-                        case "name": this.name = nameContent; break;
-                        case "email": this.email = nameContent; break;
-                        case "mobileNo": this.mobileNo = nameContent; break;
-                        case "dob": this.dob = nameContent; break;
-                    }
-                    /*
-                    if (name.toLowerCase().equals("username")) this.username = nameContent;
-                    else if (name.toLowerCase().equals("password")) this.password = nameContent;
-                    else if (name.toLowerCase().equals("name")) this.name = nameContent;
-                    else if (name.toLowerCase().equals("email")) this.email = nameContent;
-                    else if (name.toLowerCase().equals("mobileNo")) this.mobileNo = nameContent;
-                    else if (name.toLowerCase().equals("dob")) this.dob = nameContent;
-                    */
-                }
-                break;
-            }
-        }
-
-    }
     /*
      These methods can be reused later as needed
      */

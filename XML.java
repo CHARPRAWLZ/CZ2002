@@ -8,6 +8,8 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.*;
 import java.util.Scanner;
 import javax.xml.xpath.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -17,7 +19,7 @@ public class XML {
 
     private File file;
     private Document doc;
-    private Element root;
+    private Element root, curElement;
     private String elementName;
 
     /**
@@ -47,6 +49,7 @@ public class XML {
             }
             this.root = eRoot;
             this.elementName = elementName;
+            this.writeContent();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -68,39 +71,98 @@ public class XML {
         return e;
     }
 
+    /*public void createEntry(){
+     this.curElement = addElement();
+     }*/
+    public void createEntry(String[] list) {
+        this.curElement = addElement();
+        //String s = list;
+        for (String s : list) {
+            System.out.println(s);
+            Element e = doc.createElement("item");
+            this.curElement.appendChild(e);
+            e.setAttribute("name", s);
+        }
+    }
+
+    public void enterEntryItem(String itemName, String content) {
+        NodeList list = this.curElement.getElementsByTagName("item");
+        for (int i = 0; i < list.getLength(); i++) {
+            Element e = (Element) list.item(i);
+            if (itemName.equals(e.getAttribute("name"))) {
+                e.appendChild(doc.createTextNode(content));
+                break;
+            }
+        }
+    }
+
+    public String[][] retrieveData(String filter) {
+        ArrayList<String[]> entries = new <String[]> ArrayList();
+        String[] arrEntry;
+        NodeList mainList = this.root.getElementsByTagName(this.elementName);
+        int size = ((Element) mainList.item(0)).getElementsByTagName("item").
+                getLength();
+        for (int i = 0; i < mainList.getLength(); i++) {
+            arrEntry = new String[size * 2 + 2];
+            Element e = (Element) mainList.item(i);
+            arrEntry[0] = "id";
+            arrEntry[1] = e.getAttribute("id");
+            NodeList childList = e.getElementsByTagName("item");
+            boolean filterFlag = false;
+            for (int j = 2; j < childList.getLength(); j++) {
+                Node n = childList.item(j);
+                if (n.getTextContent().equals(filter)
+                        || filter.equals("None")) {
+                    filterFlag = true;
+                }
+                arrEntry[j * 2] = ((Element) n).getAttribute("name");
+                arrEntry[j * 2 + 1] = n.getTextContent();
+            }
+            if (filterFlag) {
+                entries.add(arrEntry);
+            }
+        }
+
+        List<String[]> list = entries;
+        String[][] strArr = list.toArray(new String[list.size()][]);
+
+        return strArr;
+    }
+
+    public void refreshCurElement() {
+        this.curElement = this.doc.getDocumentElement();
+    }
+
     /**
      * Add item with content to parent element
      *
-     * @param parentNode Parent node
-     * @param elementName Child node
-     * @param elementContent Child content
+     * @param elementName string array of element names
+     * @param elementContent string array of element content
      */
-    public void addItem(Element parentNode, String elementName, String elementContent) {
-        Element e = this.doc.createElement("item");
-        parentNode.appendChild(e);
-        e.setAttribute("name", elementName);
-        e.appendChild(doc.createTextNode(elementContent));
+    public void addItem(String[] elementName, String[] elementContent) {
+        this.curElement = this.addElement();
+        for (int i = 0; i < elementName.length; i++) {
+            Element e = this.doc.createElement("item");
+            curElement.appendChild(e);
+            e.setAttribute("name", elementName[i]);
+            e.appendChild(doc.createTextNode(elementContent[i]));
+        }
     }
 
     /**
      * Display all elements with items
      */
-    public void displayElement() {
-        if (!this.file.exists()) {
-            System.out.println("No file found");
-        } else {
-            NodeList nList = this.doc.getElementsByTagName(this.elementName);
-            for (int i = 0; i < nList.getLength(); i++) {
-                Node listnode = nList.item(i);
-                Element e = this.getNodeElement(nList, i);
-                System.out.println("---------------");
-                System.out.println(e.getNodeName() + " id : " + e.getAttribute("id"));
-                NodeList items = e.getElementsByTagName("item");
-                for (int j = 0; j < items.getLength(); j++) {
-
-                    this.printAttrAndContent(items.item(j), "name");
-                }
+    private void displayElement() {
+        NodeList nList = this.doc.getElementsByTagName(this.elementName);
+        for (int i = 0; i < nList.getLength(); i++) {
+            Element e = this.getNodeElement(nList, i);
+            System.out.println("---------------");
+            System.out.println(e.getNodeName() + " id : " + e.getAttribute("id"));
+            NodeList items = e.getElementsByTagName("item");
+            for (int j = 0; j < items.getLength(); j++) {
+                this.printAttrAndContent(items.item(j), "name");
             }
+
         }
     }
 
@@ -110,28 +172,25 @@ public class XML {
      * @param id value of element id
      * @return boolean if id exists
      */
-    public boolean displayElement(String id) {
+    private boolean displayElement(String id) {
         boolean idExists = false;
-        if (!this.file.exists()) {
-            System.out.println("No file found");
-        } else {
-            NodeList nList = doc.getElementsByTagName(this.elementName);
-            for (int i = 0; i < nList.getLength(); i++) {
-                Element e = this.getNodeElement(nList, i);
-                if (e.getAttribute("id").equals(id)) {
-                    idExists = true;
-                    System.out.println("---------------");
-                    System.out.println(e.getNodeName() + " id: " + e.getAttribute("id"));
-                    NodeList items = e.getElementsByTagName("item");
-                    for (int j = 0; j < items.getLength(); j++) {
-                        this.printAttrAndContent(items.item(j), "name");
-                    }
-                    break;
+        NodeList nList = doc.getElementsByTagName(this.elementName);
+        for (int i = 0; i < nList.getLength(); i++) {
+            Element e = this.getNodeElement(nList, i);
+            if (e.getAttribute("id").equals(id)) {
+                idExists = true;
+                System.out.println("---------------");
+                System.out.println(e.getNodeName() + " id: " + e.getAttribute("id"));
+                NodeList items = e.getElementsByTagName("item");
+                for (int j = 0; j < items.getLength(); j++) {
+                    this.printAttrAndContent(items.item(j), "name");
                 }
+                break;
             }
-            if (idExists == false) {
-                System.out.println("Id not found");
-            }
+        }
+        if (idExists == false) {
+            System.out.println("Id not found");
+
         }
         return idExists;
     }
@@ -142,14 +201,14 @@ public class XML {
      * @param item name of item
      * @param content content that is to be filtered
      */
-    public void displayElement(String item, String content) {
+    private void displayElement(String item, String content) {
         NodeList nList = doc.getElementsByTagName(this.elementName);
         for (int i = 0; i < nList.getLength(); i++) {
             Element e = this.getNodeElement(nList, i);
             NodeList items = e.getElementsByTagName("item");
             for (int j = 0; j < items.getLength(); j++) {
-                String name = items.item(j).getAttributes().getNamedItem("name").getNodeValue();
-                String nameContent = items.item(j).getTextContent();
+                String name = this.getItemName(items, j);
+                String nameContent = this.getItemContent(items, j);
                 if (item.toLowerCase().equals(name.toLowerCase())
                         && content.toLowerCase().equals(nameContent.toLowerCase())) {
                     displayElement(e.getAttribute("id"));
@@ -167,27 +226,34 @@ public class XML {
      * @return boolean if item exists
      */
     public boolean checkItemExists(String id, String item) {
-        boolean itemExists = false;
         NodeList nList = doc.getElementsByTagName(this.elementName);
         for (int i = 0; i < nList.getLength(); i++) {
             Element e = this.getNodeElement(nList, i);
             if (e.getAttribute("id").equals(id)) {
-                NodeList items = e.getElementsByTagName("item");
-                for (int j = 0; j < items.getLength(); j++) {
-                    String name = items.item(j).getAttributes().getNamedItem("name").getNodeValue();
-                    if (item.toLowerCase().equals(name.toLowerCase())) {
-                        itemExists = true;
-                        break;
-                    }
+                if (!this.getItemContent(id, item).equals("")) {
+                    return true;
                 }
-                break;
             }
         }
-        if (itemExists == false) {
-            System.out.println("Item name not found");
-
+        System.out.println("Item name not found");
+        return false;
+    }
+    /**
+     * Check if id exists in an xml
+     *
+     * @param id value of element id
+     * @return boolean if id exists
+     */
+    public boolean checkIdExists(String id) {
+        NodeList nList = doc.getElementsByTagName(this.elementName);
+        for (int i = 0; i < nList.getLength(); i++) {
+            Element e = this.getNodeElement(nList, i);
+            if (e.getAttribute("id").equals(id)) {
+                return true;
+            }
         }
-        return itemExists;
+        System.out.println("Id not found");
+        return false;
     }
 
     /**
@@ -204,7 +270,7 @@ public class XML {
             if (e.getAttribute("id").equals(id)) {
                 NodeList items = e.getElementsByTagName("item");
                 for (int j = 0; j < items.getLength(); j++) {
-                    String name = items.item(j).getAttributes().getNamedItem("name").getNodeValue();
+                    String name = this.getItemName(items, j);
                     if (item.toLowerCase().equals(name.toLowerCase())) {
                         items.item(j).setTextContent(content);
                         break;
@@ -233,7 +299,6 @@ public class XML {
         try {
             XPath xp = XPathFactory.newInstance().newXPath();
             NodeList nl = (NodeList) xp.evaluate("//text()[normalize-space(.)='']", doc, XPathConstants.NODESET);
-
             for (int i = 0; i < nl.getLength(); ++i) {
                 Node node = nl.item(i);
                 node.getParentNode().removeChild(node);
@@ -241,6 +306,157 @@ public class XML {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * After creating xml, check how many elements in total
+     *
+     * @return number of elements
+     */
+    public int getElementCount() {
+        if (!this.file.exists()) {
+            System.out.println("No file found");
+        } else {
+            NodeList nList = doc.getElementsByTagName(this.elementName);
+            return nList.getLength();
+        }
+        return 0;
+    }
+
+    /**
+     * After creating xml, check how many elements that contain an item content
+     * eg. returns number of movies that has item name "status" as "Now Showing"
+     *
+     * @param itemName Name of item
+     * @param itemContent Content of item
+     * @return number of elements
+     */
+    public int getElementCount(String itemName, String itemContent) {
+        int count = 0;
+        NodeList nList = doc.getElementsByTagName(this.elementName);
+        for (int i = 0; i < nList.getLength(); i++) {
+            Element e = this.getNodeElement(nList, i);
+            NodeList items = e.getElementsByTagName("item");
+            for (int j = 0; j < items.getLength(); j++) {
+                String name = this.getItemName(items, j);
+                String nameContent = this.getItemContent(items, j);
+                if (name.toLowerCase().equals(itemName.toLowerCase())
+                        && nameContent.equals(itemContent)) {
+                    count++;
+                }
+            }
+
+        }
+        return count;
+    }
+
+    /**
+     * return array of element id
+     *
+     * @return array of element id
+     */
+    public String[] getElement() {
+        NodeList nList = doc.getElementsByTagName(this.elementName);
+        String[] arrId = new String[nList.getLength()];
+        for (int i = 0; i < nList.getLength(); i++) {
+            Element e = this.getNodeElement(nList, i);
+            arrId[i] = e.getAttribute("id");
+        }
+        return arrId;
+    }
+
+    /**
+     * Return array of element id based on specified item contents
+     * Item contents of more than 1 item (an array)
+     *
+     * @param itemName array of name of item
+     * @param itemContent array of content of item
+     * @return array of element id
+     */
+    public ArrayList<String> getElement(String[] itemName, String[] itemContent) {
+        NodeList nList = doc.getElementsByTagName(this.elementName);
+        String arrId;
+        ArrayList<String> arrList = new <String> ArrayList();
+        for (int i = 0; i < nList.getLength(); i++) {
+            Element e = this.getNodeElement(nList, i);
+            arrId = e.getAttribute("id");
+            boolean check=true;
+            for (int j = 0; j < itemName.length; j++) {
+                String content = this.getItemContent(arrId, itemName[i]);
+                if(content.toLowerCase().equals(itemContent[i].toLowerCase()))check &= true;
+                else check&=false;
+            }
+            if (check) arrList.add(arrId);
+        }
+        return arrList;
+    }
+    /**
+     * Return array of element id based on specified item content
+     * Item content of one item
+     *
+     * @param itemName name of item
+     * @param itemContent content of item
+     * @return array of element id
+     */
+    public ArrayList<String> getElement(String itemName, String itemContent) {
+        NodeList nList = doc.getElementsByTagName(this.elementName);
+        String arrId;
+        ArrayList<String> arrList = new <String> ArrayList();
+        for (int i = 0; i < nList.getLength(); i++) {
+            Element e = this.getNodeElement(nList, i);
+            arrId = e.getAttribute("id");
+            boolean check;
+                String content = this.getItemContent(arrId, itemName);
+                check = content.toLowerCase().equals(itemContent.toLowerCase());
+            if (check) arrList.add(arrId);
+        }
+        return arrList;
+    }
+
+    /**
+     * Get item name
+     *
+     * @param nList Nodelist to get the item name from
+     * @param i index of item
+     * @return string of item name
+     */
+    public String getItemName(NodeList nList, int i) {
+        return nList.item(i).getAttributes().getNamedItem("name").getNodeValue();
+    }
+
+    /**
+     * Get item content from a nodelist
+     *
+     * @param nList Nodelist to get the item content from
+     * @param i index of item
+     * @return string of item content
+     */
+    public String getItemContent(NodeList nList, int i) {
+        return nList.item(i).getTextContent();
+    }
+
+    /**
+     * Get item content using element id
+     *
+     * @param id id of element
+     * @param itemName name of item
+     * @return string of item content
+     */
+    public String getItemContent(String id, String itemName) {
+        NodeList nList = this.doc.getElementsByTagName(this.elementName);
+        for (int i = 0; i < nList.getLength(); i++) {
+            Element e = this.getNodeElement(nList, i);
+            NodeList items = e.getElementsByTagName("item");
+            if (e.getAttribute("id").equals(id)) {
+                for (int j = 0; j < items.getLength(); j++) {
+                    String name = this.getItemName(items, j);
+                    if (name.toLowerCase().equals(itemName.toLowerCase())) {
+                        return this.getItemContent(items, j);
+                    }
+                }
+            }
+        }
+        return "";
     }
 
     /**
@@ -265,74 +481,9 @@ public class XML {
      * @param node Node to print
      * @param attributeName name of attribute to print
      */
-    public void printAttrAndContent(Node node, String attributeName) {
+    private void printAttrAndContent(Node node, String attributeName) {
         System.out.println(node.getAttributes().getNamedItem(attributeName).getNodeValue()
                 + " : " + node.getTextContent());
-    }
-
-    /**
-     * Set root of document, add increment counter
-     *
-     * @param root Root name
-     * @return Element of root
-     */
-    public Element setRoot(String root) {
-        Element eRoot = this.doc.createElement(root);
-        if (this.file.exists()) {
-            eRoot = this.doc.getDocumentElement();
-        } else {
-            eRoot.setAttribute("counter", "0");
-            this.doc.appendChild(eRoot);
-        }
-        this.root = eRoot;
-        return this.root;
-    }
-
-    /**
-     * Give auto-increment to an element attribute id
-     *
-     * @param element Element that has element attribute id increment
-     */
-    public void setIncId(Element element) {
-        String c = this.root.getAttribute("counter");
-        int x = Integer.parseInt(c) + 1;
-        String s = Integer.toString(x);
-        this.root.setAttribute("counter", s);
-        element.setAttribute("id", s);
-    }
-
-    /**
-     * Add child NODE to an element
-     *
-     * @param parent Parent element of the child
-     * @param child Name of child NODE to be appended to parent
-     * @return element of new child
-     */
-    public Element addNewChild(Element parent, String child) {
-        Element c = this.doc.createElement(child);
-        parent.appendChild(c);
-        return c;
-    }
-
-    /**
-     * Add text content to an element
-     *
-     * @param element Element of NODE
-     * @param content Text content to be added to element
-     */
-    public void addContent(Element element, String content) {
-        element.appendChild(doc.createTextNode(content));
-    }
-
-    /**
-     * Get the content of a node element
-     *
-     * @param element Parent element
-     * @param nodeName Name of node in the parent element
-     * @return Content of node
-     */
-    public String getNodeContent(Element element, String nodeName) {
-        return element.getElementsByTagName(nodeName).item(0).getTextContent();
     }
 
     /**
@@ -376,9 +527,28 @@ public class XML {
     public Document getDoc() {
         return this.doc;
     }
-    /*
+
+    /**
+     * Get element name
+     *
+     * @return string of element name
+     */
+    public String getElementName() {
+        return this.elementName;
+    }
+
+    /**
+     * Get root's counter
+     *
+     * @return string counter
+     */
+    public String getCounter() {
+        return this.root.getAttribute("counter");
+    }
+
     public static void main(String argv[]) {
         XML xml = new XML("movie");
+        String[] itemName = new String[]{"title", "synopsis", "director", "cast", "movieType", "movieStatus", "overallRating"};
         String choice = "-1", id = "";
         Scanner sc = new Scanner(System.in);
         do {
@@ -389,38 +559,46 @@ public class XML {
             System.out.println("|| 4: Read movie by movie id   ||");
             System.out.println("|| 5: Update movie by movie id ||");
             System.out.println("|| 6: Delete movie by movie id ||");
+            System.out.println("|| 7: Element count            ||");
             System.out.println("|| 0: Exit                     ||");
             System.out.println("||=============================||");
             System.out.print("Enter choice: ");
             choice = sc.nextLine();
             switch (choice) {
                 case "1":
-                    System.out.println("\n[ Enter / to go back ]");
-                    System.out.print("Enter title: ");
-                    String titleIn = sc.nextLine();
-                    if (titleIn.equals("/")) {
-                        break;
+                    String[] itemContent = new String[itemName.length];
+                    for (int i = 0; i < itemName.length; i++) {
+                        System.out.print("Enter " + itemName[i] + " : ");
+                        itemContent[i] = sc.nextLine();
                     }
-                    Element e = xml.addElement();
-                    xml.addItem(e, "Title", titleIn);
-
-                    System.out.print("Enter status: ");
-                    String statusIn = sc.nextLine();
-                    xml.addItem(e, "Status", statusIn);
-
+                    xml.addItem(itemName, itemContent);
                     xml.writeContent();
                     System.out.println("- Movie added into database -");
 
                     break;
                 case "2":
-                    xml.displayElement();
+                    String[] arrId;
+                    arrId = xml.getElement();
+                    for (int i = 0; i < arrId.length; i++) {
+                        System.out.println("id : " + arrId[i]);
+                        for (int j = 0; j < itemName.length; j++) {
+                            System.out.println(itemName[j] + " : " + xml.getItemContent(arrId[i], itemName[j]));
+                        }
+                    }
+                    if (arrId.length == 0) {
+                        System.out.println("No element found");
+                    }
                     break;
                 case "3":
                     System.out.print("Enter item name: ");
                     String name2 = sc.nextLine();
                     System.out.print("Enter item content: ");
-                    String content = sc.nextLine();
-                    xml.displayElement(name2,content);
+                    String content2 = sc.nextLine();
+                    //xml.displayElement(name2, content2);
+                    ArrayList<String> x = xml.getElement(name2, content2);
+                    for (int i=0;i<x.size();i++){
+                        System.out.println(x.get(i));
+                    }
                     break;
                 case "4":
                     System.out.print("Enter movie id: ");
@@ -431,19 +609,11 @@ public class XML {
                     System.out.print("Enter movie id: ");
                     id = sc.nextLine();
                     if (xml.displayElement(id) == true) {
-                        System.out.println("\n[ Enter / to go back ]");
                         System.out.print("Enter item name: ");
                         String name = sc.nextLine();
-                        if (name.equals("/")) {
-                            break;
-                        }
                         if (xml.checkItemExists(id, name) == true) {
-                            System.out.println("\n[ Enter / to go back ]");
                             System.out.print("Enter new value: ");
                             String val = sc.nextLine();
-                            if (val.equals("/")) {
-                                break;
-                            }
                             xml.editItem(id, name, val);
                             xml.displayElement(id);
                             xml.writeContent();
@@ -460,11 +630,16 @@ public class XML {
                         System.out.println("- Movie is deleted -");
                     }
                     break;
+                case "7":
+                    System.out.print("Enter item name: ");
+                    String name3 = sc.nextLine();
+                    System.out.print("Enter item content: ");
+                    String content3 = sc.nextLine();
+                    System.out.println(xml.getElementCount(name3, content3));
                 default:
                     break;
             }
             System.out.println();
         } while (!choice.equals("0"));
     }
-    */
 }

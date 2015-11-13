@@ -1,13 +1,17 @@
 package CZ2002;
+
+import java.util.Random;
+
 /**
  * Cinema class
  * @author calvinlee
  */
 public class Cinema {
 
+    private Random rand = new Random();
     private String name;
-    //private Seat[] seat;
-    private String cinemaType;
+    private String cinemaType = (rand.nextInt(2) == 0) ? "NORMAL" : "GOLD";
+    private Layout layout;
     
     /**
      * Constructor for Cinema
@@ -15,6 +19,7 @@ public class Cinema {
      */
     public Cinema(String name) {
         this.name = name;
+        this.layout = new Layout(cinemaType);
     }
     
     /**
@@ -49,7 +54,20 @@ public class Cinema {
         this.cinemaType = cinemaType;
     }
     
-    public void getLayout() {
-        // enter code here
+    public Layout getLayout(){
+        return layout;
+    }
+    
+    public void printLayout() {
+        layout.printLayout();
+    }
+    
+    /**
+     * Returns the booking data of the showtime to ShowTimeMgr to save to 
+     * XML file.
+     * @return layout.bookedBinaryData
+     */
+    public int getBookedData(){
+        return layout.getBookedData();
     }
 }

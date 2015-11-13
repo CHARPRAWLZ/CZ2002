@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<root counter="12">
+<holiday id="1">
+<item name="name">Christmas Day</item>
+<item name="date">2015-12-25</item>
+</holiday>
+<holiday id="2">
+<item name="name">Deepavali</item>
+<item name="date">2015-11-10</item>
+</holiday>
+<holiday id="3">
+<item name="name">Hari Raya Haji</item>
+<item name="date">2015-09-24</item>
+</holiday>
+<holiday id="4">
+<item name="name">National Day</item>
+<item name="date">2015-09-10</item>
+</holiday>
+<holiday id="5">
+<item name="name">National Day</item>
+<item name="date">2015-09-09</item>
+</holiday>
+<holiday id="6">
+<item name="name">Hari Raya Puasa</item>
+<item name="date">2015-07-17</item>
+</holiday>
+<holiday id="7">
+<item name="name">Vesak Day</item>
+<item name="date">2015-06-01</item>
+</holiday>
+<holiday id="8">
+<item name="name">Good Friday</item>
+<item name="date">2015-04-03</item>
+</holiday>
+<holiday id="9">
+<item name="name">Labour Day</item>
+<item name="date">2015-05-01</item>
+</holiday>
+<holiday id="10">
+<item name="name">Chinese New Year</item>
+<item name="date">2015-02-20</item>
+</holiday>
+<holiday id="11">
+<item name="name">Chinese New Year</item>
+<item name="date">2015-02-19</item>
+</holiday>
+<holiday id="12">
+<item name="name">New Year's Day</item>
+<item name="date">2015-01-01</item>
+</holiday>
+</root>

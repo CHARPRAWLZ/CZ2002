@@ -16,8 +16,8 @@ public class MovieListing {
     public MovieListing() {
         sc = new Scanner(System.in);
         xml = new XML("movie");
-        this.itemName = new String[][]{{"title", "synopsis", "director", "cast", "movieType", "movieStatus", "overallRating"},
-        {"Title", "Synopsis", "Director", "Cast", "Movie type", "Movie status", "Overall Rating"}};
+        this.itemName = new String[][]{{"title", "synopsis", "director", "cast", "movieType", "movieStatus"},
+        {"Title", "Synopsis", "Director", "Cast", "Movie type", "Movie status"}};
         //generateList();
     }
     /* end of Construcors */

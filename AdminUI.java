@@ -63,8 +63,9 @@ public class AdminUI {
         return opt;
     }
     /**
-     * The home page once the Admin is logged on
-     * @return 
+     * The home page once the administrator is logged on
+     * Shows the administrator what are the functions available to him
+     * @return option
      */
     public String homepage() {
         String opt;
@@ -103,8 +104,9 @@ public class AdminUI {
         return opt;
     }
     /**
-     * The list of options to manage movies
-     * @return 
+     * Managing a movie, the movie will be selected by entering the movie id.
+     * Allows you to create, update,delete and show movies
+     * @return option
      */
     public String movieManage() {
         String opt, id;
@@ -165,8 +167,9 @@ public class AdminUI {
         return opt;
     }
     /**
-     * The list of options to change system settings
-     * @return 
+     * This enables the administrator to manage holidays of the year
+     * as well as ticket prices of movies
+     * @return option
      */
     public String sysSettings() {
         String opt;
@@ -200,8 +203,8 @@ public class AdminUI {
         return opt;
     }
     /**
-     * Managing holiday dates
-     * @return 
+     * Allows you to add,update,delete holidays of the year
+     * @return option
      */
     public String holidayMgr() {
         String opt;

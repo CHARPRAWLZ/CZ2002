@@ -10,6 +10,9 @@ public class MovieListing {
     private Scanner sc;
 
     /* Constructors */
+    /**
+     * Construct a new list of movies according to the database
+     */
     public MovieListing() {
         sc = new Scanner(System.in);
         xml = new XML("movie");
@@ -37,11 +40,18 @@ public class MovieListing {
         }
         return title;
     }
-
+    /**
+     * shows the list of movieID
+     * @return movieID
+     */
     public String[] getMovieIds() {
         return xml.getElement();
     }
-
+    /**
+     * shows the movie info based on movie ID
+     * @param id
+     * @return movie info
+     */
     public String[] getMovieInfo(String id) {
         String[] itemContent = new String[this.itemName[0].length];
         for (int i = 0; i < itemName[0].length; i++) {
@@ -49,15 +59,23 @@ public class MovieListing {
         }
         return itemContent;
     }
-
+    /**
+     * shows the list of id
+     * @return 
+     */
     public String[] idList() {
         return xml.getElement();
     }
-
+    /**
+     * 
+     * @return 
+     */
     public String[][] getItemName() {
         return this.itemName;
     }
-
+    /**
+     * Add a movie into the database
+     */
     public void createMovie() {
 
         String[] itemContent = new String[itemName[0].length];
@@ -71,7 +89,10 @@ public class MovieListing {
                 itemContent[2], itemContent[3], itemContent[4], itemContent[5]);
         System.out.println("- Movie added into database -");
     }
-
+    /**
+     * searches for the movie according to the movie ID
+     * @param id 
+     */
     public void getMovie(String id) {
         if (xml.checkIdExists(id)) {
             String[] info = this.getMovieInfo(id);
@@ -82,7 +103,10 @@ public class MovieListing {
             }
         }
     }
-
+    /**
+     * adds a new movie and movie ID into the database
+     * @param id 
+     */
     public void updateMovie(String id) {
         if (xml.checkIdExists(id)) {
             System.out.print("Enter item name: ");
@@ -99,6 +123,10 @@ public class MovieListing {
             }
         }
     }
+    /**
+     * 
+     * @param id 
+     */
     public void deleteMovie(String id) {
         if (xml.checkIdExists(id)) {
                 xml.editItem(id, "movieStatus", "End Of Showing");
@@ -108,7 +136,9 @@ public class MovieListing {
             
         }
     }
-
+    /**
+     * 
+     */
     public void listAllMovies() {
         String[] movieIds = this.getMovieIds();
         for (int i = 0; i < movieIds.length; i++) {
@@ -120,7 +150,11 @@ public class MovieListing {
             }
         }
     }
-
+    /**
+     * 
+     * @param name
+     * @param content 
+     */
     public void listByContent(String name, String content) {
         ArrayList<String> ids = xml.getElement(name, content);
         for (int i = 0; i < ids.size(); i++) {
@@ -148,6 +182,16 @@ public class MovieListing {
 
      }
      */
+    /**
+     * adds a new movie to the database
+     * @param movieID
+     * @param title
+     * @param synopsis
+     * @param director
+     * @param cast
+     * @param type
+     * @param movieStatus 
+     */
     public void addNewMovie(String movieID, String title, String synopsis,
             String director, String cast, String type, String movieStatus) {
         addToArrayList(movieID, title, synopsis, director, cast, type,
@@ -164,19 +208,34 @@ public class MovieListing {
         xml.enterEntryItem("type", type);
         xml.enterEntryItem("movieStatus", movieStatus);
     }
-
+    /**
+     * 
+     * @param movieID
+     * @param title
+     * @param synopsis
+     * @param director
+     * @param cast
+     * @param type
+     * @param movieStatus 
+     */
     public void addToArrayList(String movieID, String title, String synopsis,
             String director, String cast, String type, String movieStatus) {
         Movie movie = new Movie(movieID, title, synopsis, director, cast, type,
                 movieStatus);
         movieList.add(movie);
     }
-
+    /**
+     * 
+     * @param movieID
+     * @param title 
+     */
     public void addToArrayList(String movieID, String title) {
         Movie movie = new Movie(movieID, title);
         movieList.add(movie);
     }
-
+    /**
+     * 
+     */
     private void generateList() {
         Movie movieEntry;
 
@@ -240,7 +299,11 @@ public class MovieListing {
             }
         }
     }
-
+/**
+ * 
+ * @param movieID
+ * @return 
+ */
     public Movie findMovie(String movieID) {
         for (Movie m : movieList) {
             if (m.getMovieID().equals(movieID)) {

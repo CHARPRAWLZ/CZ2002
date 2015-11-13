@@ -301,13 +301,19 @@ public class AppUI {
         do {
             System.out.println("");
             System.out.println("||======== DATE LISTING ========||");
-            System.out.println("|| 1: View showtime             ||");
+            System.out.println("   1: 24 Dec 2015                 ");
+            System.out.println("   2: 25 Dec 2015                 ");
             System.out.println("|| 0: Back to cineplex          ||");
             System.out.println("|| x: Quit                      ||");
             System.out.println("||==============================||");
 
             System.out.print("Enter choice: ");
             opt = sc.nextLine();
+            for (int j = 1; j <= 2; j++) {
+                if (opt.equals(Integer.toString(j))) {
+                    this.dateListing();
+                }
+            }
             switch (opt) {
                 case "1":
                     this.showtime();
@@ -329,13 +335,19 @@ public class AppUI {
         do {
             System.out.println("");
             System.out.println("||========== SHOWTIME ==========||");
-            System.out.println("|| 1: View layout               ||");
+            System.out.println("   1: 12:00pm                     ");
+            System.out.println("   2: 05:00pm                     ");
             System.out.println("|| 0: Back to date listing      ||");
             System.out.println("|| x: Quit                      ||");
             System.out.println("||==============================||");
 
             System.out.print("Enter choice: ");
             opt = sc.nextLine();
+            for (int j = 1; j <= 2; j++) {
+                if (opt.equals(Integer.toString(j))) {
+                    this.dateListing();
+                }
+            }
             switch (opt) {
                 case "1":
                     this.viewLayout();

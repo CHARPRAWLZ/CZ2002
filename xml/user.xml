@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<root counter="3">
+<root counter="4">
 <user id="1">
 <item name="username">fifi</item>
 <item name="password">pass</item>
@@ -20,5 +20,12 @@
 <item name="name">Rohaizad</item>
 <item name="email">zad@rohaizad.com</item>
 <item name="mobileNo">98989898</item>
+</user>
+<user id="4">
+<item name="username">admin</item>
+<item name="password">password</item>
+<item name="name">Administration</item>
+<item name="email">admin@appui.java</item>
+<item name="mobileNo">87654567</item>
 </user>
 </root>

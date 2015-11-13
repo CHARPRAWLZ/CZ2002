@@ -103,8 +103,10 @@ public class XML {
         int size = ((Element) mainList.item(0)).getElementsByTagName("item").
                 getLength();
         for (int i = 0; i < mainList.getLength(); i++) {
-            arrEntry = new String[size * 2];
+            arrEntry = new String[size * 2 + 2];
             Element e = (Element) mainList.item(i);
+            arrEntry[0] = "id";
+            arrEntry[1] = e.getAttribute("id");
             NodeList childList = e.getElementsByTagName("item");
             boolean filterFlag = false;
             for (int j = 0; j < childList.getLength(); j++) {

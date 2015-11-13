@@ -109,14 +109,14 @@ public class XML {
             arrEntry[1] = e.getAttribute("id");
             NodeList childList = e.getElementsByTagName("item");
             boolean filterFlag = false;
-            for (int j = 2; j < childList.getLength(); j++) {
+            for (int j = 0; j < childList.getLength(); j++) {
                 Node n = childList.item(j);
                 if (n.getTextContent().equals(filter)
                         || filter.equals("None")) {
                     filterFlag = true;
                 }
-                arrEntry[j * 2] = ((Element) n).getAttribute("name");
-                arrEntry[j * 2 + 1] = n.getTextContent();
+                arrEntry[j * 2 + 2] = ((Element) n).getAttribute("name");
+                arrEntry[j * 2 + 3] = n.getTextContent();
             }
             if (filterFlag) {
                 entries.add(arrEntry);

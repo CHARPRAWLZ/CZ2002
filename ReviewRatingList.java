@@ -109,7 +109,10 @@ public class ReviewRatingList {
         for (String[] subList : retrievedList) {
             movieFlag = false;
             reviewFlag = ratingFlag = true;
-            for (int j = 2; j < subList.length; j+=2) {
+            for (int j = 0; j < subList.length; j+=2) {
+                if (subList[j].equals("id")){
+                    continue;
+                }
                 if (subList[j].equals("movieID")) {
                     movieFlag = true;
                 } else if (reviewFlag && subList[j].equals("review")) {

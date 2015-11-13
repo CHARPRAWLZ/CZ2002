@@ -3,7 +3,8 @@ package CZ2002;
 import java.util.*;
 import java.io.*;
 /**
- *
+ * This is the main screen when you start the application
+ * This is also the main class
  * @author alfiefarhana
  */
 public class AppUI {
@@ -27,7 +28,10 @@ public class AppUI {
         AppUI ui = new AppUI();
         ui.auth();
     }
-
+/**
+ * Choose to login to book movie or continue as guest to view information
+ * @return choice
+ */
     public String auth() {
         String opt;
         do {
@@ -64,7 +68,11 @@ public class AppUI {
         exitProgram(opt);
         return opt;
     }
-
+/**
+ * The home screen when you logged in
+ * Allow you to list movies and top 5 movie rating
+ * @return option
+ */
     public String homepage() {
         String opt;
         do {
@@ -106,7 +114,10 @@ public class AppUI {
         exitProgram(opt);
         return opt;
     }
-
+/**
+ * This screen shows the top 5 movies
+ * @return 
+ */
     public String topRanking() {
         String opt;
         RankingMgr ranking = new RankingMgr();
@@ -149,7 +160,10 @@ public class AppUI {
         exitProgram(opt);
         return opt;
     }
-
+    /**
+     * Lists all the movies
+     * @return 
+     */
     public String movieList() {
         String opt;
         int j;
@@ -189,7 +203,10 @@ public class AppUI {
         exitProgram(opt);
         return opt;
     }
-
+/**
+ * displays information about the movie
+ * @return 
+ */
     public String movieInfo() {
         String opt;
         MovieListing movieMgr = new MovieListing();
@@ -229,7 +246,10 @@ public class AppUI {
         exitProgram(opt);
         return opt;
     }
-
+/**
+ * manages the rating of a movie
+ * @return 
+ */
     public String rating() {
         String opt;
         do {
@@ -263,7 +283,10 @@ public class AppUI {
         exitProgram(opt);
         return opt;
     }
-
+/**
+ * 
+ * @return 
+ */
     public String cineplex() {
         String opt;
         do {
@@ -299,7 +322,10 @@ public class AppUI {
         exitProgram(opt);
         return opt;
     }
-
+    /**
+     * display the dates available for movie
+     * @return 
+     */
     public String dateListing() {
         String opt;
         do {
@@ -334,7 +360,10 @@ public class AppUI {
         exitProgram(opt);
         return opt;
     }
-
+    /**
+     * display the timings available
+     * @return 
+     */
     public String showtime() {
         String opt;
         do {
@@ -369,7 +398,10 @@ public class AppUI {
         exitProgram(opt);
         return opt;
     }
-
+    /**
+     * view the layout of the cinema
+     * @return 
+     */
     public String viewLayout() {
         String opt;
         do {
@@ -398,7 +430,10 @@ public class AppUI {
         exitProgram(opt);
         return opt;
     }
-
+    /**
+     * choose the seat to book
+     * @return 
+     */
     public String selectSeat() {
         String opt;
         do {
@@ -427,7 +462,10 @@ public class AppUI {
         exitProgram(opt);
         return opt;
     }
-
+    /**
+     * books the selected seat
+     * @return 
+     */
     public String book() {
         String opt;
         do {
@@ -456,7 +494,10 @@ public class AppUI {
         exitProgram(opt);
         return opt;
     }
-
+    /**
+     * displays booking history
+     * @return 
+     */
     public String bookingHistory() {
         String opt;
         do {
@@ -481,7 +522,10 @@ public class AppUI {
         exitProgram(opt);
         return opt;
     }
-
+    /**
+     * exits the whole application when the "x" is clicked
+     * @param option 
+     */
     public static void exitProgram(String option) {
         if (option.equals("x")) {
             System.out.println("----------------------------------------");

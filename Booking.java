@@ -10,7 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
- *
+ * This class shows the booking of tickets
  * @author calvinlee
  */
 public class Booking {
@@ -31,42 +31,96 @@ public class Booking {
     public Booking() {
         
     }
+    /**
+     * shows the user that is booking
+     * @return user 
+     */
     public User getUser() {
         return this.user;
     }
+    /**
+     * Change the user that is booking
+     * @param user 
+     */
     public void setUser(User user) {
         this.user = user;
     }
+    /**
+     * shows the Cineplex to book
+     * @return cineplex
+     */
     public Cineplex getCineplex() {
         return this.cineplex;
     }
+    /**
+     * Change the Cineplex to book
+     * @param cineplex 
+     */
     public void setCineplex(Cineplex cineplex) {
         this.cineplex = cineplex;
     }
+    /**
+     * shows the cinema to book
+     * @return cinema
+     */
     public Cinema getCinema() {
         return this.cinema;
-    }
+    }/**
+     * Change the cinema to book
+     * @param cinema 
+     */
     public void setCinema(Cinema cinema) {
         this.cinema = cinema;
     }
+    /**
+     * shows the seat that's being booked 
+     * @return seat
+     */
     public Seat getSeat() {
         return this.seat;
     }
+    /**
+     * Change the seat to book
+     * @param seat 
+     */
     public void setSeat(Seat seat) {
         this.seat = seat;
     }
+    /**
+     * shows the movie that's being booked
+     * @return movie
+     */
     public Movie getMovie() {
         return this.movie;
     }
+    /**
+     * change the movie that's being booked
+     * @param movie 
+     */
     public void setMovie(Movie movie) {
         this.movie = movie;
     }
+    /**
+     * shows the booked movie time
+     * @return 
+     */
     public Showtime getShowtime() {
         return this.showtime;
     }
+    /**
+     * change the movie timing 
+     * @param showtime 
+     */
     public void setShowtime(Showtime showtime) {
         this.showtime = showtime;
     }
+    /**
+     * Includes additional information to compute surcharges of ticket prices
+     * Checks if :
+     * 1)movie falls on a holiday,
+     * 2)movie goer is a child/adult/senior citizen
+     * 3)the cinema is a regular or a gold class
+     */
     public void confirmBooking() {
         bookingXML = new XML("booking");
         holidayXML = new XML("holiday");
@@ -117,6 +171,9 @@ public class Booking {
         this.objectToXml();
         
     }
+    /**
+     * saves to the database
+     */
     public void objectToXml() {
         String[] itemContent = new String[]{this.payment.getTID(), this.user.getUserId(), this.user.getName(), this.user.getMobileNo(), this.user.getEmail(), this.cineplex.getID(), this.cineplex.getName(), this.cineplex.getLocation(), this.cinema.getName(), this.cinema.getCinemaType(), this.seat.getSeatID(), this.ageGroup, this.movie.getMovieID(), this.movie.getTitle(), this.showtime.getDate(), this.showtime.getTiming(), Double.toString(this.ticketPrice)};
         bookingXML.addItem(itemName, itemContent);

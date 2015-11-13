@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<root counter="2">
+<root counter="3">
 <employee id="1">
 <item name="username">admin</item>
 </employee>
 <employee id="2">
 <item name="username">fifi</item>
+</employee>
+<employee id="3">
+<item name="username">zacharias</item>
 </employee>
 </root>

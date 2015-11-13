@@ -2,8 +2,6 @@ package CZ2002;
 
 import java.util.*;
 import java.io.*;
-import java.util.ArrayList;
-
 /**
  *
  * @author alfiefarhana

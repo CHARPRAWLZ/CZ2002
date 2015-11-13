@@ -19,34 +19,6 @@ public class Employee extends User{
         super(username,password,name,email,mobileno);    
     }
     
-    //methods for employee
-    public Movie movie;
-    Scanner sc = new Scanner(System.in);
-        
-    public void configureTickets(){}
-    /**
-     * add/remove/update movies available
-     */
-
-    public void configureMovies(){
-       //add, remove, update movies from xml
-    }
-    /**
-     * prints the top 5 movie rating
-     */
-    public void configureTop5movies(){
-        /*
-        sort all movie overall rating
-        print top 5 movies
-        */
-    }
-    /**
-     * add/remove movie timings
-     */
-    public void configureMovieListing(){
-       /*
-        
-        */
-    }
+    
     
 }

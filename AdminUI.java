@@ -4,7 +4,7 @@ import java.util.*;
 import java.io.*;
 
 /**
- *
+ * This class manages the functions that a User can do once he's logged in
  * @author alfiefarhana
  */
 public class AdminUI {
@@ -21,14 +21,19 @@ public class AdminUI {
 
     private String movieId;
     private XML movieXml;
-
+    /**
+     * Create a new instance of AdminUI, movie and movleMgr 
+     */
     public AdminUI() {
         appUI = new AppUI();
         movieXml = new XML("movie");
         movieMgr = new MovieListing();
         sc = new Scanner(System.in);
     }
-
+    /**
+     * Choose to login as a cinema staff or a customer
+     * @return option chosen
+     */
     public String adminOpt() {
         String opt;
         do {
@@ -57,7 +62,10 @@ public class AdminUI {
         exitProgram(opt);
         return opt;
     }
-
+    /**
+     * The home page once the Admin is logged on
+     * @return 
+     */
     public String homepage() {
         String opt;
         do {
@@ -94,7 +102,10 @@ public class AdminUI {
         exitProgram(opt);
         return opt;
     }
-
+    /**
+     * The list of options to manage movies
+     * @return 
+     */
     public String movieManage() {
         String opt, id;
         do {
@@ -153,7 +164,10 @@ public class AdminUI {
         exitProgram(opt);
         return opt;
     }
-
+    /**
+     * The list of options to change system settings
+     * @return 
+     */
     public String sysSettings() {
         String opt;
         do {
@@ -185,7 +199,10 @@ public class AdminUI {
         exitProgram(opt);
         return opt;
     }
-
+    /**
+     * Managing holiday dates
+     * @return 
+     */
     public String holidayMgr() {
         String opt;
         String[][] itemName = new String[][]{{"name", "date"}, {"Name", "Date"}};
@@ -267,7 +284,10 @@ public class AdminUI {
         exitProgram(opt);
         return opt;
     }
-
+    /**
+     * Exits the whole application once "X" is clicked
+     * @param option 
+     */
     public static void exitProgram(String option) {
         if (option.equals("x")) {
             System.out.println("----------------------------------------");

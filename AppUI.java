@@ -12,31 +12,22 @@ public class AppUI {
 
     public static Scanner sc = new Scanner(System.in);
     public static Movie movie;
-    //public static Cineplex cineplex1, cineplex2, cineplex3;
     public static CinemaMgr cinemaMgr;
     public static Cinema cinema;
     public static UserMgr userMgr;
     public static Seat seat;
     public static Showtime showtime;
+    public static ReviewRatingList reviewMgr;
 
     public String movieId;
 
     public static void main(String args[]) {
-        // Start of Cineplex and Cinema initialisation
-        /*
-        cineplex1 = new Cineplex("CPA", "Cathay Cineplexes", "Woodlands", 3);
-        initCinemaType(cineplex1);
-        cineplex2 = new Cineplex("CPB", "Cathay Cineplex", "Orchard", 3);
-        initCinemaType(cineplex2);
-        cineplex3 = new Cineplex("CPC", "The Cathay Cineplex", "CBD", 3);
-        initCinemaType(cineplex3);*/
-         // End of Cineplex and Cinema initialisation
-
-        // Welcome page to MOBLIMA
-        System.out.println("Welcome to MOBLIMA");
-        AppUI ui = new AppUI();
         cinemaMgr = new CinemaMgr();
         userMgr = new UserMgr();
+        
+        
+        System.out.println("Welcome to MOBLIMA");
+        AppUI ui = new AppUI();
         ui.auth();
     }
 
@@ -169,7 +160,7 @@ public class AppUI {
         String[] list = movieMgr.getMovieList();
         do {
             System.out.println("");
-            System.out.println("||======= Movie Listing =======||");
+            System.out.println("||======= MOVIE LISTING =======||");
             for (int i = 0; i < list.length; i++) {
                 System.out.println("   " + (i + 1) + ": " + list[i]);
             }
@@ -209,7 +200,7 @@ public class AppUI {
         String[][] itemName = movieMgr.getItemName();
         do {
             System.out.println("");
-            System.out.println("||===== Movie Information =====||");
+            System.out.println("||===== MOVIE INFORMATION =====||");
             for (int i = 0; i < info.length; i++) {
                 System.out.println("   " + itemName[1][i] + " : " + info[i]);
             }
@@ -246,7 +237,7 @@ public class AppUI {
         String opt;
         do {
             System.out.println("");
-            System.out.println("||======= Review Rating ========||");
+            System.out.println("||======= REVIEW RATING ========||");
             System.out.println("|| 1: Create rating             ||");
             System.out.println("|| 0: Back to movie information ||");
             System.out.println("|| x: Quit                      ||");
@@ -274,7 +265,7 @@ public class AppUI {
         String opt;
         do {
             System.out.println("");
-            System.out.println("||========== Cineplex ==========||");
+            System.out.println("||========== CINEPLEX ==========||");
             System.out.println("   1: "+cinemaMgr.getCineplex(0).getName());
             System.out.println("   2: "+cinemaMgr.getCineplex(0).getName() + " Gold Class");
             System.out.println("   3: "+cinemaMgr.getCineplex(1).getName());
@@ -287,9 +278,178 @@ public class AppUI {
 
             System.out.print("Enter choice: ");
             opt = sc.nextLine();
+            for (int j = 1; j <= 6; j++) {
+                if (opt.equals(Integer.toString(j))) {
+                    this.dateListing();
+                }
+            }
             switch (opt) {
                 case "0":
                     this.movieInfo();
+                    break;
+                case "x":
+                    break;
+                default:
+                    System.out.println("- Enter a valid input -");
+            }
+        } while (!opt.matches("x"));
+        exitProgram(opt);
+        return opt;
+    }
+    public String dateListing() {
+        String opt;
+        do {
+            System.out.println("");
+            System.out.println("||======== DATE LISTING ========||");
+            System.out.println("|| 1: View showtime             ||");
+            System.out.println("|| 0: Back to cineplex          ||");
+            System.out.println("|| x: Quit                      ||");
+            System.out.println("||==============================||");
+
+            System.out.print("Enter choice: ");
+            opt = sc.nextLine();
+            switch (opt) {
+                case "1":
+                    this.showtime();
+                    break;
+                case "0":
+                    this.cineplex();
+                    break;
+                case "x":
+                    break;
+                default:
+                    System.out.println("- Enter a valid input -");
+            }
+        } while (!opt.matches("x"));
+        exitProgram(opt);
+        return opt;
+    }
+    public String showtime() {
+        String opt;
+        do {
+            System.out.println("");
+            System.out.println("||========== SHOWTIME ==========||");
+            System.out.println("|| 1: View layout               ||");
+            System.out.println("|| 0: Back to date listing      ||");
+            System.out.println("|| x: Quit                      ||");
+            System.out.println("||==============================||");
+
+            System.out.print("Enter choice: ");
+            opt = sc.nextLine();
+            switch (opt) {
+                case "1":
+                    this.viewLayout();
+                    break;
+                case "0":
+                    this.dateListing();
+                    break;
+                case "x":
+                    break;
+                default:
+                    System.out.println("- Enter a valid input -");
+            }
+        } while (!opt.matches("x"));
+        exitProgram(opt);
+        return opt;
+    }
+    public String viewLayout() {
+        String opt;
+        do {
+            System.out.println("");
+            System.out.println("||======== VIEW LAYOUT =========||");
+            System.out.println("|| 1: Select seat               ||");
+            System.out.println("|| 0: Back to showtime          ||");
+            System.out.println("|| x: Quit                      ||");
+            System.out.println("||==============================||");
+
+            System.out.print("Enter choice: ");
+            opt = sc.nextLine();
+            switch (opt) {
+                case "1":
+                    this.selectSeat();
+                    break;
+                case "0":
+                    this.showtime();
+                    break;
+                case "x":
+                    break;
+                default:
+                    System.out.println("- Enter a valid input -");
+            }
+        } while (!opt.matches("x"));
+        exitProgram(opt);
+        return opt;
+    }
+    public String selectSeat() {
+        String opt;
+        do {
+            System.out.println("");
+            System.out.println("||======== SELECT SEAT =========||");
+            System.out.println("|| 1: To Booking                ||");
+            System.out.println("|| 0: Back to view layout       ||");
+            System.out.println("|| x: Quit                      ||");
+            System.out.println("||==============================||");
+
+            System.out.print("Enter choice: ");
+            opt = sc.nextLine();
+            switch (opt) {
+                case "1":
+                    this.book();
+                    break;
+                case "0":
+                    this.viewLayout();
+                    break;
+                case "x":
+                    break;
+                default:
+                    System.out.println("- Enter a valid input -");
+            }
+        } while (!opt.matches("x"));
+        exitProgram(opt);
+        return opt;
+    }
+    public String book() {
+        String opt;
+        do {
+            System.out.println("");
+            System.out.println("||======== MAKE BOOKING ========||");
+            System.out.println("|| 1: To booking history        ||");
+            System.out.println("|| 0: Back to select seat       ||");
+            System.out.println("|| x: Quit                      ||");
+            System.out.println("||==============================||");
+
+            System.out.print("Enter choice: ");
+            opt = sc.nextLine();
+            switch (opt) {
+                case "1":
+                    this.bookingHistory();
+                    break;
+                case "0":
+                    this.selectSeat();
+                    break;
+                case "x":
+                    break;
+                default:
+                    System.out.println("- Enter a valid input -");
+            }
+        } while (!opt.matches("x"));
+        exitProgram(opt);
+        return opt;
+    }
+    public String bookingHistory() {
+        String opt;
+        do {
+            System.out.println("");
+            System.out.println("||======BOOKING HISTORY ========||");
+            System.out.println("|| 0: Back to home              ||");
+            System.out.println("|| x: Quit                      ||");
+            System.out.println("||==============================||");
+
+            System.out.print("Enter choice: ");
+            opt = sc.nextLine();
+            switch (opt) {
+                case "0":
+                    this.homepage();
                     break;
                 case "x":
                     break;
@@ -308,16 +468,4 @@ public class AppUI {
             System.exit(0);
         }
     }
-
-    /**
-     * Initialise the cinemaType for each of the Cinema in the cinemaList
-     *
-     * @param cinemaList List of Cinema within a Cineplex
-     */
-    /*
-    public static void initCinemaType(Cineplex cineplex) {
-        cineplex.getCinemaList().get(0).setCinemaType("NORMAL");
-        cineplex.getCinemaList().get(0).setCinemaType("NORMAL");
-        cineplex.getCinemaList().get(0).setCinemaType("GOLD");
-    }*/
 }

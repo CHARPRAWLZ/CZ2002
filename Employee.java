@@ -1,10 +1,9 @@
 package CZ2002;
 
-import java.util.Scanner;
-/*
-author: zach
-*/
-import java.util.Scanner;
+/**
+ * This is an entity class which is a user with admin privileges
+ * @author Zach
+ */
 public class Employee extends User{
     //constructor for employee
     /**
@@ -18,7 +17,5 @@ public class Employee extends User{
     public Employee(String username, String password, String name, String email, String mobileno){
         super(username,password,name,email,mobileno);    
     }
+} 
     
-    
-    
-}
